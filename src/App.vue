@@ -9,7 +9,7 @@
     <v-list-item class="backgrd"  color="white">
         <v-list-item-content>
           <v-list-item-title class="text-h6">
-            Menu
+            Menue 
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
