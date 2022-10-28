@@ -44,7 +44,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/CRMSingle.vue"),
+      import(/* webpackChunkName: "about" */ "../views/CRMView.vue"),
   },
   {
     path: "/crm/:id",
@@ -53,7 +53,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/SingleView.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../components/Lead/SingleView.vue"
+      ),
     props: true,
   },
   {

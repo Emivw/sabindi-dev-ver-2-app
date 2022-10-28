@@ -12,35 +12,28 @@
             <div class="card">
                 <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
                     <div class="l_name">{{ lead.leadName }}</div>
+                    <div class="l_name">{{ lead.lid }}</div>
                     <div class="l_email">{{ lead.leadEmail }}</div>
                     <div class="l_type">{{ lead.entryType }}</div>
                 </router-link>
             </div>
-            <div class="f-holder d-flex align-items-center justify-content-around">
-                <div class="edit col-5" type="button" data-bs-toggle="modal" :data-bs-target="'#update' + lead.lid">
-                    <i class="fa-solid fa-pen-to-square text-center"></i>
-                </div>
-                <div class="delete col-5" @click="deletes(lead.lid)">
-                    <i class="fa-solid fa-trash-can text-center"></i>
-                </div>
+            <div class="delete col-5" @click="deletes(lead.lid)">
+                <i class="fa-solid fa-trash-can text-center"></i>
             </div>
         </div>
-
         <BottomNav />
     </v-card>
 </template>
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-
-import AddModal from "../components/AddModal.vue";
+import AddModal from "../components/Lead/AddModal.vue";
 
 
 export default {
     props: ['lead'],
     components: {
         BottomNav,
-
         AddModal
     },
 
@@ -93,11 +86,20 @@ export default {
 
 /* Small phones */
 @media only screen and (max-width:576px) {
+    .card-holder {
+        margin-left: 5%;
+        margin-bottom: 15px;
+        border: 1px solid #333333;
+        width: 90%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
     .card {
         align-items: center;
-        margin-bottom: 15px;
         width: 200px;
         padding: 5px;
+        margin-bottom: 10px;
         border-radius: 10px;
     }
 

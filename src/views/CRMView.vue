@@ -27,7 +27,7 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/AddModal.vue";
+import AddModal from "../components/Lead/AddModal.vue";
 
 
 export default {
@@ -86,11 +86,20 @@ export default {
 
 /* Small phones */
 @media only screen and (max-width:576px) {
+    .card-holder {
+        margin-left: 5%;
+        margin-bottom: 15px;
+        border: 1px solid #333333;
+        width: 90%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
     .card {
         align-items: center;
-        margin-bottom: 15px;
         width: 200px;
         padding: 5px;
+        margin-bottom: 10px;
         border-radius: 10px;
     }
 
