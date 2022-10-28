@@ -19,7 +19,7 @@
         <span>or use your account</span>
         <input type="email" id="signInEmail" placeholder="Email" v-model="userEmails" required/>
         <input type="password" placeholder="Password" v-model="userPasswords" required/>
-        <button type="button" @click="logins()">Sign I</button>
+        <button type="button" @click="logins()">Sign In</button>
       </form>
     </div>
     
