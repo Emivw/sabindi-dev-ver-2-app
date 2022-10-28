@@ -259,7 +259,7 @@ export default new Vuex.Store({
         qtDesc,
         summary,
         jobCat,
-        qtMaterials,
+        qteMaterials,
         scope,
         total,
         addNote,
@@ -304,5 +304,5 @@ export default new Vuex.Store({
     },
   },
   modules: {},
-  plugins: [createPersistedState()],
+  // plugins: [createPersistedState()],
 });

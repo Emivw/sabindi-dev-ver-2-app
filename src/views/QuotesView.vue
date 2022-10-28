@@ -11,10 +11,10 @@
         <div class="card-holder" v-for="quote in quotes" :key="quote.qteid">
             <div class="card">
                 <router-link :to="{ name: 'SingleQuote', params: { id: quote.qteid } }" class="router-link">
-                    <div class="l_name">{{ lead.leadName }}</div>
-                    <div class="l_name">{{ lead.lid }}</div>
-                    <div class="l_email">{{ lead.leadEmail }}</div>
-                    <div class="l_type">{{ lead.entryType }}</div>
+                    <div class="l_name">{{ quote.cusName }}</div>
+                    <div class="l_name">{{ quote.qteid }}</div>
+                    <div class="l_email">{{ quote.cusNo }}</div>
+                    <div class="l_type">{{ quote.entryType }}</div>
                 </router-link>
             </div>
             <div class="delete col-5" @click="deletes(quote.qteid)">
@@ -31,7 +31,7 @@ import AddModal from "../components/Quote/AddModal.vue";
 
 
 export default {
-    props: ['lead'],
+    props: ['quote'],
     components: {
         BottomNav,
         AddModal
@@ -42,7 +42,7 @@ export default {
         // this.$store.dispatch("getSellers");
     },
     computed: {
-        leads() {
+        quotes() {
             return this.$store.state.quotes;
         }
     },
