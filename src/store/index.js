@@ -17,6 +17,9 @@ export default new Vuex.Store({
     // Quotes
     quotes: null,
     quote: null,
+    // Material
+    materials: null,
+    material: null,
     sellers: null,
     errMsg: null,
   },
@@ -40,6 +43,14 @@ export default new Vuex.Store({
     },
     setQuote(state, quote) {
       state.lead = quote;
+    },
+
+    // Materials
+    setMaterials(state, materials) {
+      state.materials = materials;
+    },
+    setMaterial(state, material) {
+      state.lead = material;
     },
 
     setSellers(state, sellers) {
@@ -298,6 +309,79 @@ export default new Vuex.Store({
           swal({
             icon: "success",
             title: "The quote was deleted",
+            button: "OK",
+          });
+        });
+    },
+
+    // Materials
+    async getMaterials(context) {
+      let fetched = await fetch(api + "materials");
+      let res = await fetched.json();
+      context.commit("setMaterials", res.material);
+    },
+
+    async getMaterial(context, id) {
+      let fetched = await fetch(api + "materials/" + id);
+      let res = await fetched.json();
+      context.commit("setMaterial", res.results);
+    },
+    async createMaterial(context, payload) {
+      fetch(api + "materials", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Material added`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getMaterials");
+          // context.commit('setProducts', data.msg)
+        });
+    },
+    async updateMaterial(context, payload) {
+      const {} = payload;
+      fetch(api + "materials/" + id, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.msg == "Edited") {
+            swal({
+              icon: "success",
+              title: "The material was edited successfully",
+              button: "OK",
+            });
+            context.dispatch("getMaterials", data.msg);
+          }
+        });
+    },
+    async deleteMaterial(context, id) {
+      fetch(api + "quotes/" + id, {
+        // fetch("https://cyber-loox.herokuapp.com/products/" + id, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getQuotes");
+          swal({
+            icon: "success",
+            title: "The material was deleted",
             button: "OK",
           });
         });
