@@ -55,12 +55,14 @@ export default new Vuex.Store({
       context.commit('setLeads', res.results)
     },
     async getDars(context) {
-      let fetched = await fetch(api +'dar');
-      let res = await fetched.json()
-      context.commit('setDars', res.dars)
+      let fetched = await fetch(
+        "https://proptechapi.herokuapp.com/dar"
+      );
+      let res = await fetched.json();
+      context.commit("setDars", res.dar);
     },
     async getDar(context, id) {
-      let fetched = await fetch(api +'dar/' + id);
+      let fetched = await fetch(api + 'dar/' + id);
       let res = await fetched.json();
       context.commit('setDars', res.results)
     },
@@ -166,6 +168,60 @@ export default new Vuex.Store({
           // context.commit('setProducts', data.msg)
         })
     },
+    async createDar(context, payload) {
+      fetch('https://proptechapi.herokuapp.com/dar', {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Damage Assessment Report Made`,
+            buttons: "OK",
+            closeOnClickOutside: false
+          })
+          context.dispatch('getDars')
+          // context.commit('setProducts', data.msg)
+        })
+    },
+    async deleteDar(context, id) {
+      fetch(api +'dar/' + id, {
+      // fetch("https://cyber-loox.herokuapp.com/products/" + id, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          },
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getLeads");
+          swal({
+            icon: "success",
+            title: "The dar was deleted",
+            button: "OK"
+          })
+        });
+    },
+    async updateDar(context,payload){
+      const {lid, entryType, leadName, leadEmail, leadNumber, leadNote, uID} = payload;
+      fetch(api +'leads/' + lid, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          alert(data.msg);
+          context.dispatch("getLeads", data.msg);
+        });
+      },
     async updateLead(context,payload){
       const {lid, entryType, leadName, leadEmail, leadNumber, leadNote, uID} = payload;
       fetch(api +'leads/' + lid, {
