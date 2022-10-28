@@ -3,7 +3,7 @@ import Vuex from "vuex";
 // ES6 Modules or TypeScript
 import swal from "sweetalert";
 import router from "@/router";
-import createPersistedState from "vuex-persistedstate";
+// import createPersistedState from "vuex-persistedstate";
 
 const api = "https://proptechapi.herokuapp.com/";
 Vue.use(Vuex);
@@ -11,8 +11,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
+    // Leads
     leads: null,
     lead: null,
+    // Quotes
+    quotes: null,
+    quote: null,
     sellers: null,
     errMsg: null,
   },
@@ -21,12 +25,23 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.user = user;
     },
+
+    // Leads
     setLeads(state, leads) {
       state.leads = leads;
     },
     setLead(state, lead) {
       state.lead = lead;
     },
+
+    // Quotes
+    setQuotes(state, quotes) {
+      state.quotes = quotes;
+    },
+    setQuote(state, quote) {
+      state.lead = quote;
+    },
+
     setSellers(state, sellers) {
       state.sellers = sellers;
     },
@@ -50,13 +65,21 @@ export default new Vuex.Store({
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.msg == "The email already exist") {
+          if (payload == "") {
+            swal({
+              icon: "error",
+              title: "Values needed",
+              text: "Enter values",
+              button: "OK",
+            });
+          } else if (data.msg == "The email already exist") {
             swal({
               icon: "error",
               title: "The email already exist",
               text: "Please try another email",
               button: "OK",
             });
+            localStorage.removeItem("users");
           } else {
             swal({
               icon: "success",
@@ -198,7 +221,7 @@ export default new Vuex.Store({
     async getQuote(context, id) {
       let fetched = await fetch(api + "quotes/" + id);
       let res = await fetched.json();
-      context.commit("setQuotes", res.results);
+      context.commit("setQuote", res.results);
     },
     async createQuote(context, payload) {
       fetch(api + "quotes", {
@@ -212,11 +235,11 @@ export default new Vuex.Store({
         .then((data) => {
           swal({
             icon: "success",
-            title: `Item added`,
+            title: `Quote added`,
             buttons: "OK",
             closeOnClickOutside: false,
           });
-          context.dispatch("getLeads");
+          context.dispatch("getQuotes");
           // context.commit('setProducts', data.msg)
         });
     },
@@ -241,7 +264,7 @@ export default new Vuex.Store({
         total,
         addNote,
       } = payload;
-      fetch(api + "quotes/" + lid, {
+      fetch(api + "quotes/" + id, {
         method: "PATCH",
         body: JSON.stringify(payload),
         headers: {
@@ -253,10 +276,10 @@ export default new Vuex.Store({
           if (data.msg == "Edited") {
             swal({
               icon: "success",
-              title: "The lead was edited successfully",
+              title: "The quote was edited successfully",
               button: "OK",
             });
-            context.dispatch("getLeads", data.msg);
+            context.dispatch("getQuotes", data.msg);
           }
         });
     },
@@ -271,10 +294,10 @@ export default new Vuex.Store({
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          context.dispatch("getLeads");
+          context.dispatch("getQuotes");
           swal({
             icon: "success",
-            title: "The lead was deleted",
+            title: "The quote was deleted",
             button: "OK",
           });
         });
