@@ -13,6 +13,8 @@ export default new Vuex.Store({
     user: null,
     leads: null,
     lead: null,
+    dars: null,
+    dar: null,
     sellers: null,
     errMsg: null
   },
@@ -27,6 +29,12 @@ export default new Vuex.Store({
     },
     setLead(state, lead) {
       state.lead = lead 
+    },
+    setDars(state, dars) {
+      state.dars = dars 
+    },
+    setDar(state, dar) {
+      state.dar = dar 
     },
     setSellers(state, sellers) {
       state.sellers = sellers 
@@ -45,6 +53,16 @@ export default new Vuex.Store({
       let fetched = await fetch(api +'leads/' + id);
       let res = await fetched.json();
       context.commit('setLeads', res.results)
+    },
+    async getDars(context) {
+      let fetched = await fetch(api +'dar');
+      let res = await fetched.json()
+      context.commit('setDars', res.dars)
+    },
+    async getDar(context, id) {
+      let fetched = await fetch(api +'dar/' + id);
+      let res = await fetched.json();
+      context.commit('setDars', res.results)
     },
     // async getUser(context,id) {
     //   let fetched = await fetch("https://proptechapi.herokuapp.com/users"+id);
