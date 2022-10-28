@@ -89,7 +89,6 @@ export default {
     }),
 
     mounted() {
-        console.log(this.leadName);
         return this.$store.dispatch("getLead", this.id);
         // this.$store.dispatch("getSellers");
     },
@@ -101,7 +100,8 @@ export default {
 
     methods: {
         deletes(id) {
-            this.$store.dispatch("deleteLead", id);
+            console.log(id);
+            // this.$store.dispatch("deleteLead", id);
         },
         update() {
             this.$store.dispatch("updateLead", {

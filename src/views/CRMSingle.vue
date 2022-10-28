@@ -12,14 +12,13 @@
             <div class="card">
                 <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
                     <div class="l_name">{{ lead.leadName }}</div>
+                    <div class="l_name">{{ lead.lid }}</div>
                     <div class="l_email">{{ lead.leadEmail }}</div>
                     <div class="l_type">{{ lead.entryType }}</div>
                 </router-link>
             </div>
-            <div class="f-holder d-flex align-items-center justify-content-around">
-                <div class="delete col-5" @click="deletes(lead.lid)">
-                    <i class="fa-solid fa-trash-can text-center"></i>
-                </div>
+            <div class="delete col-5" @click="deletes(lead.lid)">
+                <i class="fa-solid fa-trash-can text-center"></i>
             </div>
         </div>
         <BottomNav />
