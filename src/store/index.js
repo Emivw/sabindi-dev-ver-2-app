@@ -35,16 +35,6 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async getLeads(context) {
-      let fetched = await fetch(api + "leads");
-      let res = await fetched.json();
-      context.commit("setLeads", res.leads);
-    },
-    async getLead(context, id) {
-      let fetched = await fetch(api + "leads/" + id);
-      let res = await fetched.json();
-      context.commit("setLead", res.results);
-    },
     // async getUser(context,id) {
     //   let fetched = await fetch("https://proptechapi.herokuapp.com/users"+id);
     //   let res = await fetched.json();
@@ -125,6 +115,18 @@ export default new Vuex.Store({
         .then((res) => res.json())
         .then((data) => (context.state.sellers = data.buyers));
     },
+
+    // Get leads
+    async getLeads(context) {
+      let fetched = await fetch(api + "leads");
+      let res = await fetched.json();
+      context.commit("setLeads", res.leads);
+    },
+    async getLead(context, id) {
+      let fetched = await fetch(api + "leads/" + id);
+      let res = await fetched.json();
+      context.commit("setLead", res.results);
+    },
     async createLead(context, payload) {
       fetch(api + "leads", {
         method: "POST",
@@ -169,6 +171,97 @@ export default new Vuex.Store({
     },
     async deleteLead(context, id) {
       fetch(api + "leads/" + id, {
+        // fetch("https://cyber-loox.herokuapp.com/products/" + id, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getLeads");
+          swal({
+            icon: "success",
+            title: "The lead was deleted",
+            button: "OK",
+          });
+        });
+    },
+
+    // Quotes
+    async getQuotes(context) {
+      let fetched = await fetch(api + "quotes");
+      let res = await fetched.json();
+      context.commit("setQuotes", res.quotes);
+    },
+    async getQuote(context, id) {
+      let fetched = await fetch(api + "quotes/" + id);
+      let res = await fetched.json();
+      context.commit("setQuotes", res.results);
+    },
+    async createQuote(context, payload) {
+      fetch(api + "quotes", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Item added`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getLeads");
+          // context.commit('setProducts', data.msg)
+        });
+    },
+    async updateQuote(context, payload) {
+      const {
+        entryType,
+        uid,
+        cusName,
+        cusNo,
+        cusAddresss,
+        damageType,
+        insCat,
+        leakDetectMethod,
+        dmgLocation,
+        dmgStatus,
+        RepRecom,
+        qtDesc,
+        summary,
+        jobCat,
+        qtMaterials,
+        scope,
+        total,
+        addNote,
+      } = payload;
+      fetch(api + "quotes/" + lid, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.msg == "Edited") {
+            swal({
+              icon: "success",
+              title: "The lead was edited successfully",
+              button: "OK",
+            });
+            context.dispatch("getLeads", data.msg);
+          }
+        });
+    },
+    async deleteQuote(context, id) {
+      fetch(api + "quotes/" + id, {
         // fetch("https://cyber-loox.herokuapp.com/products/" + id, {
         method: "DELETE",
         headers: {

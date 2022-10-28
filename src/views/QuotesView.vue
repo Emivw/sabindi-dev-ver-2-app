@@ -38,7 +38,7 @@ export default {
     },
 
     mounted() {
-        return this.$store.dispatch("getLeads");
+        return this.$store.dispatch("getQuotes");
         // this.$store.dispatch("getSellers");
     },
     computed: {
