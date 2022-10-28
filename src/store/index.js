@@ -112,7 +112,7 @@ export default new Vuex.Store({
       })
         .then((response) => response.json())
         .then((data) => {
-           if (data.msg == "Email does not exist") {
+          if (data.msg == "Email does not exist") {
             swal({
               icon: "error",
               title: "Email does not exist",
@@ -227,6 +227,7 @@ export default new Vuex.Store({
     async getQuotes(context) {
       let fetched = await fetch(api + "quotes");
       let res = await fetched.json();
+      console.log(res.quotes);
       context.commit("setQuotes", res.quotes);
     },
     async getQuote(context, id) {
@@ -318,7 +319,8 @@ export default new Vuex.Store({
     async getMaterials(context) {
       let fetched = await fetch(api + "materials");
       let res = await fetched.json();
-      context.commit("setMaterials", res.material);
+      console.log(res);
+      context.commit("setMaterials", res.leads);
     },
 
     async getMaterial(context, id) {
@@ -388,5 +390,5 @@ export default new Vuex.Store({
     },
   },
   modules: {},
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
 });
