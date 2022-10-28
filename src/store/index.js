@@ -61,11 +61,6 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    // async getUser(context,id) {
-    //   let fetched = await fetch("https://proptechapi.herokuapp.com/users"+id);
-    //   let res = await fetched.json();
-    //   context.commit("setUsers", res.users);
-    // },
     async register(context, payload) {
       fetch("https://proptechapi.herokuapp.com/register", {
         method: "POST",
@@ -138,16 +133,6 @@ export default new Vuex.Store({
             }
           }
         });
-    },
-    // async getLeads(context) {
-    //   fetch('http://localhost:1517/leads')
-    //     .then((res) => res.json())
-    //     .then((data) => context.state.leads = data.leads)
-    // },
-    async getSellers(context) {
-      fetch("http://localhost:1517/sellers")
-        .then((res) => res.json())
-        .then((data) => (context.state.sellers = data.buyers));
     },
 
     // Get leads
