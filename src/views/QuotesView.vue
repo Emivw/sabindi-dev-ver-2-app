@@ -8,16 +8,16 @@
 
         </div>
 
-        <div class="card-holder" v-for="lead in leads" :key="lead.lid">
+        <div class="card-holder" v-for="quote in quotes" :key="quote.qteid">
             <div class="card">
-                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
+                <router-link :to="{ name: 'SingleQuote', params: { id: quote.qteid } }" class="router-link">
                     <div class="l_name">{{ lead.leadName }}</div>
                     <div class="l_name">{{ lead.lid }}</div>
                     <div class="l_email">{{ lead.leadEmail }}</div>
                     <div class="l_type">{{ lead.entryType }}</div>
                 </router-link>
             </div>
-            <div class="delete col-5" @click="deletes(lead.lid)">
+            <div class="delete col-5" @click="deletes(quote.qteid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
             </div>
         </div>
@@ -27,7 +27,7 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/Lead/AddModal.vue";
+import AddModal from "../components/Quote/AddModal.vue";
 
 
 export default {
@@ -43,13 +43,13 @@ export default {
     },
     computed: {
         leads() {
-            return this.$store.state.leads;
+            return this.$store.state.quotes;
         }
     },
 
     methods: {
         deletes(id) {
-            this.$store.dispatch("deleteLead", id);
+            this.$store.dispatch("deleteQuote", id);
         }
     },
 }

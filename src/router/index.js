@@ -59,6 +59,27 @@ const routes = [
     props: true,
   },
   {
+    path: "/quotes",
+    name: "quotes",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/QuotesView.vue"),
+  },
+  {
+    path: "/quotes/:id",
+    name: "SingleQuote",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../components/Quote/SingleView.vue"
+      ),
+    props: true,
+  },
+  {
     path: "/po",
     name: "po",
     // route level code-splitting
