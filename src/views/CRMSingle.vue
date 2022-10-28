@@ -17,22 +17,17 @@
                 </router-link>
             </div>
             <div class="f-holder d-flex align-items-center justify-content-around">
-                <div class="edit col-5" type="button" data-bs-toggle="modal" :data-bs-target="'#update' + lead.lid">
-                    <i class="fa-solid fa-pen-to-square text-center"></i>
-                </div>
                 <div class="delete col-5" @click="deletes(lead.lid)">
                     <i class="fa-solid fa-trash-can text-center"></i>
                 </div>
             </div>
         </div>
-        <EditModal :lead="lead" />
         <BottomNav />
     </v-card>
 </template>
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import EditModal from "../components/EditModal.vue";
 import AddModal from "../components/AddModal.vue";
 
 
@@ -40,7 +35,6 @@ export default {
     props: ['lead'],
     components: {
         BottomNav,
-        EditModal,
         AddModal
     },
 

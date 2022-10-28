@@ -25,14 +25,14 @@
                 </div>
             </div>
         </div>
-        <EditModal :lead="lead" />
+
         <BottomNav />
     </v-card>
 </template>
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import EditModal from "../components/EditModal.vue";
+
 import AddModal from "../components/AddModal.vue";
 
 
@@ -40,7 +40,7 @@ export default {
     props: ['lead'],
     components: {
         BottomNav,
-        EditModal,
+
         AddModal
     },
 

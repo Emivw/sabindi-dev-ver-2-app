@@ -90,7 +90,7 @@ export default {
 }
 
 .theme--light.v-card {
-  background-color: #333333 !important;
+  /* background-color: #333333 !important; */
   color: rgba(0, 0, 0, 0.87);
 }
 
