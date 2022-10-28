@@ -3,7 +3,7 @@ import Vuex from "vuex";
 // ES6 Modules or TypeScript
 import swal from "sweetalert";
 import router from "@/router";
-import createPersistedState from "vuex-persistedstate";
+// import createPersistedState from "vuex-persistedstate";
 
 const api = "https://proptechapi.herokuapp.com/";
 Vue.use(Vuex);
@@ -60,13 +60,22 @@ export default new Vuex.Store({
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.msg == "The email already exist") {
+          if(payload == ""){
+            swal({
+              icon: "error",
+              title: "Values needed",
+              text: "Enter values",
+              button: "OK",
+            });
+          }
+          else if(data.msg == "The email already exist") {
             swal({
               icon: "error",
               title: "The email already exist",
               text: "Please try another email",
               button: "OK",
             });
+            localStorage.removeItem("users")
           } else {
             swal({
               icon: "success",
@@ -189,5 +198,5 @@ export default new Vuex.Store({
   },
   modules: {
   },
-  plugins: [createPersistedState()]
+  // plugins: [createPersistedState()]
 })
