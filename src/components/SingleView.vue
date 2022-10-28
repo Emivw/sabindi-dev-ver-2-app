@@ -20,28 +20,17 @@
             </div>
             <div class="a-notes">
                 <h4 class="text-center">Additional notes</h4>
-                <p>{{ lead.leadNote }}</p>
+                <p class="text-center">{{ lead.leadNote }}</p>
             </div>
         </div>
-        <div class="f-holder">
-            <i class="fa-solid fa-trash-can" @click="deletes(this.id)"></i>
-            <i class="fa-solid fa-pen-to-square" type="button" data-bs-toggle="modal"
-                :data-bs-target="'#update' + lead.lid"></i>
-            <EditModal :lead="lead" />
-
-        </div>
-
     </div>
 </template>
   
 <script>
-import EditModal from "../components/EditModal.vue";
 export default {
     props: ['id'],
 
-    components: {
-        EditModal
-    },
+
     // data() {
     //     return {
     //         items: [

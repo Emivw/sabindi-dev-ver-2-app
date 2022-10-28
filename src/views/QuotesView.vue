@@ -1,162 +1,122 @@
 <template>
     <v-card>
-        <v-data-table :headers="headers" :items="report" :items-per-page="5" class="elevation-1"></v-data-table>
+        <div id="box">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#add">
+                ADD <i class="fa-solid fa-plus"></i>
+            </button>
+            <AddModal />
+
+        </div>
+
+        <div class="card-holder" v-for="lead in leads" :key="lead.lid">
+            <div class="card">
+                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
+                    <div class="l_name">{{ lead.leadName }}</div>
+                    <div class="l_email">{{ lead.leadEmail }}</div>
+                    <div class="l_type">{{ lead.entryType }}</div>
+                </router-link>
+            </div>
+            <div class="f-holder d-flex align-items-center justify-content-around">
+                <div class="edit col-5" type="button" data-bs-toggle="modal" :data-bs-target="'#update' + lead.lid">
+                    <i class="fa-solid fa-pen-to-square text-center"></i>
+                </div>
+                <div class="delete col-5" @click="deletes(lead.lid)">
+                    <i class="fa-solid fa-trash-can text-center"></i>
+                </div>
+            </div>
+        </div>
+        <EditModal :lead="lead" />
         <BottomNav />
     </v-card>
 </template>
 
 <script>
-import BottomNav from '../components/BottomNav'
+import BottomNav from "../components/BottomNav.vue"
+import EditModal from "../components/EditModal.vue";
+import AddModal from "../components/AddModal.vue";
+
+
 export default {
+    props: ['lead'],
     components: {
         BottomNav,
+        EditModal,
+        AddModal
     },
-    data() {
-        return {
-            dialog: false,
-            plus: false,
-            deletes: false,
-            pencil: false,
-            direction: 'left',
-            fab: false,
-            fling: true,
-            hover: false,
-            tabs: null,
-            top: true,
-            right: true,
-            bottom: false,
-            left: false,
-            transition: 'scale-transition',
-            tabs: null,
-            headers: [
-                {
-                    text: 'Name',
-                    align: 'start',
-                    sortable: false,
-                    value: 'name',
-                },
-                { text: 'Area', value: 'area' },
-                { text: 'Quote No', value: 'quote' },
 
-            ],
-            report: [
-                {
-                    name: 'S. Razack',
-                    area: 'Ravensmead',
-                    quote: 'HQ QTE 472',
-                },
-                {
-                    name: 'J. Isaacs',
-                    area: 'Mitchells Plain',
-                    quote: 'HQ QTE 473',
-                },
-                {
-                    name: 'C. Adonis',
-                    area: 'Ravensmead',
-                    quote: 'HQ QTE 474',
-                },
-                {
-                    name: 'M. Rinquest',
-                    area: 'Ravensmead',
-                    quote: 'HQ QTE 475',
-                },
-                {
-                    name: 'E. Van Wyk',
-                    area: 'Wynberg',
-                    quote: 'HQ QTE 476',
-                },
-                {
-                    name: 'E. Elliott',
-                    area: 'Mitchells Plain',
-                    quote: 'HQ QTE 477',
-                },
-
-            ],
-
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    mounted() {
+        return this.$store.dispatch("getLeads");
+        // this.$store.dispatch("getSellers");
+    },
+    computed: {
+        leads() {
+            return this.$store.state.leads;
         }
+    },
 
-    },
-    watch: {
-        top(val) {
-            this.bottom = !val
-        },
-        right(val) {
-            this.left = !val
-        },
-        bottom(val) {
-            this.top = !val
-        },
-        left(val) {
-            this.right = !val
-        },
-    },
     methods: {
-        clickIcon(results) {
-            var icon = document.getElementById('change');
-            if (results == "plus") {
-                this.plus = true
-                this.deletes = false
-                this.pencil = false
-                this.dialog = true
-            }
-            if (results == "pencil") {
-                this.pencil = true
-                this.plus = false
-                this.dialog = true
-            }
-            if (results == "delete") {
-                this.deletes = true
-                this.plus = false
-                this.pencil = false
-            }
+        deletes(id) {
+            this.$store.dispatch("deleteLead", id);
         }
-    }
+    },
 }
 </script>
 
 <style scoped>
-/* Helper classes */
-/* This is for documentation purposes and will not be needed in your application */
-#create .v-speed-dial {
-    position: absolute;
-}
-
-#create .v-btn--floating {
-    position: relative;
-}
-
-.overflow {
-    position: static;
-}
-
-.container--fluid {
-    max-width: 100%;
-    display: none !important;
+.card-holder {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 
-.account {
-    color: orange !important;
+.f-holder {
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.mdi-account-circle::before {
-    content: "\F0009";
-    color: black !important;
+.edit,
+.delete {
+    border: 1px solid #A5A5A5;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
 }
 
-.v-application .primary--text {
-    color: orange !important;
-    caret-color: #1976d2 !important;
+.fa-solid {
+    text-align: center;
 }
 
-.mdi-microphone::before {
-    content: "\F036C";
-    color: orange !important;
+
+
+/* Small phones */
+@media only screen and (max-width:576px) {
+    .card {
+        align-items: center;
+        margin-bottom: 15px;
+        width: 200px;
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+    .column {
+        padding-right: 10px;
+    }
+
 }
 
-.v-toolbar__content {
-    background-color: black;
-    color: white;
-}
+/* Bigger Phones */
+@media only screen and (min-width:576px) {}
+
+/* Tablets */
+@media only screen and (min-width:768px) {}
+
+/* Laptops */
+@media only screen and (min-width:992px) {}
+
+/* Desktops */
+@media only screen and (min-width:1200px) {}
 </style>
+
