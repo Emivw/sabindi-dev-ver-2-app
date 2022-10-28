@@ -8,13 +8,14 @@
 
         </div>
 
-        <div class="card-holder" v-for="lead in leads" :key="lead.lid">
+        <div class="card-holder" v-for="wo in workOrders" :key="wo.woid">
             <div class="card">
-                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
-                    <div class="l_name">{{ lead.leadName }}</div>
-                    <div class="l_name">{{ lead.lid }}</div>
-                    <div class="l_email">{{ lead.leadEmail }}</div>
-                    <div class="l_type">{{ lead.entryType }}</div>
+                <router-link :to="{ name: 'SingleCRM', params: { id: wo.woid } }" class="router-link">
+                    <div class="l_name">{{ wo.workers }}</div>
+                    <div class="l_name">{{ wo.woid}}</div>
+                    <div class="l_email">{{ wo.entryType }}</div>
+                    <div class="l_type">{{ wo.workStatus }}</div>
+                    <div class="l_type">{{ wo.jobCat}}</div>
                 </router-link>
             </div>
             <div class="delete col-5" @click="deletes(lead.lid)">
@@ -27,7 +28,7 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/Lead/AddModal.vue";
+import AddModal from "../components/WO/AddModal.vue";
 
 
 export default {
@@ -38,12 +39,12 @@ export default {
     },
 
     mounted() {
-        return this.$store.dispatch("getLeads");
+        return this.$store.dispatch("getWorkOrders")
         // this.$store.dispatch("getSellers");
     },
     computed: {
-        leads() {
-            return this.$store.state.leads;
+        workOrders() {
+            return this.$store.state.wos;
         }
     },
 

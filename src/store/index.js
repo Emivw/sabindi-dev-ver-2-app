@@ -19,6 +19,8 @@ export default new Vuex.Store({
     quote: null,
     sellers: null,
     errMsg: null,
+    wos:null,
+    po:null,
   },
   getters: {},
   mutations: {
@@ -48,7 +50,13 @@ export default new Vuex.Store({
     setErrMsg(state, errMsg) {
       state.errMsg = errMsg;
     },
+    setWorkOrders(state,wos){
+      state.wos = wos;
+    },
+   setPurchaseOrder(state,po){
+    state.po = po;
   },
+},
   actions: {
     // async getUser(context,id) {
     //   let fetched = await fetch("https://proptechapi.herokuapp.com/users"+id);
@@ -300,6 +308,33 @@ export default new Vuex.Store({
             title: "The quote was deleted",
             button: "OK",
           });
+        });
+    },
+
+    //WO
+    async getWorkOrders(context) {
+      let fetched = await fetch(api + "wo");
+      let res = await fetched.json();
+      context.commit("setWorkOrders", res.leads);
+    },
+    async createWorkOrders(context, payload) {
+      fetch(api + "wo", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Quote added`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getWorkOrders");
+          // context.commit('setProducts', data.msg)
         });
     },
   },
