@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="info-holder" v-for="lead in lead" :key="lead.lid">
+        <div class="info-holder" v-for="quote in quote" :key="quote.qteid">
             <h2 class="text-center">Lead Information</h2>
             <div class="seperator d-flex ">
                 <div class="info-title-holder col-5">
-                    <div class="info-text">Lid :</div>
                     <div class="info-text">Entry Type :</div>
+                    <div class="info-text">:</div>
                     <div class="info-text">Name :</div>
                     <div class="info-text">Email :</div>
                     <div class="info-text">Phone No :</div>
@@ -89,12 +89,12 @@ export default {
     }),
 
     mounted() {
-        return this.$store.dispatch("getLead", this.id);
+        return this.$store.dispatch("getQuote", this.id);
         // this.$store.dispatch("getSellers");
     },
     computed: {
-        lead() {
-            return this.$store.state.lead;
+        quote() {
+            return this.$store.state.quote;
         },
     },
 
@@ -105,13 +105,24 @@ export default {
         },
         update() {
             this.$store.dispatch("updateLead", {
-                lid: this.lead.lid,
-                entryType: this.lead.entryType,
-                leadName: this.lead.leadName,
-                leadEmail: this.lead.leadEmail,
-                leadNumber: this.lead.leadNumber,
-                leadNote: this.lead.leadNote,
-                uID: this.lead.uID
+                entryType: this.entryType,
+                uid: this.uid,
+                cusName: this.cusName,
+                cusNo: this.cusNo,
+                cusAddress: this.cusAddress,
+                damageType: this.damageType,
+                insCat: this.insCat,
+                leakDetectMethod: this.leakDetectMethod,
+                dmgLocation: this.dmgLocation,
+                dmgStatus: this.dmgStatus,
+                RepRecom: this.RepRecom,
+                qtDesc: this.qtDesc,
+                summary: this.summary,
+                jobCat: this.jobCat,
+                qteMaterials: this.qteMaterials,
+                scope: this.scope,
+                total: this.total,
+                addNote: this.addNote
             });
         }
     },

@@ -119,7 +119,7 @@ export default {
       qtDesc: "",
       summary: "",
       jobCat: "",
-      qtMaterials: "",
+      qteMaterials: "",
       scope: "",
       total: "",
       addNote: ""
@@ -142,7 +142,7 @@ export default {
         qtDesc: this.qtDesc,
         summary: this.summary,
         jobCat: this.jobCat,
-        qtMaterials: this.qtMaterials,
+        qteMaterials: this.qteMaterials,
         scope: this.scope,
         total: this.total,
         addNote: this.addNote,

@@ -105,24 +105,7 @@ export default {
   props: ['quote'],
   data() {
     return {
-      entryType: "",
-      uid: "",
-      cusName: "",
-      cusNo: "",
-      cusAddress: "",
-      damageType: "",
-      insCat: "",
-      leakDetectMethod: "",
-      dmgLocation: "",
-      dmgStatus: "",
-      RepRecom: "",
-      qtDesc: "",
-      summary: "",
-      jobCat: "",
-      qteMaterials: "",
-      scope: "",
-      total: "",
-      addNote: ""
+
     };
   },
   methods: {
@@ -132,7 +115,7 @@ export default {
         uid: this.uid,
         cusName: this.cusName,
         cusNo: this.cusNo,
-        cusAddresss: this.cusAddress,
+        cusAddress: this.cusAddress,
         damageType: this.damageType,
         insCat: this.insCat,
         leakDetectMethod: this.leakDetectMethod,
@@ -142,7 +125,7 @@ export default {
         qtDesc: this.qtDesc,
         summary: this.summary,
         jobCat: this.jobCat,
-        qtMaterials: this.qtMaterials,
+        qteMaterials: this.qteMaterials,
         scope: this.scope,
         total: this.total,
         addNote: this.addNote,
