@@ -68,7 +68,7 @@
         category: [
           "admin"
         ],
-        to: '/wo'
+        to: '/wos'
       },
       {
         title: 'Quotes',

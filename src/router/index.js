@@ -89,13 +89,23 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/POView.vue"),
   },
   {
-    path: "/wo",
-    name: "wo",
+    path: "/wos",
+    name: "wos",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/WOView.vue"),
+  },
+  {
+    path: "/wos/:id",
+    name: "SingleWO",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/WO/SingleView.vue"),
+      props:true,
   },
 
   {
