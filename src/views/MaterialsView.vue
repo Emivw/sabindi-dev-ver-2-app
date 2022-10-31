@@ -14,7 +14,7 @@
                     <div class="l_name">{{ material.MatCat }}</div>
                 </router-link>
             </div>
-            <div class="delete col-5" @click="deletes(material.mid)">
+            <div class="delete col-5" @click="deleteMaterial(material.mid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
             </div>
         </div>
@@ -36,8 +36,6 @@ export default {
 
     mounted() {
         return this.$store.dispatch("getMaterials");
-        // console.log(this.$store.state.materials)
-        // this.$store.dispatch("getSellers");
     },
     computed: {
         materials() {
@@ -46,7 +44,7 @@ export default {
     },
 
     methods: {
-        deletes(id) {
+        deleteMaterial(id) {
             this.$store.dispatch("deleteMaterial", id);
         }
     },

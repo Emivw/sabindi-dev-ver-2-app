@@ -42,7 +42,7 @@ export default new Vuex.Store({
       state.quotes = quotes;
     },
     setQuote(state, quote) {
-      state.lead = quote;
+      state.quote = quote;
     },
 
     // Materials
@@ -50,7 +50,7 @@ export default new Vuex.Store({
       state.materials = materials;
     },
     setMaterial(state, material) {
-      state.lead = material;
+      state.material = material;
     },
 
     setSellers(state, sellers) {
@@ -184,7 +184,7 @@ export default new Vuex.Store({
     async updateLead(context, payload) {
       const { lid, entryType, leadName, leadEmail, leadNumber, leadNote, uID } =
         payload;
-      fetch(api + "leads/" + lid, {
+      fetch(api + "leads/" + id, {
         method: "PATCH",
         body: JSON.stringify(payload),
         headers: {
@@ -202,6 +202,7 @@ export default new Vuex.Store({
             context.dispatch("getLeads", data.msg);
           }
         });
+      console.log(data);
     },
     async deleteLead(context, id) {
       fetch(api + "leads/" + id, {
@@ -233,6 +234,7 @@ export default new Vuex.Store({
     async getQuote(context, id) {
       let fetched = await fetch(api + "quotes/" + id);
       let res = await fetched.json();
+      console.log(res.quote);
       context.commit("setQuote", res.results);
     },
     async createQuote(context, payload) {
@@ -258,7 +260,7 @@ export default new Vuex.Store({
     async updateQuote(context, payload) {
       const {
         entryType,
-        uid,
+        uID,
         cusName,
         cusNo,
         cusAddresss,
@@ -370,8 +372,7 @@ export default new Vuex.Store({
         });
     },
     async deleteMaterial(context, id) {
-      fetch(api + "quotes/" + id, {
-        // fetch("https://cyber-loox.herokuapp.com/products/" + id, {
+      fetch(api + "materials/" + id, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -380,7 +381,7 @@ export default new Vuex.Store({
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          context.dispatch("getQuotes");
+          context.dispatch("getMaterials");
           swal({
             icon: "success",
             title: "The material was deleted",
