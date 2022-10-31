@@ -208,8 +208,8 @@ export default new Vuex.Store({
         });
     },
     async updateDar(context,payload){
-      const {lid, entryType, leadName, leadEmail, leadNumber, leadNote, uID} = payload;
-      fetch(api +'leads/' + lid, {
+      const {darid, claimNumber, date, reportNumber, damageType, facility, damageSeverity, inspectionCategory, leakDetectionMethod, damageLocationInternal, damageLocationexternal, damageStatusConcealed, damageStatusNotConcealed, repairActionRecommendation, executiveSummary, authBy} = payload;
+      fetch(api +'dar/' + darid, {
         method: "PATCH",
         body: JSON.stringify(payload),
         headers: {
@@ -219,7 +219,7 @@ export default new Vuex.Store({
         .then((res) => res.json())
         .then((data) => {
           alert(data.msg);
-          context.dispatch("getLeads", data.msg);
+          context.dispatch("getDars", data.msg);
         });
       },
     async updateLead(context,payload){

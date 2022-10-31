@@ -1,11 +1,11 @@
 <template>
     <div>
         <div id="box">
-      <button type="button" data-bs-toggle="modal" data-bs-target="#addDar">
-        ADD <i class="fa-solid fa-plus"></i>
-      </button>
-      <AddDARModal/>
-    </div>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#addDar">
+                ADD <i class="fa-solid fa-plus"></i>
+            </button>
+            <AddDARModal />
+        </div>
 
 
         <table class="table">
@@ -16,11 +16,16 @@
             </tr>
             <tr class="table__row" v-for="dar in dars" :key="dar.darid">
                 <td class="table__content" data-heading="Claim Number">
-                    {{ dar.claimNumber}}
+                    {{ dar.claimNumber }}
                 </td>
                 <td class="table__content" data-heading="Client Name">{{ dar.clientName }}</td>
                 <td class="table__content" data-heading="Lead Name">
                     {{ dar.damageType }}
+                </td>
+                <td class="table__content" data-heading="">
+                    <i class="fa-solid fa-trash-can" @click="deletes(dar.darid)"></i>
+                    <i class="fa-solid fa-pen-to-square" type="button" data-bs-toggle="modal"
+                        :data-bs-target="'#update' + dar.darid"></i>
                 </td>
             </tr>
         </table>
@@ -41,12 +46,13 @@ export default {
         }
     },
     methods: {
-        deletes(id){
-        this.$store.dispatch("deleteDar", id);
-      }
+        deletes(id) {
+            this.$store.dispatch("deleteDar", id);
+        }
     }
 }
 </script>
 
 <style scoped>
+
 </style>

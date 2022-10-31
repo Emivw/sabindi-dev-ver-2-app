@@ -74,12 +74,13 @@
                   <label for="damage-type" class="col-form-label"
                     >Damage type:</label
                   >
-                  <v-select
-                    :items="items"
-                  label="Outlined style"
-                      dense
-                      outlined
-                     ></v-select>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="damage-type"
+                    placeholder="Damage Type"
+                    v-model="damageType"
+                  />
                 </div>
 
               </form>
