@@ -56,13 +56,13 @@ export default new Vuex.Store({
     },
     async getDars(context) {
       let fetched = await fetch(
-        "https://proptechapi.herokuapp.com/dar"
+        "https://proptechapi.herokuapp.com/dars"
       );
       let res = await fetched.json();
       context.commit("setDars", res.dar);
     },
     async getDar(context, id) {
-      let fetched = await fetch(api + 'dar/' + id);
+      let fetched = await fetch(api + 'dars/' + id);
       let res = await fetched.json();
       context.commit('setDars', res.results)
     },
@@ -169,7 +169,7 @@ export default new Vuex.Store({
         })
     },
     async createDar(context, payload) {
-      fetch('https://proptechapi.herokuapp.com/dar', {
+      fetch('https://proptechapi.herokuapp.com/dars', {
           method: 'POST',
           body: JSON.stringify(payload),
           headers: {
@@ -189,7 +189,7 @@ export default new Vuex.Store({
         })
     },
     async deleteDar(context, id) {
-      fetch(api +'dar/' + id, {
+      fetch(api +'dars/' + id, {
       // fetch("https://cyber-loox.herokuapp.com/products/" + id, {
           method: "DELETE",
           headers: {
@@ -198,8 +198,7 @@ export default new Vuex.Store({
         })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          context.dispatch("getLeads");
+          context.dispatch("getDars");
           swal({
             icon: "success",
             title: "The dar was deleted",
@@ -209,7 +208,7 @@ export default new Vuex.Store({
     },
     async updateDar(context,payload){
       const {darid, claimNumber, date, reportNumber, damageType, facility, damageSeverity, inspectionCategory, leakDetectionMethod, damageLocationInternal, damageLocationexternal, damageStatusConcealed, damageStatusNotConcealed, repairActionRecommendation, executiveSummary, authBy} = payload;
-      fetch(api +'dar/' + darid, {
+      fetch(api +'dars/' + darid, {
         method: "PATCH",
         body: JSON.stringify(payload),
         headers: {

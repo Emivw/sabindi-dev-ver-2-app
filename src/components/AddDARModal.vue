@@ -50,7 +50,7 @@
                     >Date:</label
                   >
                   <input
-                    type="text"
+                    type="date"
                     class="form-control"
                     id="date"
                     placeholder="yyyy-mm-dd"
@@ -82,7 +82,138 @@
                     v-model="damageType"
                   />
                 </div>
-
+                <div class="mb-3">
+                  <label for="facility" class="col-form-label"
+                    >Facility:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="facility"
+                    placeholder="Facility"
+                    v-model="facility"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="damage-severity" class="col-form-label"
+                    >Damage Severity:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="damage-severity"
+                    placeholder="Damage Severity"
+                    v-model="damageSeverity"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="inspection-category" class="col-form-label"
+                    >Inspection Category:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inspection-category"
+                    placeholder="Inspection Category"
+                    v-model="inspectionCategory"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="leak-detection-method" class="col-form-label"
+                    >Leak Detection Method:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="leak-detection-method"
+                    placeholder="Leak Detection Method"
+                    v-model="leakDetectionMethod"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="damage-location-internal" class="col-form-label"
+                    >Damage Location Internal:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="damage-location-internal"
+                    placeholder="Damage Location Internal"
+                    v-model="damageLocationInternal"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="damage-location-external" class="col-form-label"
+                    >Damage Location External:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="damage-location-external"
+                    placeholder="Damage Location External"
+                    v-model="damageLocationExternal"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="damage-status-concealed" class="col-form-label"
+                    >Damage Status Concealed:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="damage-status-concealed"
+                    placeholder="Damage Status Concealed"
+                    v-model="damageStatusConcealed"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="damage-status-not-concealed" class="col-form-label"
+                    >Damage Status Not Concealed:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="damage-status-not-concealed"
+                    placeholder="Damage Status Not Concealed"
+                    v-model="damageStatusNotConcealed"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="repair-action-recommendation" class="col-form-label"
+                    >Repair Action Recommendation:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="repair-action-recommendation"
+                    placeholder="Repair Action Recommendation"
+                    v-model="repairActionRecommendation"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="executive-summary" class="col-form-label"
+                    >Executive Summary:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="executive-summary"
+                    placeholder="Executive Summary"
+                    v-model="executiveSummary"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="authBy" class="col-form-label"
+                    >Authorised By:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="authBy"
+                    placeholder="Authorised By"
+                    v-model="authBy"
+                  />
+                </div>
               </form>
             </div>
             <div class="modal-footer">
@@ -120,7 +251,7 @@ return {
   inspectionCategory:"",
   leakDetectionMethod:"",
   damageLocationInternal:"",
-  damageLocationexternal:"",
+  damageLocationExternal:"",
   damageStatusConcealed:"",
   damageStatusNotConcealed:"",
   repairActionRecommendation:"",
@@ -142,7 +273,7 @@ add() {
         inspectionCategory: this.inspectionCategory,
         leakDetectionMethod: this.leakDetectionMethod,
         damageLocationInternal: this.damageLocationInternal,
-        damageLocationexternal: this.damageLocationexternal,
+        damageLocationExternal: this.damageLocationExternal,
         damageStatusConcealed: this.damageStatusConcealed,
         damageStatusNotConcealed: this.damageStatusNotConcealed,
         repairActionRecommendation: this.repairActionRecommendation,
