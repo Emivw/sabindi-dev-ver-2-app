@@ -22,7 +22,9 @@ export default new Vuex.Store({
     material: null,
     // Inventory
     inventory: null,
-    sellers: null,
+    // work orders
+    wos: null,
+    wo: null,
     errMsg: null,
   },
   getters: {},
@@ -39,6 +41,13 @@ export default new Vuex.Store({
       state.lead = lead;
     },
 
+    // work orders
+    setWOS(state, wos) {
+      state.wos = wos;
+    },
+    setWO(state, wo) {
+      state.wo = wo;
+    },
     // Quotes
     setQuotes(state, quotes) {
       state.quotes = quotes;
@@ -68,11 +77,6 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    // async getUser(context,id) {
-    //   let fetched = await fetch("https://proptechapi.herokuapp.com/users"+id);
-    //   let res = await fetched.json();
-    //   context.commit("setUsers", res.users);
-    // },
     async register(context, payload) {
       fetch("https://proptechapi.herokuapp.com/register", {
         method: "POST",
@@ -145,16 +149,6 @@ export default new Vuex.Store({
             }
           }
         });
-    },
-    // async getLeads(context) {
-    //   fetch('http://localhost:1517/leads')
-    //     .then((res) => res.json())
-    //     .then((data) => context.state.leads = data.leads)
-    // },
-    async getSellers(context) {
-      fetch("http://localhost:1517/sellers")
-        .then((res) => res.json())
-        .then((data) => (context.state.sellers = data.buyers));
     },
 
     // Get leads
@@ -230,6 +224,78 @@ export default new Vuex.Store({
           });
         });
     },
+
+      // Get work orders
+      async getWOS(context) {
+        let fetched = await fetch(api + "wos");
+        let res = await fetched.json();
+        context.commit("setWOS", res.workOrders);
+      },
+      async getWO(context, id) {
+        let fetched = await fetch(api + "wos/" + id);
+        let res = await fetched.json();
+        context.commit("setWO", res.results);
+      },
+      async createWO(context, payload) {
+        fetch(api + "wos", {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            swal({
+              icon: "success",
+              title: `Item added`,
+              buttons: "OK",
+              closeOnClickOutside: false,
+            });
+            context.dispatch("getWOS");
+            // context.commit('setProducts', data.msg)
+          });
+      },
+      async updateWO(context, payload) {
+        const {woid, conID, workers, entryType, jobCat, mat, qteID, poID, jobDesc, uID, workStatus, workerNote, workerTimeKeeping } =
+          payload;
+        fetch(api + "wos/" + woid, {
+          method: "PATCH",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.msg == "Edited") {
+              swal({
+                icon: "success",
+                title: "The work order was edited successfully",
+                button: "OK",
+              });
+              context.dispatch("getWO", data.msg);
+            }
+          });
+      },
+      async deleteWO(context, id) {
+        fetch(api + "wos/" + id, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            context.dispatch("getLeads");
+            swal({
+              icon: "success",
+              title: "The work order was deleted",
+              button: "OK",
+            });
+          });
+      },
 
     // Quotes
     async getQuotes(context) {
