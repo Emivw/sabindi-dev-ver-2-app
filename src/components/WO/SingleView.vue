@@ -55,42 +55,42 @@
                                             <v-text-field v-model="wo.woid" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="wo.jobCat"></v-text-field>
+                                            <v-text-field type="text" v-model="jobCat" :placeholder="wo.jobCat"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
                                                 :items="['residential', 'insurance', 'corporate']"
-                                                v-model="wo.entryType"></v-autocomplete>
+                                                v-model="entryType" :placeholder="wo.entryType" type="text"></v-autocomplete>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="wo.jobDesc"></v-text-field>
+                                            <v-text-field v-model="jobDesc" :placeholder="wo.jobDesc"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="wo.workerNote"></v-text-field>
+                                            <v-text-field v-model="workerNote" :placeholder="wo.workerNote"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="wo.qteID"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="wo.jobDesc"></v-text-field>
+                                            <v-text-field v-model="qteID" :placeholder="wo.qteID" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="wo.workStatus"></v-text-field>
+                                            <v-text-field v-model="workStatus" :placeholder="wo.workStatus"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="wo.poID" type="number"></v-text-field>
+                                            <v-text-field v-model="poID" :placeholder="wo.poID" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="wo.uID"></v-text-field>
+                                            <v-text-field v-model="uID" :placeholder="wo.uID" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="wo.workerTimeKeeping"></v-text-field>
+                                            <v-text-field v-model="workerTimeKeeping" :placeholder="wo.workerTimeKeeping"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="wo.mat" type="number"></v-text-field>
+                                            <v-text-field v-model="mat" :placeholder="wo.mat" type="text"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="wo.workers" type="number"></v-text-field>
+                                            <v-text-field v-model="workers" :placeholder="wo.workers" type="number"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="conID" :placeholder="wo.conID" type="number"></v-text-field>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -152,21 +152,21 @@ export default {
         update(id) {
             const payload= {
                 woid: id,
-                workers: this.wo.workers,
-                entryType: this.wo.entryType,
-                conID: this.wo.conID,
-                jobCat: this.wo.jobCat,
-                mat: this.wo.mat,
-                qteID: this.wo.qteID,
-                poID: this.wo.poID,
-                jobDesc: this.wo.jobDesc,
-                uID: this.wo.uID,
-                workStatus: this.wo.workStatus,
-                workerNote: this.wo.workerNote,
-                workerTimeKeeping: this.wo.workerTimeKeeping
+                workers: this.workers,
+                entryType: this.entryType,
+                conID: this.conID,
+                jobCat: this.jobCat,
+                mat: this.mat,
+                qteID: this.qteID,
+                poID: this.poID,
+                jobDesc: this.jobDesc,
+                uID: this.uID,
+                workStatus: this.workStatus,
+                workerNote: this.workerNote,
+                workerTimeKeeping: this.workerTimeKeeping
             };
             console.log(payload);
-           this.$store.dispatch("updateWO", payload);
+          return this.$store.dispatch("updateWO", payload);
         }
     },
 }
