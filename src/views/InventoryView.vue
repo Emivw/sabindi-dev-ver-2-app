@@ -4,11 +4,11 @@
             <button type="button" data-bs-toggle="modal" data-bs-target="#add">
                 ADD <i class="fa-solid fa-plus"></i>
             </button>
-            <!-- <AddModal /> -->
+            <AddModal />
 
         </div>
 
-        <div class="card-holder" v-for="inventory in inventories" :key="inventory.invenID">
+        <div class="card-holder" v-for="inventory in inventory" :key="inventory.invenID">
             <div class="card">
                 <div class="l_name">{{ inventory.Equipment }}</div>
                 <div class="l_name">{{ inventory.Stock }}</div>
@@ -24,21 +24,22 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-// import AddModal from "../components/Inventory/AddModal.vue";
+import AddModal from "../components/Inventory/AddModal.vue"
 
 
 export default {
     // props: ['quote'],
     components: {
         BottomNav,
-        // AddModal
+        AddModal
     },
 
     mounted() {
+        // console.log(this.$store.state.inventory);
         return this.$store.dispatch("getInventory");
     },
     computed: {
-        inventories() {
+        inventory() {
             return this.$store.state.inventory;
         }
     },

@@ -402,7 +402,7 @@ export default new Vuex.Store({
       let fetched = await fetch(api + "inventory");
       let res = await fetched.json();
       console.log(res);
-      context.commit("setInventory", res.leads);
+      context.commit("setInventory", res.inventory);
     },
     async createItem(context, payload) {
       fetch(api + "inventory", {
@@ -455,7 +455,7 @@ export default new Vuex.Store({
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          context.dispatch("Inventory");
+          context.dispatch("getInventory");
           swal({
             icon: "success",
             title: "The item was deleted",
