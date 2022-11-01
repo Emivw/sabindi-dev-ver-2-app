@@ -29,9 +29,6 @@
                         <v-icon v-else-if="pencil">
                         mdi-pencil
                         </v-icon>
-                        <v-icon v-else-if="plus">
-                        mdi-plus
-                        </v-icon>
                         <v-icon v-else-if="deletes">
                         mdi-delete
                         </v-icon>
