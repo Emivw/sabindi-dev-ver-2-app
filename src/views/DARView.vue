@@ -26,7 +26,7 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/WO/AddModal.vue";
+import AddModal from "../components/DAR/AddModal.vue";
 
 
 export default {
@@ -38,7 +38,6 @@ export default {
 
     mounted() {
         return this.$store.dispatch("getDARS");
-        // this.$store.dispatch("getSellers");
     },
     computed: {
         dars() {

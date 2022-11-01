@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="info-holder" v-for="quote in quote" :key="quote.qteid">
-            <h2 class="text-center">Lead Information</h2>
+        <div class="info-holder" v-for="dar in dar" :key="dar.darid">
+            <h2 class="text-center">Damage Assessment Report</h2>
             <div class="seperator d-flex ">
                 <div class="info-title-holder col-5">
-                    <div class="info-text">Entry Type :</div>
-                    <div class="info-text">uid:</div>
+                    <div class="info-text">Claim Number :</div>
+                    <div class="info-text">Client Name:</div>
                     <div class="info-text">Customer Name :</div>
                     <div class="info-text">Customer Number :</div>
                     <div class="info-text">Customer Address :</div>
@@ -41,16 +41,12 @@
                     <div class="info-text">{{ quote.total }}</div>
                 </div>
             </div>
-            <div class="a-notes">
-                <h4 class="text-center">Additional notes</h4>
-                <p class="text-center">{{ quote.addNote }}</p>
-            </div>
             <template>
                 <v-row justify="center">
                     <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                                Open Dialog
+                                Edit Information
                             </v-btn>
                         </template>
                         <v-card>
@@ -66,11 +62,6 @@
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="quote.uid"></v-text-field>
                                         </v-col>
-                                        <!-- <v-col cols="12" sm="6" md="4">
-                                            <v-autocomplete
-                                                :items="['Looking to rent', 'Looking to rent out', 'Selling', 'Buying', 'Brochure/Business Card', 'Maintenance/Construction']"
-                                                v-model="quote.entryType"></v-autocomplete>
-                                        </v-col> -->
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="quote.cusName"></v-text-field>
                                         </v-col>
@@ -149,14 +140,14 @@ export default {
     }),
 
     mounted() {
-        console.log(this.$store.state.quote)
+        console.log(this.$store.state.dar)
         console.log(this.id)
-        return this.$store.dispatch("getQuote", this.id);
+        return this.$store.dispatch("getDAR", this.id);
         // this.$store.dispatch("getSellers");
     },
     computed: {
-        quote() {
-            return this.$store.state.quote;
+        dar() {
+            return this.$store.state.dar;
         },
     },
 
