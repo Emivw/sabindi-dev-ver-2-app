@@ -55,7 +55,7 @@
                                             <v-text-field v-model="wo.woid" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="wo.jobCat"></v-text-field>
+                                            <v-text-field v-model="wo.jobCat" ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
