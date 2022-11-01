@@ -8,6 +8,7 @@
                     <div class="info-text">Material Description :</div>
                     <div class="info-text">Material Dimensions :</div>
                     <div class="info-text">Material Category :</div>
+                    <div class="info-text">Material Cost :</div>
                     <div class="info-text">Material sID :</div>
                 </div>
                 <div class="info-text-holder col-7">
@@ -15,6 +16,7 @@
                     <div class="info-text">{{ material.matDesc }}</div>
                     <div class="info-text">{{ material.MatDimensions }}</div>
                     <div class="info-text">{{ material.MatCat }}</div>
+                    <div class="info-text">R{{ material.cost }}</div>
                     <div class="info-text">{{ material.sID }}</div>
                 </div>
             </div>
