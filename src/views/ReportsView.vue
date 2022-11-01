@@ -1,11 +1,7 @@
 <template>
     <v-card>
         <v-toolbar color="orange" dark flat prominent>
-<<<<<<< HEAD
             <v-text-field append-icon="mdi-microphone"  color="black" class="mx-4" flat hide-details label="Search"
-=======
-            <v-text-field append-icon="mdi-microphone" color="black" class="mx-4" flat hide-details label="Search"
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
                 prepend-inner-icon="mdi-magnify" solo-inverted></v-text-field>
 
             <!-- <template v-slot:extension>
@@ -27,11 +23,7 @@
                     <v-btn  v-model="fab" color="black darken-2" class="overflow" dark fab>
 =======
                     <v-btn v-model="fab" color="black darken-2" class="overflow" dark fab>
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
                         <v-icon v-if="fab">
-                            mdi-close
-                        </v-icon>
-                        <v-icon v-else-if="plus">
 <<<<<<< HEAD
                         mdi-plus
                         </v-icon>

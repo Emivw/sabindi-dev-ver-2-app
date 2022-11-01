@@ -1,6 +1,5 @@
 <template>
     <v-card>
-<<<<<<< HEAD
         <v-toolbar color="orange" dark flat prominent>
             <v-text-field append-icon="mdi-microphone"  color="black" class="mx-4" flat hide-details label="Search"
                 prepend-inner-icon="mdi-magnify" solo-inverted></v-text-field>
@@ -124,32 +123,10 @@
             </v-tab-item>
         </v-tabs-items> -->
      
-=======
-        <div id="box">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#add">
-                ADD <i class="fa-solid fa-plus"></i>
-            </button>
-            <AddModal />
-
-        </div>
-        <div class="card-holder" v-for="material in materials" :key="material.mid">
-            <div class="card">
-                <router-link :to="{ name: 'SingleMaterial', params: { id: material.mid } }" class="router-link">
-                    <div class="l_name">{{ material.matName }}</div>
-                    <div class="l_name">{{ material.MatCat }}</div>
-                </router-link>
-            </div>
-            <div class="delete col-5" @click="deleteMaterial(material.mid)">
-                <i class="fa-solid fa-trash-can text-center"></i>
-            </div>
-        </div>
-        <BottomNav />
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
     </v-card>
 </template>
 
 <script>
-<<<<<<< HEAD
 import BottomNav from '../components/BottomNav'
 export default {
     components: {
@@ -171,7 +148,6 @@ export default {
             bottom: false,
             left: false,
             transition: 'scale-transition',
-            tabs: null,
             items: [
                 { title: 'buyers', },
                 { title: 'sellers', },
@@ -314,63 +290,9 @@ export default {
                  this.pencil = false
             }
         }
-    }
-=======
-import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/Materials/AddModal.vue";
-
-
-export default {
-    props: ['material'],
-    components: {
-        BottomNav,
-        AddModal
-    },
-
-    mounted() {
-        return this.$store.dispatch("getMaterials");
-    },
-    computed: {
-        materials() {
-            return this.$store.state.materials;
-        }
-    },
-
-    methods: {
-        deleteMaterial(id) {
-            this.$store.dispatch("deleteMaterial", id);
-        }
-    },
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
-}
+    }}
 </script>
-
-<style scoped>
-<<<<<<< HEAD
-/* Helper classes */
-/* This is for documentation purposes and will not be needed in your application */
-#create .v-speed-dial {
-    position: absolute;
-}
-
-#create .v-btn--floating {
-    position: relative;
-}
-
-.overflow{
-  position: static;
-}
-
-.container--fluid {
-    max-width: 100%;
-    display: none !important;
-}
-
-
-.account{
-    color: orange !important;
-}
-
+<style  scoped>
 .mdi-account-circle::before {
     content: "\F0009";
     color: black !important;
@@ -390,8 +312,6 @@ export default {
   background-color:black;
   color:white;
 }
-</style>
-=======
 .card-holder {
     display: flex;
     justify-content: center;
@@ -458,4 +378,3 @@ export default {
 @media only screen and (min-width:1200px) {}
 </style>
 
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
