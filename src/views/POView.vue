@@ -1,5 +1,6 @@
 <template>
     <v-card>
+<<<<<<< HEAD
         <v-toolbar color="orange" dark flat prominent>
             <v-text-field append-icon="mdi-microphone"  color="black" class="mx-4" flat hide-details label="Search"
                 prepend-inner-icon="mdi-magnify" solo-inverted></v-text-field>
@@ -123,10 +124,35 @@
             </v-tab-item>
         </v-tabs-items> -->
      
+=======
+        <div id="box">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#add">
+                ADD <i class="fa-solid fa-plus"></i>
+            </button>
+            <AddModal />
+
+        </div>
+
+        <div class="card-holder" v-for="lead in leads" :key="lead.lid">
+            <div class="card">
+                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
+                    <div class="l_name">{{ lead.leadName }}</div>
+                    <div class="l_name">{{ lead.lid }}</div>
+                    <div class="l_email">{{ lead.leadEmail }}</div>
+                    <div class="l_type">{{ lead.entryType }}</div>
+                </router-link>
+            </div>
+            <div class="delete col-5" @click="deletes(lead.lid)">
+                <i class="fa-solid fa-trash-can text-center"></i>
+            </div>
+        </div>
+        <BottomNav />
+>>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
     </v-card>
 </template>
 
 <script>
+<<<<<<< HEAD
 import BottomNav from '../components/BottomNav'
 export default {
     components: {
@@ -292,10 +318,39 @@ export default {
             }
         }
     }
+=======
+import BottomNav from "../components/BottomNav.vue"
+import AddModal from "../components/Lead/AddModal.vue";
+
+
+export default {
+    props: ['lead'],
+    components: {
+        BottomNav,
+        AddModal
+    },
+
+    mounted() {
+        return this.$store.dispatch("getLeads");
+        // this.$store.dispatch("getSellers");
+    },
+    computed: {
+        leads() {
+            return this.$store.state.leads;
+        }
+    },
+
+    methods: {
+        deletes(id) {
+            this.$store.dispatch("deleteLead", id);
+        }
+    },
+>>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
 }
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 /* Helper classes */
 /* This is for documentation purposes and will not be needed in your application */
 #create .v-speed-dial {
@@ -340,3 +395,71 @@ export default {
   color:white;
 }
 </style>
+=======
+.card-holder {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.f-holder {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.edit,
+.delete {
+    border: 1px solid #A5A5A5;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.fa-solid {
+    text-align: center;
+}
+
+
+
+/* Small phones */
+@media only screen and (max-width:576px) {
+    .card-holder {
+        margin-left: 5%;
+        margin-bottom: 15px;
+        border: 1px solid #333333;
+        width: 90%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .card {
+        align-items: center;
+        width: 200px;
+        padding: 5px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+    .column {
+        padding-right: 10px;
+    }
+
+}
+
+/* Bigger Phones */
+@media only screen and (min-width:576px) {}
+
+/* Tablets */
+@media only screen and (min-width:768px) {}
+
+/* Laptops */
+@media only screen and (min-width:992px) {}
+
+/* Desktops */
+@media only screen and (min-width:1200px) {}
+</style>
+
+>>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
