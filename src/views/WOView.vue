@@ -8,18 +8,18 @@
 
         </div>
 
-        <div class="card-holder" v-for="lead in leads" :key="lead.lid">
+        <div class="card-holder" v-for="wo in wos" :key="wo.woid">
             <div class="card">
-                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
-                    <div class="l_name">{{ lead.leadName }}</div>
-                    <div class="l_name">{{ lead.lid }}</div>
-                    <div class="l_email">{{ lead.leadEmail }}</div>
-                    <div class="l_type">{{ lead.entryType }}</div>
+                <router-link :to="{ name: 'SingleWO', params: { id: wo.woid }, }" class="router-link">
+                    <div class="l_name">{{ wo.entryType }}</div>
+                    <div class="l_name">{{ wo.jobCat }}</div>
+                    <div class="l_email">{{ wo.workStatus }}</div>
+                    <div class="l_type">{{ wo.qteID }}</div>
                 </router-link>
             </div>
-            <div class="delete col-5" @click="deletes(lead.lid)">
+            <!-- <div class="delete col-5" @click="deletes(lead.lid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
-            </div>
+            </div> -->
         </div>
         <BottomNav />
     </v-card>
@@ -27,29 +27,29 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/Lead/AddModal.vue";
+import AddModal from "../components/WO/AddModal.vue";
 
 
 export default {
-    props: ['lead'],
+    props: ['wo'],
     components: {
         BottomNav,
         AddModal
     },
 
     mounted() {
-        return this.$store.dispatch("getLeads");
+        return this.$store.dispatch("getWOS");
         // this.$store.dispatch("getSellers");
     },
     computed: {
-        leads() {
-            return this.$store.state.leads;
+        wos() {
+            return this.$store.state.wos;
         }
     },
 
     methods: {
         deletes(id) {
-            this.$store.dispatch("deleteLead", id);
+            this.$store.dispatch("deleteWO", id);
         }
     },
 }

@@ -83,6 +83,13 @@ export default {
     data: () => ({
         dialog: false,
 
+                lid: '',
+                entryType: '',
+                leadName: '',
+                leadEmail: '',
+                leadNumber: '',
+                leadNote: '',
+                uID: ''
     }),
 
     mounted() {
