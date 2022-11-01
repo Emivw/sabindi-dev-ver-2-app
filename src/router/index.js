@@ -107,6 +107,27 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../components/WO/SingleView.vue"),
       props:true,
   },
+  {
+    path: "/dars",
+    name: "DarView",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/DARView.vue"),
+  },
+  {
+    path: "/dars/:id",
+    name: "SingleDAR",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../components/DAR/SingleView.vue"
+      ),
+    props: true,
+  },
 
   {
     path: "/materials",
