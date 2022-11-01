@@ -16,9 +16,9 @@
                     <div class="l_email">{{ dar.damageType }}</div>
                 </router-link>
             </div>
-            <!-- <div class="delete col-5" @click="deletes(lead.lid)">
+            <div class="delete col-5" @click="deletes(dar.darid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
-            </div> -->
+            </div>
         </div>
         <BottomNav />
     </v-card>
