@@ -123,6 +123,15 @@
           "admin"
         ],
         to: '/costs'
+      },
+      {
+        title: 'DAR',
+        icon: 'mdi-cash-multiple ',
+        text: '',
+        category: [
+          "admin"
+        ],
+        to: '/dar'
       }
     ],
     })
