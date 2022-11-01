@@ -19,12 +19,11 @@
             <v-speed-dial v-model="fab" :top="top" :bottom="bottom" :right="right" :left="left" :direction="direction"
                 :open-on-hover="hover" :transition="transition">
                 <template v-slot:activator>
-<<<<<<< HEAD
                     <v-btn  v-model="fab" color="black darken-2" class="overflow" dark fab>
-=======
-                    <v-btn v-model="fab" color="black darken-2" class="overflow" dark fab>
                         <v-icon v-if="fab">
-<<<<<<< HEAD
+                            mdi-close
+                        </v-icon>
+                        <v-icon v-else-if="plus">
                         mdi-plus
                         </v-icon>
                         <v-icon v-else-if="pencil">
@@ -32,15 +31,6 @@
                         </v-icon>
                         <v-icon v-else-if="deletes">
                         mdi-delete
-=======
-                            mdi-plus
-                        </v-icon>
-                        <v-icon v-else-if="pencil">
-                            mdi-pencil
-                        </v-icon>
-                        <v-icon v-else-if="deletes">
-                            mdi-delete
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
                         </v-icon>
                         <v-icon color="" v-else-if="!dialog">
                             mdi-account-circle
@@ -54,7 +44,6 @@
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
                 <v-dialog v-model="dialog" persistent max-width="600px">
-<<<<<<< HEAD
                     <template v-slot:activator="{ on, attrs }">
                         <!-- <v-btn
           color="primary"
@@ -65,9 +54,6 @@
           Open Dialog
         </v-btn> -->
                     </template>
-=======
-
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
                     <v-card>
                         <v-card-title>
                             <span class="text-h5">User Profile</span>
@@ -122,7 +108,6 @@
                 </v-btn>
             </v-speed-dial>
         </v-card>
-<<<<<<< HEAD
                 <v-card flat>
                     <v-data-table v-model="selected" :headers="headers" :items="desserts" :single-select="singleSelect"
                         item-key="name" show-select class="elevation-1">
@@ -132,27 +117,12 @@
                     </v-data-table>
                     <BottomNav/>
                 </v-card>
-=======
-        <v-card flat>
-            <v-data-table v-model="selected" :headers="headers" :items="desserts" :single-select="singleSelect"
-                item-key="name" show-select class="elevation-1">
-                <template v-slot:top>
-                    <v-switch v-model="singleSelect" label="Single select" class="pa-3"></v-switch>
-                </template>
-            </v-data-table>
-            <BottomNav />
-        </v-card>
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
 
         <!-- <v-tabs-items v-model="tabs">
             <v-tab-item v-for="item in items" :key="item">
             </v-tab-item>
         </v-tabs-items> -->
-<<<<<<< HEAD
      
-=======
-
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
     </v-card>
 </template>
 
@@ -160,23 +130,14 @@
 import BottomNav from '../components/BottomNav'
 export default {
     components: {
-<<<<<<< HEAD
       BottomNav,
-=======
-        BottomNav,
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
     },
     data() {
         return {
             dialog: false,
             plus: false,
-<<<<<<< HEAD
             deletes:false,
             pencil:false,
-=======
-            deletes: false,
-            pencil: false,
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
             direction: 'left',
             fab: false,
             fling: true,
@@ -311,7 +272,6 @@ export default {
         },
     },
     methods: {
-<<<<<<< HEAD
         clickIcon(results){
             var icon = document.getElementById('change');
             if(results == "plus" ){
@@ -329,25 +289,6 @@ export default {
                  this.deletes = true
                  this.plus = false
                  this.pencil = false
-=======
-        clickIcon(results) {
-            var icon = document.getElementById('change');
-            if (results == "plus") {
-                this.plus = true
-                this.deletes = false
-                this.pencil = false
-                this.dialog = true
-            }
-            if (results == "pencil") {
-                this.pencil = true
-                this.plus = false
-                this.dialog = true
-            }
-            if (results == "delete") {
-                this.deletes = true
-                this.plus = false
-                this.pencil = false
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
             }
         }
     }
@@ -365,13 +306,8 @@ export default {
     position: relative;
 }
 
-<<<<<<< HEAD
 .overflow{
   position: static;
-=======
-.overflow {
-    position: static;
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
 }
 
 .container--fluid {
@@ -380,11 +316,7 @@ export default {
 }
 
 
-<<<<<<< HEAD
 .account{
-=======
-.account {
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
     color: orange !important;
 }
 
@@ -403,14 +335,8 @@ export default {
     color: orange !important;
 }
 
-<<<<<<< HEAD
 .v-toolbar__content{
   background-color:black;
   color:white;
-=======
-.v-toolbar__content {
-    background-color: black;
-    color: white;
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
 }
 </style>

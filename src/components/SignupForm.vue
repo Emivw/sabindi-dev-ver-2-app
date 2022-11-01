@@ -2,21 +2,12 @@
 <body>
   <div class="container" id="container">
     <div class="form-container sign-up-container">
-<<<<<<< HEAD
       <form method="POST" >
         <h1>Create Account</h1>
         <span>or use your email for registration</span>
         <input type="text" placeholder="Name" v-model="userName" />
         <input type="text" placeholder="Number" v-model="userNo" />
         <input type="email" id="signUpEmail" placeholder="Email" v-model="userEmail" />
-=======
-      <form method="POST">
-        <h1>Create Account</h1>
-        <span>or use your email for registration</span>
-        <input type="text" placeholder="Name" v-model="userName" required/>
-        <input type="text" placeholder="Number" v-model="userNo" required/>
-        <input type="email" id="signUpEmail" placeholder="Email" v-model="userEmail" required />
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
         <input type="password" placeholder="Password" v-model="userPassword"/>
         <button type="button" @click="register()"> Sign Up </button>
       </form>
@@ -26,15 +17,9 @@
       <form method="POST" onSubmit={this.handleSubmitLogin}>
         <h1>Sign in</h1>
         <span>or use your account</span>
-<<<<<<< HEAD
         <input type="email" id="signInEmail" placeholder="Email" v-model="userEmails" />
         <input type="password" placeholder="Password" v-model="userPasswords" />
         <button type="button" @click="logins()">Sign In</button>
-=======
-        <input type="email" id="signInEmail" placeholder="Email"  @keyup="success()" v-model="userEmails" required/>
-        <input type="password" placeholder="Password" id="signInPassword" @keyup="success()" v-model="userPasswords" required/>
-        <button type="button" @click.prevent="logins()" id="loginButton" disabled>Sign In</button>
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
       </form>
     </div>
     
@@ -157,18 +142,7 @@
     userPassword: this.userPasswords
     }
     this.$store.dispatch('login', payload)
-<<<<<<< HEAD
   }
-=======
-  },
-  success() {
-	 if(document.getElementById("signInEmail").value==="" || document.getElementById("signInPassword").value==="" ) { 
-            document.getElementById('loginButton').disabled = true; 
-        } else { 
-            document.getElementById('loginButton').disabled = false;
-        }
-    }
->>>>>>> a16babf0c14a336f0237ca34118a35c4fbd2fde9
 }
   }
 </script>
