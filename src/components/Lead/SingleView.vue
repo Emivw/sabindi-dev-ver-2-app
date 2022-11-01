@@ -38,9 +38,6 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.lid" type="number"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="lead.leadName"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
@@ -51,10 +48,10 @@
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="lead.leadEmail"></v-text-field>
                                         </v-col>
-                                        <v-col cols="12">
+                                        <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="lead.leadNumber"></v-text-field>
                                         </v-col>
-                                        <v-col cols="12">
+                                        <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="lead.leadNote"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
@@ -99,13 +96,9 @@ export default {
     },
 
     methods: {
-        deletes(id) {
-            console.log(id);
-            // this.$store.dispatch("deleteLead", id);
-        },
         update() {
             this.$store.dispatch("updateLead", {
-                lid: this.lead.lid,
+                lid: this.id,
                 entryType: this.lead.entryType,
                 leadName: this.lead.leadName,
                 leadEmail: this.lead.leadEmail,
@@ -113,6 +106,7 @@ export default {
                 leadNote: this.lead.leadNote,
                 uID: this.lead.uID
             });
+            // console.log(this.$store.state.lead)
         }
     },
 }
