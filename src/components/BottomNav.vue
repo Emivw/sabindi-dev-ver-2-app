@@ -15,7 +15,7 @@
         value: 'recent',
     items: [
       { title: 'Todo', icon: ' mdi-domain', to: "/" },
-      { title: 'about', icon: ' mdi-message-text', to: "/about" },
+      { title: 'abouts', icon: ' mdi-message-text', to: "/about" },
     ],
   }),
     }

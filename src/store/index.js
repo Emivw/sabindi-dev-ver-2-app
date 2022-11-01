@@ -20,15 +20,14 @@ export default new Vuex.Store({
     // Material
     materials: null,
     material: null,
-<<<<<<< HEAD
     // Inventory
     inventory: null,
     sellers: null,
-=======
+
     // work orders
     wos: null,
     wo: null,
->>>>>>> ee86593d645a2f815f57bb419ab5814e5673ac6a
+
     errMsg: null,
   },
   getters: {},
