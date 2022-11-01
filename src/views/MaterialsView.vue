@@ -7,17 +7,14 @@
             <AddModal />
 
         </div>
-
-        <div class="card-holder" v-for="lead in leads" :key="lead.lid">
+        <div class="card-holder" v-for="material in materials" :key="material.mid">
             <div class="card">
-                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
-                    <div class="l_name">{{ lead.leadName }}</div>
-                    <div class="l_name">{{ lead.lid }}</div>
-                    <div class="l_email">{{ lead.leadEmail }}</div>
-                    <div class="l_type">{{ lead.entryType }}</div>
+                <router-link :to="{ name: 'SingleMaterial', params: { id: material.mid } }" class="router-link">
+                    <div class="l_name">{{ material.matName }}</div>
+                    <div class="l_name">{{ material.MatCat }}</div>
                 </router-link>
             </div>
-            <div class="delete col-5" @click="deletes(lead.lid)">
+            <div class="delete col-5" @click="deleteMaterial(material.mid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
             </div>
         </div>
@@ -27,29 +24,28 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/Lead/AddModal.vue";
+import AddModal from "../components/Materials/AddModal.vue";
 
 
 export default {
-    props: ['lead'],
+    props: ['material'],
     components: {
         BottomNav,
         AddModal
     },
 
     mounted() {
-        return this.$store.dispatch("getLeads");
-        // this.$store.dispatch("getSellers");
+        return this.$store.dispatch("getMaterials");
     },
     computed: {
-        leads() {
-            return this.$store.state.leads;
+        materials() {
+            return this.$store.state.materials;
         }
     },
 
     methods: {
-        deletes(id) {
-            this.$store.dispatch("deleteLead", id);
+        deleteMaterial(id) {
+            this.$store.dispatch("deleteMaterial", id);
         }
     },
 }

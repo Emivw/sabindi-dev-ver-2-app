@@ -3,7 +3,7 @@ import Vuex from "vuex";
 // ES6 Modules or TypeScript
 import swal from "sweetalert";
 import router from "@/router";
-// import createPersistedState from "vuex-persistedstate";
+import createPersistedState from "vuex-persistedstate";
 
 const api = "https://proptechapi.herokuapp.com/";
 Vue.use(Vuex);
@@ -17,6 +17,11 @@ export default new Vuex.Store({
     // Quotes
     quotes: null,
     quote: null,
+    // Material
+    materials: null,
+    material: null,
+    // Inventory
+    inventory: null,
     sellers: null,
     errMsg: null,
   },
@@ -39,7 +44,20 @@ export default new Vuex.Store({
       state.quotes = quotes;
     },
     setQuote(state, quote) {
-      state.lead = quote;
+      state.quote = quote;
+    },
+
+    // Materials
+    setMaterials(state, materials) {
+      state.materials = materials;
+    },
+    setMaterial(state, material) {
+      state.material = material;
+    },
+
+    // Inventory
+    setInventory(state, inventory) {
+      state.inventory = inventory;
     },
 
     setSellers(state, sellers) {
@@ -170,12 +188,12 @@ export default new Vuex.Store({
           // context.commit('setProducts', data.msg)
         });
     },
-    async updateLead(context, payload) {
-      const { lid, entryType, leadName, leadEmail, leadNumber, leadNote, uID } =
-        payload;
-      fetch(api + "leads/" + lid, {
+    async updateLead(context, leads) {
+      // const { entryType, leadName, leadEmail, leadNumber, leadNote, uID } =
+      //   payload;
+      fetch(api + "leads/", {
         method: "PATCH",
-        body: JSON.stringify(payload),
+        body: JSON.stringify(leads),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
@@ -188,7 +206,8 @@ export default new Vuex.Store({
               title: "The lead was edited successfully",
               button: "OK",
             });
-            context.dispatch("getLeads", data.msg);
+            console.log(data);
+            context.dispatch("getLeads", data);
           }
         });
     },
@@ -216,11 +235,13 @@ export default new Vuex.Store({
     async getQuotes(context) {
       let fetched = await fetch(api + "quotes");
       let res = await fetched.json();
+      console.log(res.quotes);
       context.commit("setQuotes", res.quotes);
     },
     async getQuote(context, id) {
       let fetched = await fetch(api + "quotes/" + id);
       let res = await fetched.json();
+      console.log(res.quote);
       context.commit("setQuote", res.results);
     },
     async createQuote(context, payload) {
@@ -246,7 +267,7 @@ export default new Vuex.Store({
     async updateQuote(context, payload) {
       const {
         entryType,
-        uid,
+        uID,
         cusName,
         cusNo,
         cusAddresss,
@@ -302,7 +323,147 @@ export default new Vuex.Store({
           });
         });
     },
+
+    // Materials
+    async getMaterials(context) {
+      let fetched = await fetch(api + "materials");
+      let res = await fetched.json();
+      console.log(res);
+      context.commit("setMaterials", res.leads);
+    },
+
+    async getMaterial(context, id) {
+      let fetched = await fetch(api + "materials/" + id);
+      let res = await fetched.json();
+      context.commit("setMaterial", res.results);
+    },
+    async createMaterial(context, payload) {
+      fetch(api + "materials", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Material added`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getMaterials");
+          // context.commit('setProducts', data.msg)
+        });
+    },
+    async updateMaterial(context, payload) {
+      const {} = payload;
+      fetch(api + "materials/" + id, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.msg == "Edited") {
+            swal({
+              icon: "success",
+              title: "The material was edited successfully",
+              button: "OK",
+            });
+            context.dispatch("getMaterials", data.msg);
+          }
+        });
+    },
+    async deleteMaterial(context, id) {
+      fetch(api + "materials/" + id, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getMaterials");
+          swal({
+            icon: "success",
+            title: "The material was deleted",
+            button: "OK",
+          });
+        });
+    },
+
+    // Inventory
+    async getInventory(context) {
+      let fetched = await fetch(api + "inventory");
+      let res = await fetched.json();
+      console.log(res);
+      context.commit("setInventory", res.leads);
+    },
+    async createItem(context, payload) {
+      fetch(api + "inventory", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Item added`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getInventory");
+          // context.commit('setProducts', data.msg)
+        });
+    },
+    async updateInventory(context, payload) {
+      const {} = payload;
+      fetch(api + "inventory/" + id, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.msg === "Item has been added") {
+            swal({
+              icon: "success",
+              title: "The item was edited successfully",
+              button: "OK",
+            });
+            context.dispatch("getMaterials", data.msg);
+          }
+        });
+    },
+    async deleteInventory(context, id) {
+      fetch(api + "inventory/" + id, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("Inventory");
+          swal({
+            icon: "success",
+            title: "The item was deleted",
+            button: "OK",
+          });
+        });
+    },
   },
   modules: {},
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
 });

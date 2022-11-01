@@ -1,26 +1,22 @@
 <template>
     <div>
-        <div class="info-holder" v-for="lead in lead" :key="lead.lid">
-            <h2 class="text-center">Lead Information</h2>
+        <div class="info-holder" v-for="material in material" :key="material.mid">
+            <h2 class="text-center">material Information</h2>
             <div class="seperator d-flex ">
                 <div class="info-title-holder col-5">
-                    <div class="info-text">Lid :</div>
-                    <div class="info-text">Entry Type :</div>
-                    <div class="info-text">Name :</div>
-                    <div class="info-text">Email :</div>
-                    <div class="info-text">Phone No :</div>
+                    <div class="info-text">Material Name :</div>
+                    <div class="info-text">Material Description :</div>
+                    <div class="info-text">Material Dimensions :</div>
+                    <div class="info-text">Material Category :</div>
+                    <div class="info-text">Material sID :</div>
                 </div>
                 <div class="info-text-holder col-7">
-                    <div class="info-text">{{ lead.lid }}</div>
-                    <div class="info-text">{{ lead.entryType }}</div>
-                    <div class="info-text">{{ lead.leadName }}</div>
-                    <div class="info-text">{{ lead.leadEmail }}</div>
-                    <div class="info-text">{{ lead.leadNumber }}</div>
+                    <div class="info-text">{{ material.matName }}</div>
+                    <div class="info-text">{{ material.matDesc }}</div>
+                    <div class="info-text">{{ material.MatDimensions }}</div>
+                    <div class="info-text">{{ material.MatCat }}</div>
+                    <div class="info-text">{{ material.sID }}</div>
                 </div>
-            </div>
-            <div class="a-notes">
-                <h4 class="text-center">Additional notes</h4>
-                <p class="text-center">{{ lead.leadNote }}</p>
             </div>
             <template>
                 <v-row justify="center">
@@ -32,33 +28,33 @@
                         </template>
                         <v-card>
                             <v-card-title>
-                                <span class="text-h5">Edit Lead Information</span>
+                                <span class="text-h5">Edit Material Information</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.lid" type="number"></v-text-field>
+                                            <v-text-field v-model="material.lid" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.leadName"></v-text-field>
+                                            <v-text-field v-model="material.materialName"></v-text-field>
                                         </v-col>
-                                        <v-col cols="12" sm="6" md="4">
+                                        <!-- <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
                                                 :items="['Looking to rent', 'Looking to rent out', 'Selling', 'Buying', 'Brochure/Business Card', 'Maintenance/Construction']"
-                                                v-model="lead.entryType"></v-autocomplete>
-                                        </v-col>
+                                                v-model="material.entryType"></v-autocomplete>
+                                        </v-col> -->
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.leadEmail"></v-text-field>
+                                            <v-text-field v-model="material.materialEmail"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="lead.leadNumber"></v-text-field>
+                                            <v-text-field v-model="material.materialNumber"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="lead.leadNote"></v-text-field>
+                                            <v-text-field v-model="material.materialNote"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.uID" type="number"></v-text-field>
+                                            <v-text-field v-model="material.uID" type="number"></v-text-field>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -89,29 +85,26 @@ export default {
     }),
 
     mounted() {
-        return this.$store.dispatch("getLead", this.id);
+        return this.$store.dispatch("getMaterial", this.id);
         // this.$store.dispatch("getSellers");
     },
     computed: {
-        lead() {
-            return this.$store.state.lead;
+        material() {
+            return this.$store.state.material;
         },
     },
 
     methods: {
-        deletes(id) {
-            console.log(id);
-            // this.$store.dispatch("deleteLead", id);
-        },
+
         update() {
-            this.$store.dispatch("updateLead", {
-                lid: this.lead.lid,
-                entryType: this.lead.entryType,
-                leadName: this.lead.leadName,
-                leadEmail: this.lead.leadEmail,
-                leadNumber: this.lead.leadNumber,
-                leadNote: this.lead.leadNote,
-                uID: this.lead.uID
+            this.$store.dispatch("updateMaterial", {
+                lid: this.material.lid,
+                entryType: this.material.entryType,
+                materialName: this.material.materialName,
+                materialEmail: this.material.materialEmail,
+                materialNumber: this.material.materialNumber,
+                materialNote: this.material.materialNote,
+                uID: this.material.uID
             });
         }
     },

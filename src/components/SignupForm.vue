@@ -2,7 +2,7 @@
 <body>
   <div class="container" id="container">
     <div class="form-container sign-up-container">
-      <form method="POST" >
+      <form method="POST">
         <h1>Create Account</h1>
         <span>or use your email for registration</span>
         <input type="text" placeholder="Name" v-model="userName" required/>
@@ -17,9 +17,9 @@
       <form method="POST" onSubmit={this.handleSubmitLogin}>
         <h1>Sign in</h1>
         <span>or use your account</span>
-        <input type="email" id="signInEmail" placeholder="Email" v-model="userEmails" required/>
-        <input type="password" placeholder="Password" v-model="userPasswords" required/>
-        <button type="button" @click="logins()">Sign In</button>
+        <input type="email" id="signInEmail" placeholder="Email"  @keyup="success()" v-model="userEmails" required/>
+        <input type="password" placeholder="Password" id="signInPassword" @keyup="success()" v-model="userPasswords" required/>
+        <button type="button" @click.prevent="logins()" id="loginButton" disabled>Sign In</button>
       </form>
     </div>
     
@@ -142,7 +142,14 @@
     userPassword: this.userPasswords
     }
     this.$store.dispatch('login', payload)
-  }
+  },
+  success() {
+	 if(document.getElementById("signInEmail").value==="" || document.getElementById("signInPassword").value==="" ) { 
+            document.getElementById('loginButton').disabled = true; 
+        } else { 
+            document.getElementById('loginButton').disabled = false;
+        }
+    }
 }
   }
 </script>
