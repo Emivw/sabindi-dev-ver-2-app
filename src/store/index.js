@@ -22,20 +22,12 @@ export default new Vuex.Store({
     material: null,
     // Inventory
     inventory: null,
-<<<<<<< HEAD
     // work orders
     wos: null,
     wo: null,
     // damage report
     dars: null,
     dar: null,
-=======
-    sellers: null,
-
-    // work orders
-    wos: null,
-    wo: null,
->>>>>>> bc8213b4a5bd94fe2213873c6aaeac66b57a544a
     errMsg: null,
   },
   getters: {},
