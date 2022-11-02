@@ -8,16 +8,16 @@
 
         </div>
 
-        <div class="card-holder" v-for="lead in leads" :key="lead.lid">
+        <div class="card-holder" v-for="po in pos" :key="po.poid">
             <div class="card">
-                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
-                    <div class="l_name">{{ lead.leadName }}</div>
-                    <div class="l_name">{{ lead.lid }}</div>
-                    <div class="l_email">{{ lead.leadEmail }}</div>
-                    <div class="l_type">{{ lead.entryType }}</div>
+                <router-link :to="{ name: 'SinglePO', params: { id: po.poid } }" class="router-link">
+                    <div class="l_name">{{ po.poid }}</div>
+                    <div class="l_name">{{ po.qteID }}</div>
+                    <div class="l_email">{{ po.sID }}</div>
+                    <div class="l_type">{{ po.mat }}</div>
                 </router-link>
             </div>
-            <div class="delete col-5" @click="deletes(lead.lid)">
+            <div class="delete col-5" @click="deletes(po.poid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
             </div>
         </div>
@@ -27,29 +27,29 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/Lead/AddModal.vue";
+import AddModal from "../components/PO/AddModal.vue";
 
 
 export default {
-    props: ['lead'],
+    props: ['po'],
     components: {
         BottomNav,
         AddModal
     },
 
     mounted() {
-        return this.$store.dispatch("getLeads");
+        return this.$store.dispatch("getPOS");
         // this.$store.dispatch("getSellers");
     },
     computed: {
-        leads() {
-            return this.$store.state.leads;
+        pos() {
+            return this.$store.state.pos;
         }
     },
 
     methods: {
         deletes(id) {
-            this.$store.dispatch("deleteLead", id);
+            this.$store.dispatch("deletePO", id);
         }
     },
 }
