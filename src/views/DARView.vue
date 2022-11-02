@@ -35,7 +35,6 @@ export default {
         BottomNav,
         AddModal 
     },
-
     mounted() {
         return this.$store.dispatch("getDARS");
     },
@@ -44,7 +43,6 @@ export default {
             return this.$store.state.dars
         }
     },
-
     methods: {
         deletes(id) {
             this.$store.dispatch("deleteDAR", id);

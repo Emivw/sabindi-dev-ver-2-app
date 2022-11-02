@@ -10,7 +10,7 @@
 
         <div class="card-holder" v-for="lead in leads" :key="lead.lid">
             <div class="card">
-                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
+                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid }}" class="router-link">
                     <div class="l_name">{{ lead.leadName }}</div>
                     <div class="l_name">{{ lead.lid }}</div>
                     <div class="l_email">{{ lead.leadEmail }}</div>

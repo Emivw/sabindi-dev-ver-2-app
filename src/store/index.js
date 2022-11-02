@@ -13,7 +13,7 @@ export default new Vuex.Store({
     user: null,
     // Leads
     leads: null,
-    lead: null,
+    // lead: null,
     // Quotes
     quotes: null,
     quote: null,
@@ -40,9 +40,9 @@ export default new Vuex.Store({
     setLeads(state, leads) {
       state.leads = leads;
     },
-    setLead(state, lead) {
-      state.lead = lead;
-    },
+    // setLead(state, leads) {
+    //   state.leads = leads;
+    // },
     // damage report
     setDARS(state, dars) {
       state.dars = dars;
@@ -241,7 +241,7 @@ export default new Vuex.Store({
     async getLead(context, id) {
       let fetched = await fetch(api + "leads/" + id);
       let res = await fetched.json();
-      context.commit("setLead", res.results);
+      context.commit("setLeads", res.results);
     },
     async createLead(context, payload) {
       fetch(api + "leads", {
@@ -259,16 +259,15 @@ export default new Vuex.Store({
             buttons: "OK",
             closeOnClickOutside: false,
           });
-          context.dispatch("getLeads");
+          context.dispatch("getLead");
           // context.commit('setProducts', data.msg)
         });
     },
-    async updateLead(context, leads) {
-      // const { entryType, leadName, leadEmail, leadNumber, leadNote, uID } =
-      //   payload;
-      fetch(api + "leads/", {
-        method: "PATCH",
-        body: JSON.stringify(leads),
+    async updateLead(context, payload) {
+   const { lid,entryType, leadName, leadEmail, leadNumber, leadNote, uID } =  payload;
+      fetch(api + "leads/"+ lid ,{
+        method: "PUT",
+        body: JSON.stringify(payload),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
@@ -282,7 +281,8 @@ export default new Vuex.Store({
               button: "OK",
             });
             console.log(data);
-            context.dispatch("getLeads", data);
+            context.dispatch("getLead");
+            this.$router.go()
           }
         });
     },

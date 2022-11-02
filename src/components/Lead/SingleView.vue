@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="info-holder" v-for="lead in lead" :key="lead.lid">
+        <div class="info-holder" v-for="lead in leads" :key="lead.lid">
             <h2 class="text-center">Lead Information</h2>
             <div class="seperator d-flex ">
                 <div class="info-title-holder col-5">
@@ -38,24 +38,24 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.leadName"></v-text-field>
+                                            <v-text-field v-model="leadName" placeholder="Lead Name"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
                                                 :items="['Looking to rent', 'Looking to rent out', 'Selling', 'Buying', 'Brochure/Business Card', 'Maintenance/Construction']"
-                                                v-model="lead.entryType"></v-autocomplete>
+                                                v-model="entryType" placeholder="Entry Type"></v-autocomplete>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.leadEmail"></v-text-field>
+                                            <v-text-field v-model="leadEmail" placeholder="Lead Email"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.leadNumber"></v-text-field>
+                                            <v-text-field v-model="leadNumber" placeholder="Lead Number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.leadNote"></v-text-field>
+                                            <v-text-field v-model="leadNote" placeholder="Lead Note"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="lead.uID" type="number"></v-text-field>
+                                            <v-text-field v-model="uID" placeholder="uID" type="number"></v-text-field>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -75,21 +75,20 @@
     </div>
 </template>
   
-<script>
+<script> 
+import router from "@/router";
 export default {
     props: ['id'],
 
 
     data: () => ({
         dialog: false,
-
-                lid: '',
-                entryType: '',
-                leadName: '',
-                leadEmail: '',
-                leadNumber: '',
-                leadNote: '',
-                uID: ''
+        entryType: "",
+        leadName: "",
+        leadEmail: "",
+        leadNumber: "",
+        leadNote: "",
+        uID: ""
     }),
 
     mounted() {
@@ -97,23 +96,23 @@ export default {
         // this.$store.dispatch("getSellers");
     },
     computed: {
-        lead() {
-            return this.$store.state.lead;
+        leads() {
+            return this.$store.state.leads;
         },
     },
-
     methods: {
         update() {
             this.$store.dispatch("updateLead", {
                 lid: this.id,
-                entryType: this.lead.entryType,
-                leadName: this.lead.leadName,
-                leadEmail: this.lead.leadEmail,
-                leadNumber: this.lead.leadNumber,
-                leadNote: this.lead.leadNote,
-                uID: this.lead.uID
+                entryType: this.entryType,
+                leadName: this.leadName,
+                leadEmail: this.leadEmail,
+                leadNumber: this.leadNumber,
+                leadNote: this.leadNote,
+                uID: this.uID
             });
             // console.log(this.$store.state.lead)
+            
         }
     },
 }
