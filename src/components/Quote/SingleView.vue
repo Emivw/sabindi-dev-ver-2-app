@@ -20,62 +20,24 @@
                     <div class="row text">{{ quote.insCat }}</div>
                     <div class="row title">Leak Detection Method</div>
                     <div class="row text">{{ quote.leakDetectMethod }}</div>
-                    <div class="row title"></div>
-                    <div class="row text"></div>
-                    <div class="row title"></div>
-                    <div class="row text"></div>
-                    <div class="row title"></div>
-                    <div class="row text"></div>
-                    <div class="row title"></div>
-                    <div class="row text"></div>
-                    <div class="row title"></div>
-                    <div class="row text"></div>
-                    <div class="row title"></div>
-                    <div class="row text"></div>
-                    <div class="row title"></div>
-                    <div class="row text"></div>
-                    <div class="row title"></div>
-                    <div class="row text"></div>
-                    <div class="row title"></div>
-                    <div class="row text"></div>
-                </div>
-                <div class="info-title-holder col-5">
-                    <div class="info-text">:</div>
-                    <div class="info-text">:</div>
-                    <div class="info-text"> :</div>
-                    <div class="info-text"> :</div>
-                    <div class="info-text"> :</div>
-                    <div class="info-text"> :</div>
-                    <div class="info-text">  :</div>
-                    <div class="info-text">  :</div>
-                    <div class="info-text"> Damage Location :</div>
-                    <div class="info-text"> Damage Status :</div>
-                    <div class="info-text"> RepRecom :</div>
-                    <div class="info-text"> Quote Description :</div>
-                    <div class="info-text"> Summary :</div>
-                    <div class="info-text"> Job Category :</div>
-                    <div class="info-text"> Quote Materials :</div>
-                    <div class="info-text"> Scope :</div>
-                    <div class="info-text"> Total :</div>
-                </div>
-                <div class="info-text-holder col-7">
-                    <div class="info-text"></div>
-                    <div class="info-text"></div>
-                    <div class="info-text"></div>
-                    <div class="info-text"></div>
-                    <div class="info-text"></div>
-                    <div class="info-text">/div>
-                    <div class="info-text"></div>
-                    <div class="info-text"></div>
-                    <div class="info-text">{{ quote.dmgLocation }}</div>
-                    <div class="info-text">{{ quote.dmgStatus }}</div>
-                    <div class="info-text">{{ quote.RepRecom }}</div>
-                    <div class="info-text">{{ quote.qtDesc }}</div>
-                    <div class="info-text">{{ quote.summary }}</div>
-                    <div class="info-text">{{ quote.jobCat }}</div>
-                    <div class="info-text">{{ quote.qteMaterials }}</div>
-                    <div class="info-text">{{ quote.scope }}</div>
-                    <div class="info-text">{{ quote.total }}</div>
+                    <div class="row title">Damage Location</div>
+                    <div class="row text">{{ quote.dmgLocation }}</div>
+                    <div class="row title">Damage Status</div>
+                    <div class="row text">{{ quote.dmgStatus }}</div>
+                    <div class="row title">RepRecom</div>
+                    <div class="row text">{{ quote.RepRecom }}</div>
+                    <div class="row title">Quote Description</div>
+                    <div class="row text">{{ quote.qtDesc }}</div>
+                    <div class="row title">Summary</div>
+                    <div class="row text">{{ quote.summary }}</div>
+                    <div class="row title">Job Category</div>
+                    <div class="row text">{{ quote.jobCat }}</div>
+                    <div class="row title">Quote Materials</div>
+                    <div class="row title">{{ quote.qteMaterials }}</div>
+                    <div class="row text">Scope </div>
+                    <div class="row text">{{ quote.scope }}</div>
+                    <div class="row title">Total</div>
+                    <div class="row text">{{ quote.total }}</div>
                 </div>
             </div>
             <div class="a-notes">
@@ -252,6 +214,24 @@ export default {
 
     .v-card.v-sheet.theme--light {
         margin-top: 30px;
+    }
+
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .title {
+         text-decoration: underline;
+         margin: auto;
+        text-align: center;
+    }
+
+    .text {
+        padding-bottom: 15px;
+        margin: auto;
+        text-align: center;
     }
 
 }
