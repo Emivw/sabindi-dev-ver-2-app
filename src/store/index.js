@@ -25,6 +25,9 @@ export default new Vuex.Store({
     // work orders
     wos: null,
     wo: null,
+    // purchase orders
+        pos: null,
+        po: null,
     errMsg: null,
   },
   getters: {},
@@ -48,6 +51,13 @@ export default new Vuex.Store({
     setWO(state, wo) {
       state.wo = wo;
     },
+    // purchase orders
+        setPOS(state, pos) {
+          state.pos = pos;
+        },
+        setPO(state, po) {
+          state.po = po;
+        },
     // Quotes
     setQuotes(state, quotes) {
       state.quotes = quotes;
@@ -224,6 +234,83 @@ export default new Vuex.Store({
           });
         });
     },
+          // Get purchase orders
+          async getPOS(context) {
+            let fetched = await fetch(api + "pos");
+            let res = await fetched.json();
+            context.commit("setPOS", res.purchaseOrders);
+          },
+          async getPO(context, id) {
+            let fetched = await fetch(api + "pos/" + id);
+            let res = await fetched.json();
+            context.commit("setPO", res.results);
+          },
+          async createPO(context, payload) {
+            fetch(api + "pos", {
+              method: "POST",
+              body: JSON.stringify(payload),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                swal({
+                  icon: "success",
+                  title: `Item added`,
+                  buttons: "OK",
+                  closeOnClickOutside: false,
+                });
+                context.dispatch("getPOS");
+                // context.commit('setProducts', data.msg)
+              });
+          },
+          async updatePO(context, payload) {
+            const {
+              poid,
+              qteID,
+              otp,
+              sID,
+              mat 
+            } =
+              payload;
+            fetch(api + "pos/" + poid, {
+              method: "PATCH",
+              body: JSON.stringify(payload),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.msg == "Edited") {
+                  swal({
+                    icon: "success",
+                    title: "The purchase order was edited successfully",
+                    button: "OK",
+                  });
+                  context.dispatch("getPO", data.msg);
+                }
+              });
+          },
+          async deletePO(context, id) {
+            fetch(api + "pos/" + id, {
+              method: "DELETE",
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                context.dispatch("getPO");
+                swal({
+                  icon: "success",
+                  title: "The Purchase Order was deleted",
+                  button: "OK",
+                });
+              });
+          },
 
       // Get work orders
       async getWOS(context) {
@@ -288,7 +375,7 @@ export default new Vuex.Store({
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            context.dispatch("getLeads");
+            context.dispatch("getWO");
             swal({
               icon: "success",
               title: "The work order was deleted",

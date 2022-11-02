@@ -86,7 +86,7 @@
         category: [
           "admin"
         ],
-        to: '/po'
+        to: '/pos'
       },
       {
         title: 'Reports',
