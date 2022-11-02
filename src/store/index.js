@@ -28,6 +28,9 @@ export default new Vuex.Store({
     // purchase orders
         pos: null,
         po: null,
+    //Damage Assessment Report
+        dars: null,
+        dar: null,
     errMsg: null,
   },
   getters: {},

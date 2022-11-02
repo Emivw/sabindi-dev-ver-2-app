@@ -48,7 +48,7 @@
                 v-model="inspectionCategory" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">leak Detection Method:</label>
+              <label for="recipient-name" class="col-form-label">Leak Detection Method:</label>
               <input type="text" class="form-control" id="recipient-name" placeholder="Leak Detection Method" v-model="leakDetectionMethod" />
             </div>
             <div class="mb-3">
@@ -129,7 +129,7 @@ export default {
         facility: this.facility,
         damageSeverity: this.damageSeverity,
         inspectionCategory: this.inspectionCategory,
-        leakDetectMethod: this.leakDetectMethod,
+        leakDetectionMethod: this.leakDetectionMethod,
         damageLocationInternal: this.damageLocationInternal,
         damageLocationExternal: this.damageLocationExternal,
         damageStatusConcealed: this.damageStatusConcealed,
