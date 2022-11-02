@@ -8,16 +8,15 @@
 
         </div>
 
-        <div class="card-holder" v-for="lead in leads" :key="lead.lid">
+        <div class="card-holder" v-for="dar in dars" :key="dar.darid">
             <div class="card">
-                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid }}" class="router-link">
-                    <div class="l_name">{{ lead.leadName }}</div>
-                    <div class="l_name">{{ lead.lid }}</div>
-                    <div class="l_email">{{ lead.leadEmail }}</div>
-                    <div class="l_type">{{ lead.entryType }}</div>
+                <router-link :to="{ name: 'SingleDAR', params: { id: dar.darid }, }" class="router-link">
+                    <div class="l_name">{{ dar.claimNumber }}</div>
+                    <div class="l_name">{{ dar.clientName }}</div>
+                    <div class="l_email">{{ dar.damageType }}</div>
                 </router-link>
             </div>
-            <div class="delete col-5" @click="deletes(lead.lid)">
+            <div class="delete col-5" @click="deletes(dar.darid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
             </div>
         </div>
@@ -27,29 +26,26 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/Lead/AddModal.vue";
+import AddModal from "../components/DAR/AddModal.vue";
 
 
 export default {
-    props: ['lead'],
+    props: ['dar'],
     components: {
         BottomNav,
-        AddModal
+        AddModal 
     },
-
     mounted() {
-        return this.$store.dispatch("getLeads");
-        // this.$store.dispatch("getSellers");
+        return this.$store.dispatch("getDARS");
     },
     computed: {
-        leads() {
-            return this.$store.state.leads;
+        dars() {
+            return this.$store.state.dars
         }
     },
-
     methods: {
         deletes(id) {
-            this.$store.dispatch("deleteLead", id);
+            this.$store.dispatch("deleteDAR", id);
         }
     },
 }

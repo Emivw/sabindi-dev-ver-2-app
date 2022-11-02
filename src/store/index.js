@@ -13,7 +13,7 @@ export default new Vuex.Store({
     user: null,
     // Leads
     leads: null,
-    lead: null,
+    // lead: null,
     // Quotes
     quotes: null,
     quote: null,
@@ -28,6 +28,9 @@ export default new Vuex.Store({
     // purchase orders
         pos: null,
         po: null,
+    //Damage Assessment Report
+        dars: null,
+        dar: null,
     errMsg: null,
   },
   getters: {},
@@ -40,8 +43,15 @@ export default new Vuex.Store({
     setLeads(state, leads) {
       state.leads = leads;
     },
-    setLead(state, lead) {
-      state.lead = lead;
+    // setLead(state, leads) {
+    //   state.leads = leads;
+    // },
+    // damage report
+    setDARS(state, dars) {
+      state.dars = dars;
+    },
+    setdar(state, dar) {
+      state.dar = dar;
     },
 
     // work orders
@@ -161,6 +171,77 @@ export default new Vuex.Store({
         });
     },
 
+        // Get damage reports
+        async getDARS(context) {
+          let fetched = await fetch(api + "dars");
+          let res = await fetched.json();
+          context.commit("setDARS", res.dars);
+        },
+        async getDAR(context, id) {
+          let fetched = await fetch(api + "dars/" + id);
+          let res = await fetched.json();
+          context.commit("setdar", res.results);
+        },
+        async createDAR(context, payload) {
+          fetch(api + "dars", {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              swal({
+                icon: "success",
+                title: `Item added`,
+                buttons: "OK",
+                closeOnClickOutside: false,
+              });
+              context.dispatch("getDARS");
+              // context.commit('setProducts', data.msg)
+            });
+        },
+        async updateDAR(context, payload) {
+          const { darid } = payload;
+          fetch(api + "dars/" + darid, {
+            method: "PATCH",
+            body: JSON.stringify(payload),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.msg == "Edited") {
+                swal({
+                  icon: "success",
+                  title: "The damage Report was edited successfully",
+                  button: "OK",
+                });
+                context.dispatch("getDAR", data.msg);
+              }
+            });
+        },
+        async deleteDAR(context, id) {
+          fetch(api + "dars/" + id, {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              context.dispatch("getDARS");
+              swal({
+                icon: "success",
+                title: "The damage report was deleted",
+                button: "OK",
+              });
+            });
+        },
+
     // Get leads
     async getLeads(context) {
       let fetched = await fetch(api + "leads");
@@ -170,7 +251,7 @@ export default new Vuex.Store({
     async getLead(context, id) {
       let fetched = await fetch(api + "leads/" + id);
       let res = await fetched.json();
-      context.commit("setLead", res.results);
+      context.commit("setLeads", res.results);
     },
     async createLead(context, payload) {
       fetch(api + "leads", {
@@ -188,16 +269,15 @@ export default new Vuex.Store({
             buttons: "OK",
             closeOnClickOutside: false,
           });
-          context.dispatch("getLeads");
+          context.dispatch("getLead");
           // context.commit('setProducts', data.msg)
         });
     },
-    async updateLead(context, leads) {
-      // const { entryType, leadName, leadEmail, leadNumber, leadNote, uID } =
-      //   payload;
-      fetch(api + "leads/", {
-        method: "PATCH",
-        body: JSON.stringify(leads),
+    async updateLead(context, payload) {
+   const { lid,entryType, leadName, leadEmail, leadNumber, leadNote, uID } =  payload;
+      fetch(api + "leads/"+ lid ,{
+        method: "PUT",
+        body: JSON.stringify(payload),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
@@ -211,7 +291,8 @@ export default new Vuex.Store({
               button: "OK",
             });
             console.log(data);
-            context.dispatch("getLeads", data);
+            context.dispatch("getLead");
+            this.$router.go()
           }
         });
     },
@@ -312,77 +393,90 @@ export default new Vuex.Store({
               });
           },
 
-      // Get work orders
-      async getWOS(context) {
-        let fetched = await fetch(api + "wos");
-        let res = await fetched.json();
-        context.commit("setWOS", res.workOrders);
-      },
-      async getWO(context, id) {
-        let fetched = await fetch(api + "wos/" + id);
-        let res = await fetched.json();
-        context.commit("setWO", res.results);
-      },
-      async createWO(context, payload) {
-        fetch(api + "wos", {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
+    // Get work orders
+    async getWOS(context) {
+      let fetched = await fetch(api + "wos");
+      let res = await fetched.json();
+      context.commit("setWOS", res.workOrders);
+    },
+    async getWO(context, id) {
+      let fetched = await fetch(api + "wos/" + id);
+      let res = await fetched.json();
+      context.commit("setWO", res.results);
+    },
+    async createWO(context, payload) {
+      fetch(api + "wos", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Item added`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getWOS");
+          // context.commit('setProducts', data.msg)
+        });
+    },
+    async updateWO(context, payload) {
+      const {
+        woid,
+        conID,
+        workers,
+        entryType,
+        jobCat,
+        mat,
+        qteID,
+        poID,
+        jobDesc,
+        uID,
+        workStatus,
+        workerNote,
+        workerTimeKeeping,
+      } = payload;
+      fetch(api + "wos/" + woid, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.msg == "Edited") {
             swal({
               icon: "success",
-              title: `Item added`,
-              buttons: "OK",
-              closeOnClickOutside: false,
-            });
-            context.dispatch("getWOS");
-            // context.commit('setProducts', data.msg)
-          });
-      },
-      async updateWO(context, payload) {
-        const {woid, conID, workers, entryType, jobCat, mat, qteID, poID, jobDesc, uID, workStatus, workerNote, workerTimeKeeping } =
-          payload;
-        fetch(api + "wos/" + woid, {
-          method: "PATCH",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.msg == "Edited") {
-              swal({
-                icon: "success",
-                title: "The work order was edited successfully",
-                button: "OK",
-              });
-              context.dispatch("getWO", data.msg);
-            }
-          });
-      },
-      async deleteWO(context, id) {
-        fetch(api + "wos/" + id, {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            context.dispatch("getWO");
-            swal({
-              icon: "success",
-              title: "The work order was deleted",
+              title: "The work order was edited successfully",
               button: "OK",
             });
+            context.dispatch("getWO", data.msg);
+          }
+        });
+    },
+    async deleteWO(context, id) {
+      fetch(api + "wos/" + id, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getLeads");
+          swal({
+            icon: "success",
+            title: "The work order was deleted",
+            button: "OK",
           });
-      },
+        });
+    },
 
     // Quotes
     async getQuotes(context) {
