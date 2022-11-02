@@ -12,11 +12,13 @@
           <form>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">What is the item</label>
-              <input type="text" class="form-control" id="item-name" v-model="Equipment" />
+              <input type="text" class="form-control" id="item-name" placeholder="What is the item?"
+                v-model="Equipment" />
             </div>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">How much of the item is there?</label>
-              <input type="text" class="form-control" id="amount" v-model="Stock" />
+              <input type="text" class="form-control" id="amount" placeholder="How much of the item is there?"
+                v-model="Stock" />
             </div>
 
 
