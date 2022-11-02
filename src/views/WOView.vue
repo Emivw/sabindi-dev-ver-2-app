@@ -8,6 +8,14 @@
 
         </div>
 
+        <input type="text" class="form-control" placeholder="Search..." v-model="search" />
+        <select name="entryType" v-model="entryType">
+            <option value="All" selected>All</option>
+            <option value="Insurance">Insurance</option>
+            <option value="Construction">Construction</option>
+            <option value="Maintenance">Maintenance</option>
+        </select>
+
         <div class="card-holder" v-for="wo in wos" :key="wo.woid">
             <div class="card">
                 <router-link :to="{ name: 'SingleWO', params: { id: wo.woid }, }" class="router-link">
@@ -17,9 +25,9 @@
                     <div class="l_type">{{ wo.qteID }}</div>
                 </router-link>
             </div>
-            <!-- <div class="delete col-5" @click="deletes(lead.lid)">
+            <div class="delete col-5" @click="deletes(wo.woid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
-            </div> -->
+            </div>
         </div>
         <BottomNav />
     </v-card>
@@ -32,6 +40,12 @@ import AddModal from "../components/WO/AddModal.vue";
 
 export default {
     props: ['wo'],
+    data() {
+        return {
+            search: "",
+            entryType: "All",
+        };
+    },
     components: {
         BottomNav,
         AddModal
@@ -43,7 +57,14 @@ export default {
     },
     computed: {
         wos() {
-            return this.$store.state.wos;
+            return this.$store.state.wos?.filter((wo) => {
+                let isMatch = true;
+                if (!wo.jobDesc?.toLowerCase().includes(this.search.toLowerCase()))
+                    isMatch = false;
+                if (this.entryType !== "All" && wo.entryType !== this.entryType)
+                    isMatch = false;
+                return isMatch;
+            });
         }
     },
 

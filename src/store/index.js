@@ -26,11 +26,11 @@ export default new Vuex.Store({
     wos: null,
     wo: null,
     // purchase orders
-        pos: null,
-        po: null,
+    pos: null,
+    po: null,
     //Damage Assessment Report
-        dars: null,
-        dar: null,
+    dars: null,
+    dar: null,
     errMsg: null,
   },
   getters: {},
@@ -62,12 +62,12 @@ export default new Vuex.Store({
       state.wo = wo;
     },
     // purchase orders
-        setPOS(state, pos) {
-          state.pos = pos;
-        },
-        setPO(state, po) {
-          state.po = po;
-        },
+    setPOS(state, pos) {
+      state.pos = pos;
+    },
+    setPO(state, po) {
+      state.po = po;
+    },
     // Quotes
     setQuotes(state, quotes) {
       state.quotes = quotes;
@@ -171,76 +171,76 @@ export default new Vuex.Store({
         });
     },
 
-        // Get damage reports
-        async getDARS(context) {
-          let fetched = await fetch(api + "dars");
-          let res = await fetched.json();
-          context.commit("setDARS", res.dars);
+    // Get damage reports
+    async getDARS(context) {
+      let fetched = await fetch(api + "dars");
+      let res = await fetched.json();
+      context.commit("setDARS", res.dars);
+    },
+    async getDAR(context, id) {
+      let fetched = await fetch(api + "dars/" + id);
+      let res = await fetched.json();
+      context.commit("setdar", res.results);
+    },
+    async createDAR(context, payload) {
+      fetch(api + "dars", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
         },
-        async getDAR(context, id) {
-          let fetched = await fetch(api + "dars/" + id);
-          let res = await fetched.json();
-          context.commit("setdar", res.results);
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Item added`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getDARS");
+          // context.commit('setProducts', data.msg)
+        });
+    },
+    async updateDAR(context, payload) {
+      const { darid } = payload;
+      fetch(api + "dars/" + darid, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
         },
-        async createDAR(context, payload) {
-          fetch(api + "dars", {
-            method: "POST",
-            body: JSON.stringify(payload),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              swal({
-                icon: "success",
-                title: `Item added`,
-                buttons: "OK",
-                closeOnClickOutside: false,
-              });
-              context.dispatch("getDARS");
-              // context.commit('setProducts', data.msg)
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.msg == "Edited") {
+            swal({
+              icon: "success",
+              title: "The damage Report was edited successfully",
+              button: "OK",
             });
+            context.dispatch("getDAR", data.msg);
+          }
+        });
+    },
+    async deleteDAR(context, id) {
+      fetch(api + "dars/" + id, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
         },
-        async updateDAR(context, payload) {
-          const { darid } = payload;
-          fetch(api + "dars/" + darid, {
-            method: "PATCH",
-            body: JSON.stringify(payload),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.msg == "Edited") {
-                swal({
-                  icon: "success",
-                  title: "The damage Report was edited successfully",
-                  button: "OK",
-                });
-                context.dispatch("getDAR", data.msg);
-              }
-            });
-        },
-        async deleteDAR(context, id) {
-          fetch(api + "dars/" + id, {
-            method: "DELETE",
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-              context.dispatch("getDARS");
-              swal({
-                icon: "success",
-                title: "The damage report was deleted",
-                button: "OK",
-              });
-            });
-        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getDARS");
+          swal({
+            icon: "success",
+            title: "The damage report was deleted",
+            button: "OK",
+          });
+        });
+    },
 
     // Get leads
     async getLeads(context) {
@@ -274,8 +274,9 @@ export default new Vuex.Store({
         });
     },
     async updateLead(context, payload) {
-   const { lid,entryType, leadName, leadEmail, leadNumber, leadNote, uID } =  payload;
-      fetch(api + "leads/"+ lid ,{
+      const { lid, entryType, leadName, leadEmail, leadNumber, leadNote, uID } =
+        payload;
+      fetch(api + "leads/" + lid, {
         method: "PUT",
         body: JSON.stringify(payload),
         headers: {
@@ -292,7 +293,7 @@ export default new Vuex.Store({
             });
             console.log(data);
             context.dispatch("getLead");
-            this.$router.go()
+            this.$router.go();
           }
         });
     },
@@ -315,83 +316,76 @@ export default new Vuex.Store({
           });
         });
     },
-          // Get purchase orders
-          async getPOS(context) {
-            let fetched = await fetch(api + "pos");
-            let res = await fetched.json();
-            context.commit("setPOS", res.purchaseOrders);
-          },
-          async getPO(context, id) {
-            let fetched = await fetch(api + "pos/" + id);
-            let res = await fetched.json();
-            context.commit("setPO", res.results);
-          },
-          async createPO(context, payload) {
-            fetch(api + "pos", {
-              method: "POST",
-              body: JSON.stringify(payload),
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-              },
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                swal({
-                  icon: "success",
-                  title: `Item added`,
-                  buttons: "OK",
-                  closeOnClickOutside: false,
-                });
-                context.dispatch("getPOS");
-                // context.commit('setProducts', data.msg)
-              });
-          },
-          async updatePO(context, payload) {
-            const {
-              poid,
-              qteID,
-              otp,
-              sID,
-              mat 
-            } =
-              payload;
-            fetch(api + "pos/" + poid, {
-              method: "PATCH",
-              body: JSON.stringify(payload),
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-              },
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.msg == "Edited") {
-                  swal({
-                    icon: "success",
-                    title: "The purchase order was edited successfully",
-                    button: "OK",
-                  });
-                  context.dispatch("getPO", data.msg);
-                }
-              });
-          },
-          async deletePO(context, id) {
-            fetch(api + "pos/" + id, {
-              method: "DELETE",
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-              },
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                console.log(data);
-                context.dispatch("getPO");
-                swal({
-                  icon: "success",
-                  title: "The Purchase Order was deleted",
-                  button: "OK",
-                });
-              });
-          },
+    // Get purchase orders
+    async getPOS(context) {
+      let fetched = await fetch(api + "pos");
+      let res = await fetched.json();
+      context.commit("setPOS", res.purchaseOrders);
+    },
+    async getPO(context, id) {
+      let fetched = await fetch(api + "pos/" + id);
+      let res = await fetched.json();
+      context.commit("setPO", res.results);
+    },
+    async createPO(context, payload) {
+      fetch(api + "pos", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Item added`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getPOS");
+          // context.commit('setProducts', data.msg)
+        });
+    },
+    async updatePO(context, payload) {
+      const { poid, qteID, otp, sID, mat } = payload;
+      fetch(api + "pos/" + poid, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.msg == "Edited") {
+            swal({
+              icon: "success",
+              title: "The purchase order was edited successfully",
+              button: "OK",
+            });
+            context.dispatch("getPO", data.msg);
+          }
+        });
+    },
+    async deletePO(context, id) {
+      fetch(api + "pos/" + id, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getPO");
+          swal({
+            icon: "success",
+            title: "The Purchase Order was deleted",
+            button: "OK",
+          });
+        });
+    },
 
     // Get work orders
     async getWOS(context) {

@@ -8,6 +8,8 @@
 
         </div>
 
+        <input type="text" class="form-control" placeholder="Search..." v-model="search" />
+
         <div class="card-holder" v-for="quote in quotes" :key="quote.qteid">
             <div class="card">
                 <router-link :to="{ name: 'SingleQuote', params: { id: quote.qteid } }" class="router-link">
@@ -32,6 +34,11 @@ import AddModal from "../components/Quote/AddModal.vue";
 
 export default {
     props: ['quote'],
+    data() {
+        return {
+            search: "",
+        };
+    },
     components: {
         BottomNav,
         AddModal
@@ -42,7 +49,12 @@ export default {
     },
     computed: {
         quotes() {
-            return this.$store.state.quotes;
+            return this.$store.state.quotes?.filter((quote) => {
+                let isMatch = true;
+                if (!quote.cusName?.toLowerCase().includes(this.search.toLowerCase()))
+                    isMatch = false;
+                return isMatch;
+            });
         }
     },
 

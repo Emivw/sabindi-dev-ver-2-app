@@ -41,7 +41,7 @@
                                             <v-text-field v-model="id" type="number" :placeholder="id"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="qteID"   :placeholder="po.qteID"></v-text-field>
+                                            <v-text-field v-model="qteID" :placeholder="po.qteID"></v-text-field>
                                         </v-col>
                                         <!-- <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
@@ -80,9 +80,12 @@ export default {
     props: ['id'],
 
 
+
     data: () => ({
         dialog: false,
-
+        //         return{
+        // otp:this.
+        //         }
     }),
 
     mounted() {

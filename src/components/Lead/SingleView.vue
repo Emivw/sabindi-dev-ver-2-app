@@ -14,6 +14,12 @@
                     <div class="row text">{{ lead.leadEmail }}</div>
                     <div class="row title">Phone No</div>
                     <div class="row text">{{ lead.leadNumber }}</div>
+                    <div class="row title">Additional Number</div>
+                    <div class="row text">{{ lead.leadExtraNumber }}</div>
+                    <div class="row title">Area of lead</div>
+                    <div class="row text">{{ lead.leadArea }}</div>
+                    <div class="row title">Address</div>
+                    <div class="row text">{{ lead.leadAddress }}</div>
                 </div>
             </div>
             <div class="a-notes">
@@ -73,7 +79,7 @@
     </div>
 </template>
   
-<script> 
+<script>
 import router from "@/router";
 export default {
     props: ['id'],
@@ -110,7 +116,7 @@ export default {
                 uID: this.uID
             });
             // console.log(this.$store.state.lead)
-            
+
         }
     },
 }
@@ -146,22 +152,22 @@ export default {
 }
 
 .container-fluid {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-    .title {
-         text-decoration: underline;
-         margin: auto;
-        text-align: center;
-    }
+.title {
+    text-decoration: underline;
+    margin: auto;
+    text-align: center;
+}
 
-    .text {
-        padding-bottom: 15px;
-        margin: auto;
-        text-align: center;
-    }
+.text {
+    padding-bottom: 15px;
+    margin: auto;
+    text-align: center;
+}
 
 
 /* Bigger Phones */

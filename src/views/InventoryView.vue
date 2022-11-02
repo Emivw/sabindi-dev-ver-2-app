@@ -5,8 +5,8 @@
                 ADD <i class="fa-solid fa-plus"></i>
             </button>
             <AddModal />
-
         </div>
+        <input type="text" class="form-control" placeholder="Search..." v-model="search" />
 
         <div class="card-holder" v-for="inventory in inventory" :key="inventory.invenID">
             <div class="card">
@@ -28,6 +28,11 @@ import AddModal from "../components/Inventory/AddModal.vue";
 
 
 export default {
+    data() {
+        return {
+            search: "",
+        };
+    },
     // props: ['quote'],
     components: {
         BottomNav,
@@ -40,7 +45,12 @@ export default {
     },
     computed: {
         inventory() {
-            return this.$store.state.inventory;
+            return this.$store.state.inventory?.filter((inventory) => {
+                let isMatch = true;
+                if (!inventory.Equipment?.toLowerCase().includes(this.search.toLowerCase()))
+                    isMatch = false;
+                return isMatch;
+            });
         }
     },
 
