@@ -7,7 +7,6 @@
             <!-- <AddModal /> -->
 
         </div>
-        <input type="text" class="form-control" placeholder="Search..." v-model="search" />
 
         <div class="card-holder" v-for="inventory in inventories" :key="inventory.invenID">
             <div class="card">
@@ -29,11 +28,6 @@ import BottomNav from "../components/BottomNav.vue"
 
 
 export default {
-    data() {
-        return {
-            search: "",
-        };
-    },
     // props: ['quote'],
     components: {
         BottomNav,

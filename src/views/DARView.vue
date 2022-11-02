@@ -16,9 +16,9 @@
                     <div class="l_email">{{ dar.damageType }}</div>
                 </router-link>
             </div>
-            <div class="delete col-5" @click="deletes(dar.darid)">
+            <!-- <div class="delete col-5" @click="deletes(lead.lid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
-            </div>
+            </div> -->
         </div>
         <BottomNav />
     </v-card>
@@ -26,7 +26,7 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/DAR/AddModal.vue";
+import AddModal from "../components/WO/AddModal.vue";
 
 
 export default {
@@ -37,6 +37,7 @@ export default {
     },
     mounted() {
         return this.$store.dispatch("getDARS");
+        // this.$store.dispatch("getSellers");
     },
     computed: {
         dars() {

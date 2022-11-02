@@ -11,75 +11,80 @@
         <div class="modal-body">
           <form>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Claim Number:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Claim Number" v-model="claimNumber" />
+              <label for="recipient-name" class="col-form-label">Entry Type</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="entryType" v-model="entryType" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Client Name:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Client Name" v-model="clientName" />
+              <label for="recipient-name" class="col-form-label">uid:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="uid" v-model="uid" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Date:</label>
-              <input type="date" class="form-control" id="recipient-name" placeholder="Date"
-                v-model="date" />
+              <label for="recipient-name" class="col-form-label">Customer Name</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="Customer Name"
+                v-model="cusName" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Report Number:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Report Number"
-                v-model="reportNumber" />
+              <label for="recipient-name" class="col-form-label">Customer Number:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="Customer Number"
+                v-model="cusNo" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Damage Type:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Damage Type"
-                v-model="damageType" />
+              <label for="recipient-name" class="col-form-label">Customer Address:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="cusAddress"
+                v-model="cusAddress" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Facility:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Facility" v-model="facility" />
-            </div>
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Damage Severity:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Damage Severity"
-                v-model="damageSeverity" />
-            </div>
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Inspection Category:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Inspection Category"
-                v-model="inspectionCategory" />
+              <label for="recipient-name" class="col-form-label">Insurance Category:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="insCat" v-model="insCat" />
             </div>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Leak Detection Method:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Leak Detection Method" v-model="leakDetectionMethod" />
+              <input type="text" class="form-control" id="recipient-name" placeholder="leakDetectMethod"
+                v-model="leakDetectMethod" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Damage Location Internal:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Damage Location Internal" v-model="damageLocationInternal" />
+              <label for="recipient-name" class="col-form-label">Damage Location:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="dmgLocation"
+                v-model="dmgLocation" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Damage Location External:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Damage Location External" v-model="damageLocationExternal" />
+              <label for="recipient-name" class="col-form-label">Damage Status:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="dmgStatus" v-model="dmgStatus" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Damage Status Concealed:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Damage Status Concealed" v-model="damageStatusConcealed" />
+              <label for="recipient-name" class="col-form-label">RepRecom:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="RepRecom" v-model="RepRecom" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Damage Status Not Concealed:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Damage Status Not Concealed" v-model="damageStatusNotConcealed" />
+              <label for="recipient-name" class="col-form-label">Quote Description:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="qtDesc" v-model="qtDesc" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Repair Action Recommendation:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Repair Action Recommendation"
-                v-model="repairActionRecommendation" />
+              <label for="recipient-name" class="col-form-label">Summary:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="summary" v-model="summary" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Executive Summary:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Executive Summary" v-model="executiveSummary" />
+              <label for="recipient-name" class="col-form-label">Job Category:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="jobCat" v-model="jobCat" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Authorised By:</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="Authorised By" v-model="authBy" />
+              <label for="recipient-name" class="col-form-label">Quote Materials:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="qteMaterials"
+                v-model="qteMaterials" />
             </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Scope:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="scope" v-model="scope" />
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Total:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="total" v-model="total" />
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Add notes:</label>
+              <input type="text" class="form-control" id="recipient-name" placeholder="addNote" v-model="addNote" />
+            </div>
+
           </form>
         </div>
         <div class="modal-footer">
@@ -97,48 +102,52 @@
 
 <script>
 export default {
-  props: ['dar'],
+  props: ['quote'],
   data() {
     return {
-      claimNumber: "",
-      clientName: "",
-      date: "",
-      reportNumber: "",
+      entryType: "",
+      uid: "",
+      cusName: "",
+      cusNo: "",
+      cusAddress: "",
       damageType: "",
-      facility: "",
-      damageSeverity: "",
-      inspectionCategory: "",
-      leakDetectionMethod: "",
-      damageLocationInternal: "",
-      damageLocationExternal: "",
-      damageStatusConcealed: "",
-      damageStatusNotConcealed: "",
-      repairActionRecommendation: "",
-      executiveSummary: "",
-      authBy: "",
+      insCat: "",
+      leakDetectMethod: "",
+      dmgLocation: "",
+      dmgStatus: "",
+      RepRecom: "",
+      qtDesc: "",
+      summary: "",
+      jobCat: "",
+      qteMaterials: "",
+      scope: "",
+      total: "",
+      addNote: ""
     };
   },
   methods: {
     add() {
       let payload = {
-        claimNumber: this.claimNumber,
-        clientName: this.clientName,
-        date: this.date,
-        reportNumber: this.reportNumber,
+        entryType: this.entryType,
+        uid: this.uid,
+        cusName: this.cusName,
+        cusNo: this.cusNo,
+        cusAddress: this.cusAddress,
         damageType: this.damageType,
-        facility: this.facility,
-        damageSeverity: this.damageSeverity,
-        inspectionCategory: this.inspectionCategory,
-        leakDetectionMethod: this.leakDetectionMethod,
-        damageLocationInternal: this.damageLocationInternal,
-        damageLocationExternal: this.damageLocationExternal,
-        damageStatusConcealed: this.damageStatusConcealed,
-        damageStatusNotConcealed: this.damageStatusNotConcealed,
-        repairActionRecommendation: this.repairActionRecommendation,
-        executiveSummary: this.executiveSummary,
-        authBy: this.authBy,
+        insCat: this.insCat,
+        leakDetectMethod: this.leakDetectMethod,
+        dmgLocation: this.dmgLocation,
+        dmgStatus: this.dmgStatus,
+        RepRecom: this.RepRecom,
+        qtDesc: this.qtDesc,
+        summary: this.summary,
+        jobCat: this.jobCat,
+        qteMaterials: this.qteMaterials,
+        scope: this.scope,
+        total: this.total,
+        addNote: this.addNote,
       }
-      this.$store.dispatch("createDAR", payload);
+      this.$store.dispatch("createQuote", payload);
     }
   }
 }

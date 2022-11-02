@@ -44,7 +44,7 @@
                 <h4 class="text-center">Additional notes</h4>
                 <p class="text-center">{{ quote.addNote }}</p>
             </div>
-            <!-- <template>
+            <template>
                 <v-row justify="center">
                     <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on, attrs }">
@@ -65,11 +65,11 @@
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="quote.uID" type="number"></v-text-field>
                                         </v-col>
-                                        <v-col cols="12" sm="6" md="4">
+                                        <!-- <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
                                                 :items="['Looking to rent', 'Looking to rent out', 'Selling', 'Buying', 'Brochure/Business Card', 'Maintenance/Construction']"
                                                 v-model="quote.entryType"></v-autocomplete>
-                                        </v-col>
+                                        </v-col> -->
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="quote.cusName"></v-text-field>
                                         </v-col>
@@ -131,7 +131,7 @@
                         </v-card>
                     </v-dialog>
                 </v-row>
-            </template> -->
+            </template>
         </div>
         <BottomNav />
     </div>
@@ -214,24 +214,6 @@ export default {
 
     .v-card.v-sheet.theme--light {
         margin-top: 30px;
-    }
-
-    .container-fluid {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .title {
-         text-decoration: underline;
-         margin: auto;
-        text-align: center;
-    }
-
-    .text {
-        padding-bottom: 15px;
-        margin: auto;
-        text-align: center;
     }
 
 }

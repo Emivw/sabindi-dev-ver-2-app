@@ -52,15 +52,15 @@
         ],
         to: '/crm'
       },
-      // {
-      //   title: 'SRM',
-      //   icon: 'mdi-account-tie',
-      //   text: 'Supplier Relational Manager',
-      //   category: [
-      //     'admin'
-      //   ],
-      //   to: '/srm'
-      // },
+      {
+        title: 'SRM',
+        icon: 'mdi-account-tie',
+        text: 'Supplier Relational Manager',
+        category: [
+          'admin'
+        ],
+        to: '/srm'
+      },
       {
         title: 'WO',
         icon: 'mdi-briefcase',
@@ -86,17 +86,17 @@
         category: [
           "admin"
         ],
-        to: '/pos'
+        to: '/po'
       },
-      // {
-      //   title: 'Reports',
-      //   icon: 'mdi-chart-box',
-      //   text: '',
-      //   category: [
-      //     "admin"
-      //   ],
-      //   to: '/reports'
-      // },
+      {
+        title: 'Reports',
+        icon: 'mdi-chart-box',
+        text: '',
+        category: [
+          "admin"
+        ],
+        to: '/reports'
+      },
       {
         title: 'Materials',
         icon: 'mdi-factory',
@@ -115,18 +115,18 @@
         ],
         to: '/inventory'
       },
-      // {
-      //   title: 'Costs',
-      //   icon: 'mdi-cash-multiple ',
-      //   text: '',
-      //   category: [
-      //     "admin"
-      //   ],
-      //   to: '/costs'
-      // },
       {
-        title: 'DAR',
-        icon: 'mdi-chart-box',
+        title: 'Costs',
+        icon: 'mdi-cash-multiple ',
+        text: '',
+        category: [
+          "admin"
+        ],
+        to: '/costs'
+      },
+      {
+        title: 'Damage Assessment Report',
+        icon: 'mdi-cash-multiple ',
         text: '',
         category: [
           "admin"

@@ -5,21 +5,12 @@
                 ADD <i class="fa-solid fa-plus"></i>
             </button>
             <AddModal />
+
         </div>
-        <input type="text" class="form-control" placeholder="Search..." v-model="search" />
-        <select name="entryType" v-model="entryType">
-            <option value="All" selected>All</option>
-            <option value="Seller">Seller</option>
-            <option value="Buyer">Construction</option>
-            <option value="Renting">Renting</option>
-            <option value="Renting Out">Renting Out</option>
-            <option value="Maintenance">Maintenance</option>
-            <option value="Other">Other</option>
-        </select>
 
         <div class="card-holder" v-for="lead in leads" :key="lead.lid">
             <div class="card">
-                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid } }" class="router-link">
+                <router-link :to="{ name: 'SingleCRM', params: { id: lead.lid }}" class="router-link">
                     <div class="l_name">{{ lead.leadName }}</div>
                     <div class="l_name">{{ lead.lid }}</div>
                     <div class="l_email">{{ lead.leadEmail }}</div>
@@ -45,26 +36,14 @@ export default {
         BottomNav,
         AddModal
     },
-    data() {
-        return {
-            search: "",
-            entryType: "All",
-        };
-    },
+
     mounted() {
         return this.$store.dispatch("getLeads");
         // this.$store.dispatch("getSellers");
     },
     computed: {
         leads() {
-            return this.$store.state.leads?.filter((lead) => {
-                let isMatch = true;
-                if (!lead.leadName?.toLowerCase().includes(this.search.toLowerCase()))
-                    isMatch = false;
-                if (this.entryType !== "All" && lead.entryType !== this.entryType)
-                    isMatch = false;
-                return isMatch;
-            });
+            return this.$store.state.leads;
         }
     },
 
