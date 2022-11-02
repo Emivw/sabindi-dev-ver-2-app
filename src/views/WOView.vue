@@ -19,10 +19,9 @@
         <div class="card-holder" v-for="wo in wos" :key="wo.woid">
             <div class="card">
                 <router-link :to="{ name: 'SingleWO', params: { id: wo.woid }, }" class="router-link">
-                    <div class="l_name">{{ wo.entryType }}</div>
-                    <div class="l_name">{{ wo.jobCat }}</div>
-                    <div class="l_email">{{ wo.workStatus }}</div>
-                    <div class="l_type">{{ wo.qteID }}</div>
+                    <div class="l_name">Entry Type:{{ wo.entryType }}</div>
+                    <div class="l_name">Job Category:{{ wo.jobCat }}</div>
+                    <div class="l_email">Work Status:{{ wo.workStatus }}</div>
                 </router-link>
             </div>
             <div class="delete col-5" @click="deletes(wo.woid)">
@@ -113,9 +112,44 @@ export default {
     .column {
         padding-right: 10px;
     }
+    .form-control {
+        width: 90%;
+        margin: auto;
+    }
+    .options {
+        border-radius: 3px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 15px;
+        padding: 3px;
+        border: 1px solid #ced4da;
+    }
 }
 /* Bigger Phones */
-@media only screen and (min-width:576px) {}
+@media only screen and (min-width:576px) {
+    .card-holder {
+        margin-left: 5%;
+        margin-bottom: 15px;
+        border: 1px solid #333333;
+        width: 90%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    .card {
+        align-items: center;
+        width: 200px;
+        padding: 5px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+    .column {
+        padding-right: 10px;
+    }
+    .form-control {
+        width: 90%;
+        margin: auto;
+    }
+}
 /* Tablets */
 @media only screen and (min-width:768px) {}
 /* Laptops */

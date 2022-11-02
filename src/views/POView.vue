@@ -11,18 +11,10 @@
         <div class="card-holder" v-for="po in pos" :key="po.poid">
             <div class="card">
                 <router-link :to="{ name: 'SinglePO', params: { id: po.poid } }" class="router-link">
-                    <div class="l_name">
-                        <p class="subtitle">Purchase Order ID:</p>
-                        <p>{{ po.poid }}</p>
-                    </div>
-                    <div class="l_name">
-                        <p class="subtitle">Quote ID:</p>
-                        <p>{{ po.qteID }}</p>
-                    </div>
-                    <div class="l_name">
-                        <p class="subtitle">Material:</p>
-                        <p>{{ po.mat }}</p>
-                    </div>
+                    <div class="l_name">Purchase Order ID:{{ po.poid }}</div>
+                    <div class="l_name">Quote ID:{{ po.qteID }}</div>
+                    <div class="l_email">Suppllier ID:{{ po.sID }}</div>
+                    <div class="l_type">Material:{{ po.mat }}</div>
                 </router-link>
             </div>
             <div class="delete col-5" @click="deletes(po.poid)">
@@ -35,29 +27,25 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/Lead/AddModal.vue";
-
-
+import AddModal from "../components/PO/AddModal.vue";
 export default {
-    props: ['lead'],
+    props: ['po'],
     components: {
         BottomNav,
         AddModal
     },
-
     mounted() {
-        return this.$store.dispatch("getLeads");
+        return this.$store.dispatch("getPOS");
         // this.$store.dispatch("getSellers");
     },
     computed: {
-        leads() {
-            return this.$store.state.leads;
+        pos() {
+            return this.$store.state.pos;
         }
     },
-
     methods: {
         deletes(id) {
-            this.$store.dispatch("deleteLead", id);
+            this.$store.dispatch("deletePO", id);
         }
     },
 }
@@ -70,7 +58,6 @@ export default {
     flex-direction: column;
     align-items: center;
 }
-
 
 .f-holder {
     width: 100%;
@@ -90,8 +77,6 @@ export default {
     text-align: center;
 }
 
-
-
 /* Small phones */
 @media only screen and (max-width:576px) {
     .card-holder {
@@ -109,17 +94,6 @@ export default {
         padding: 5px;
         margin-bottom: 10px;
         border-radius: 10px;
-    }
-
-    .l_name {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .subtitle {
-        font-weight: bold;
-        text-decoration: underline;
     }
 
     .column {
@@ -160,17 +134,6 @@ export default {
         border-radius: 10px;
     }
 
-    .l_name {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .subtitle {
-        font-weight: bold;
-        text-decoration: underline;
-    }
-
     .column {
         padding-right: 10px;
     }
@@ -190,4 +153,3 @@ export default {
 /* Desktops */
 @media only screen and (min-width:1200px) {}
 </style>
-

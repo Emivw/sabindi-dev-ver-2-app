@@ -17,8 +17,8 @@
         <div class="card-holder" v-for="material in filteredMaterials" :key="material.mid">
             <div class="card">
                 <router-link :to="{ name: 'SingleMaterial', params: { id: material.mid } }" class="router-link">
-                    <div class="l_name">{{ material.matName }}</div>
-                    <div class="l_name">{{ material.MatCat }}</div>
+                    <div class="l_name">Material Name:{{ material.matName }}</div>
+                    <div class="l_name">Material Category:{{ material.MatCat }}</div>
                 </router-link>
             </div>
             <div class="delete col-5" @click="deleteMaterial(material.mid)">
@@ -32,8 +32,6 @@
 <script>
 import BottomNav from "../components/BottomNav.vue"
 import AddModal from "../components/Materials/AddModal.vue";
-
-
 export default {
     props: ['material'],
     components: {
@@ -61,7 +59,6 @@ export default {
             });
         }
     },
-
     methods: {
         deleteMaterial(id) {
             this.$store.dispatch("deleteMaterial", id);
@@ -69,7 +66,6 @@ export default {
     },
 }
 </script>
-
 <style scoped>
 .card-holder {
     display: flex;
@@ -77,7 +73,6 @@ export default {
     flex-direction: column;
     align-items: center;
 }
-
 
 .f-holder {
     width: 100%;
@@ -96,8 +91,6 @@ export default {
 .fa-solid {
     text-align: center;
 }
-
-
 
 /* Small phones */
 @media only screen and (max-width:576px) {
@@ -122,10 +115,49 @@ export default {
         padding-right: 10px;
     }
 
+    .form-control {
+        width: 90%;
+        margin: auto;
+    }
+
+    .options {
+        border-radius: 3px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 15px;
+        padding: 3px;
+        border: 1px solid #ced4da;
+    }
 }
 
 /* Bigger Phones */
-@media only screen and (min-width:576px) {}
+@media only screen and (min-width:576px) {
+    .card-holder {
+        margin-left: 5%;
+        margin-bottom: 15px;
+        border: 1px solid #333333;
+        width: 90%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .card {
+        align-items: center;
+        width: 200px;
+        padding: 5px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+    .column {
+        padding-right: 10px;
+    }
+
+    .form-control {
+        width: 90%;
+        margin: auto;
+    }
+}
 
 /* Tablets */
 @media only screen and (min-width:768px) {}

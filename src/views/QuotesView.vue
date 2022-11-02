@@ -30,8 +30,6 @@
 <script>
 import BottomNav from "../components/BottomNav.vue"
 import AddModal from "../components/Quote/AddModal.vue";
-
-
 export default {
     props: ['quote'],
     data() {
@@ -43,7 +41,6 @@ export default {
         BottomNav,
         AddModal
     },
-
     mounted() {
         return this.$store.dispatch("getQuotes");
     },
@@ -57,7 +54,6 @@ export default {
             });
         }
     },
-
     methods: {
         deletes(id) {
             this.$store.dispatch("deleteQuote", id);
@@ -65,7 +61,6 @@ export default {
     },
 }
 </script>
-
 <style scoped>
 .card-holder {
     display: flex;
@@ -73,7 +68,6 @@ export default {
     flex-direction: column;
     align-items: center;
 }
-
 
 .f-holder {
     width: 100%;
@@ -92,8 +86,6 @@ export default {
 .fa-solid {
     text-align: center;
 }
-
-
 
 /* Small phones */
 @media only screen and (max-width:576px) {
@@ -117,7 +109,6 @@ export default {
     .column {
         padding-right: 10px;
     }
-
 }
 
 /* Bigger Phones */

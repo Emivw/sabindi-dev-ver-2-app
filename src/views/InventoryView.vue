@@ -10,8 +10,8 @@
 
         <div class="card-holder" v-for="inventory in inventory" :key="inventory.invenID">
             <div class="card">
-                <div class="l_name">{{ inventory.Equipment }}</div>
-                <div class="l_name">{{ inventory.Stock }}</div>
+                <div class="l_name">Equipment:{{ inventory.Equipment }}</div>
+                <div class="l_name">Stock:{{ inventory.Stock }}</div>
 
             </div>
             <div class="delete col-5" @click="deletes(inventory.invenID)">
@@ -99,9 +99,44 @@ export default {
     .column {
         padding-right: 10px;
     }
+    .form-control {
+        width: 90%;
+        margin: auto;
+    }
+    .options {
+        border-radius: 3px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 15px;
+        padding: 3px;
+        border: 1px solid #ced4da;
+    }
 }
 /* Bigger Phones */
-@media only screen and (min-width:576px) {}
+@media only screen and (min-width:576px) {
+    .card-holder {
+        margin-left: 5%;
+        margin-bottom: 15px;
+        border: 1px solid #333333;
+        width: 90%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    .card {
+        align-items: center;
+        width: 200px;
+        padding: 5px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+    .column {
+        padding-right: 10px;
+    }
+    .form-control {
+        width: 90%;
+        margin: auto;
+    }
+}
 /* Tablets */
 @media only screen and (min-width:768px) {}
 /* Laptops */
