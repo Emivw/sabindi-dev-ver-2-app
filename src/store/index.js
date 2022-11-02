@@ -31,6 +31,8 @@ export default new Vuex.Store({
     //Damage Assessment Report
     dars: null,
     dar: null,
+    mat: null,
+
     errMsg: null,
   },
   getters: {},
@@ -52,6 +54,11 @@ export default new Vuex.Store({
     },
     setdar(state, dar) {
       state.dar = dar;
+    },
+
+    // Cart
+    setMat(context, mat) {
+      context.mat = mat;
     },
 
     // work orders
@@ -566,11 +573,63 @@ export default new Vuex.Store({
     },
 
     // Materials
+    async getMat(context, id) {
+      let fetched = await fetch(
+        "https://proptechapi.herokuapp.com/users/" + id + "/mat"
+      );
+      let res = await fetched.json();
+      context.commit("setMat", res.results);
+    },
+
+    addMat(context, payload) {
+      let id = context.state.user.uid;
+      fetch("https://proptechapi.herokuapp.com/users/" + id + "/mat", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Item added`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getMat", id);
+          console.log(id);
+        });
+    },
+
     async getMaterials(context) {
       let fetched = await fetch(api + "materials");
       let res = await fetched.json();
       console.log(res);
       context.commit("setMaterials", res.leads);
+    },
+
+    async deleteMatItem(context, id) {
+      fetch(
+        "https://proptechapi.herokuapp.com/users/" +
+          context.state.user.uid +
+          "/mat/" +
+          id,
+        {
+          method: "DELETE",
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Items have been removed`,
+            buttons: "OK",
+            closeOnClickOutside: false,
+          });
+          context.dispatch("getMat", context.state.user.uid);
+        });
     },
 
     async getMaterial(context, id) {
