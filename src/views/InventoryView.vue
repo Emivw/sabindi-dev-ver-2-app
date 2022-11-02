@@ -24,7 +24,7 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/Inventory/AddModal.vue"
+import AddModal from "../components/Inventory/AddModal.vue";
 
 
 export default {

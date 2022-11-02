@@ -7,7 +7,14 @@
             <AddModal />
 
         </div>
-        <div class="card-holder" v-for="material in materials" :key="material.mid">
+        <input type="text" class="form-control" placeholder="Search..." v-model="search" />
+        <select name="MatCat" v-model="MatCat">
+            <option value="All" selected>All</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Construction">Construction</option>
+            <option value="Insurance">Insurance</option>
+        </select>
+        <div class="card-holder" v-for="material in filteredMaterials" :key="material.mid">
             <div class="card">
                 <router-link :to="{ name: 'SingleMaterial', params: { id: material.mid } }" class="router-link">
                     <div class="l_name">{{ material.matName }}</div>
@@ -33,13 +40,25 @@ export default {
         BottomNav,
         AddModal
     },
-
+    data() {
+        return {
+            search: "",
+            MatCat: "All",
+        };
+    },
     mounted() {
         return this.$store.dispatch("getMaterials");
     },
     computed: {
-        materials() {
-            return this.$store.state.materials;
+        filteredMaterials() {
+            return this.$store.state.materials?.filter((material) => {
+                let isMatch = true;
+                if (!material.matName?.toLowerCase().includes(this.search.toLowerCase()))
+                    isMatch = false;
+                if (this.MatCat !== "All" && material.MatCat !== this.MatCat)
+                    isMatch = false;
+                return isMatch;
+            });
         }
     },
 
