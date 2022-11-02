@@ -105,7 +105,24 @@ export default {
   props: ['quote'],
   data() {
     return {
-
+      entryType: "",
+      uid: "",
+      cusName: "",
+      cusNo: "",
+      cusAddress: "",
+      damageType: "",
+      insCat: "",
+      leakDetectMethod: "",
+      dmgLocation: "",
+      dmgStatus: "",
+      RepRecom: "",
+      qtDesc: "",
+      summary: "",
+      jobCat: "",
+      qteMaterials: "",
+      scope: "",
+      total: "",
+      addNote: ""
     };
   },
   methods: {

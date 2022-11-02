@@ -86,6 +86,13 @@ export default {
     data: () => ({
         dialog: false,
 
+                lid: '',
+                entryType: '',
+                leadName: '',
+                leadEmail: '',
+                leadNumber: '',
+                leadNote: '',
+                uID: ''
     }),
 
     mounted() {
@@ -105,7 +112,7 @@ export default {
         },
         update() {
             this.$store.dispatch("updateLead", {
-                lid: this.lead.lid,
+                lid: this.id,
                 entryType: this.lead.entryType,
                 leadName: this.lead.leadName,
                 leadEmail: this.lead.leadEmail,

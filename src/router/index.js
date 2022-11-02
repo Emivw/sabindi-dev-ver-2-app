@@ -80,8 +80,8 @@ const routes = [
     props: true,
   },
   {
-    path: "/po",
-    name: "po",
+    path: "/pos",
+    name: "pos",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -89,23 +89,57 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/POView.vue"),
   },
   {
-    path: "/wo",
-    name: "wo",
+    path: "/pos/:id",
+    name: "SinglePO",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../components/PO/SingleView.vue"
+      ),
+    props: true,
+  },
+  {
+    path: "/wos",
+    name: "wos",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/WOView.vue"),
   },
+  {
+    path: "/wos/:id",
+    name: "SingleWO",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/WO/SingleView.vue"),
+      props:true,
+  },
 
   {
     path: "/materials",
-    name: "materials",
+    name: "MaterialsView",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/MaterialsView.vue"),
+  },
+  {
+    path: "/materials/:id",
+    name: "SingleMaterial",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../components/Materials/SingleView.vue"
+      ),
+    props: true,
   },
   {
     path: "/inventory",

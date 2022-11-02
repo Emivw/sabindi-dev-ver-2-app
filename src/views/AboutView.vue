@@ -68,7 +68,7 @@
         category: [
           "admin"
         ],
-        to: '/wo'
+        to: '/wos'
       },
       {
         title: 'Quotes',
@@ -86,7 +86,7 @@
         category: [
           "admin"
         ],
-        to: '/po'
+        to: '/pos'
       },
       {
         title: 'Reports',

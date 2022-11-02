@@ -3,7 +3,7 @@ import Vuex from "vuex";
 // ES6 Modules or TypeScript
 import swal from "sweetalert";
 import router from "@/router";
-// import createPersistedState from "vuex-persistedstate";
+import createPersistedState from "vuex-persistedstate";
 
 const api = "https://proptechapi.herokuapp.com/";
 Vue.use(Vuex);
@@ -17,7 +17,15 @@ export default new Vuex.Store({
     // Quotes
     quotes: null,
     quote: null,
-    sellers: null,
+    // Material
+    materials: null,
+    material: null,
+    // work orders
+    wos: null,
+    wo: null,
+    // purchase orders
+        pos: null,
+        po: null,
     errMsg: null,
     wos:null,
     po:null,
@@ -36,12 +44,34 @@ export default new Vuex.Store({
       state.lead = lead;
     },
 
+    // work orders
+    setWOS(state, wos) {
+      state.wos = wos;
+    },
+    setWO(state, wo) {
+      state.wo = wo;
+    },
+    // purchase orders
+        setPOS(state, pos) {
+          state.pos = pos;
+        },
+        setPO(state, po) {
+          state.po = po;
+        },
     // Quotes
     setQuotes(state, quotes) {
       state.quotes = quotes;
     },
     setQuote(state, quote) {
       state.lead = quote;
+    },
+
+    // Materials
+    setMaterials(state, materials) {
+      state.materials = materials;
+    },
+    setMaterial(state, material) {
+      state.lead = material;
     },
 
     setSellers(state, sellers) {
@@ -58,11 +88,6 @@ export default new Vuex.Store({
   },
 },
   actions: {
-    // async getUser(context,id) {
-    //   let fetched = await fetch("https://proptechapi.herokuapp.com/users"+id);
-    //   let res = await fetched.json();
-    //   context.commit("setUsers", res.users);
-    // },
     async register(context, payload) {
       fetch("https://proptechapi.herokuapp.com/register", {
         method: "POST",
@@ -135,16 +160,6 @@ export default new Vuex.Store({
             }
           }
         });
-    },
-    // async getLeads(context) {
-    //   fetch('http://localhost:1517/leads')
-    //     .then((res) => res.json())
-    //     .then((data) => context.state.leads = data.leads)
-    // },
-    async getSellers(context) {
-      fetch("http://localhost:1517/sellers")
-        .then((res) => res.json())
-        .then((data) => (context.state.sellers = data.buyers));
     },
 
     // Get leads
@@ -219,11 +234,161 @@ export default new Vuex.Store({
           });
         });
     },
+          // Get purchase orders
+          async getPOS(context) {
+            let fetched = await fetch(api + "pos");
+            let res = await fetched.json();
+            context.commit("setPOS", res.purchaseOrders);
+          },
+          async getPO(context, id) {
+            let fetched = await fetch(api + "pos/" + id);
+            let res = await fetched.json();
+            context.commit("setPO", res.results);
+          },
+          async createPO(context, payload) {
+            fetch(api + "pos", {
+              method: "POST",
+              body: JSON.stringify(payload),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                swal({
+                  icon: "success",
+                  title: `Item added`,
+                  buttons: "OK",
+                  closeOnClickOutside: false,
+                });
+                context.dispatch("getPOS");
+                // context.commit('setProducts', data.msg)
+              });
+          },
+          async updatePO(context, payload) {
+            const {
+              poid,
+              qteID,
+              otp,
+              sID,
+              mat 
+            } =
+              payload;
+            fetch(api + "pos/" + poid, {
+              method: "PATCH",
+              body: JSON.stringify(payload),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.msg == "Edited") {
+                  swal({
+                    icon: "success",
+                    title: "The purchase order was edited successfully",
+                    button: "OK",
+                  });
+                  context.dispatch("getPO", data.msg);
+                }
+              });
+          },
+          async deletePO(context, id) {
+            fetch(api + "pos/" + id, {
+              method: "DELETE",
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                context.dispatch("getPO");
+                swal({
+                  icon: "success",
+                  title: "The Purchase Order was deleted",
+                  button: "OK",
+                });
+              });
+          },
+
+      // Get work orders
+      async getWOS(context) {
+        let fetched = await fetch(api + "wos");
+        let res = await fetched.json();
+        context.commit("setWOS", res.workOrders);
+      },
+      async getWO(context, id) {
+        let fetched = await fetch(api + "wos/" + id);
+        let res = await fetched.json();
+        context.commit("setWO", res.results);
+      },
+      async createWO(context, payload) {
+        fetch(api + "wos", {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            swal({
+              icon: "success",
+              title: `Item added`,
+              buttons: "OK",
+              closeOnClickOutside: false,
+            });
+            context.dispatch("getWOS");
+            // context.commit('setProducts', data.msg)
+          });
+      },
+      async updateWO(context, payload) {
+        const {woid, conID, workers, entryType, jobCat, mat, qteID, poID, jobDesc, uID, workStatus, workerNote, workerTimeKeeping } =
+          payload;
+        fetch(api + "wos/" + woid, {
+          method: "PATCH",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.msg == "Edited") {
+              swal({
+                icon: "success",
+                title: "The work order was edited successfully",
+                button: "OK",
+              });
+              context.dispatch("getWO", data.msg);
+            }
+          });
+      },
+      async deleteWO(context, id) {
+        fetch(api + "wos/" + id, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            context.dispatch("getWO");
+            swal({
+              icon: "success",
+              title: "The work order was deleted",
+              button: "OK",
+            });
+          });
+      },
 
     // Quotes
     async getQuotes(context) {
       let fetched = await fetch(api + "quotes");
       let res = await fetched.json();
+      console.log(res.quotes);
       context.commit("setQuotes", res.quotes);
     },
     async getQuote(context, id) {
@@ -310,34 +475,7 @@ export default new Vuex.Store({
           });
         });
     },
-
-    //WO
-    async getWorkOrders(context) {
-      let fetched = await fetch(api + "wo");
-      let res = await fetched.json();
-      context.commit("setWorkOrders", res.leads);
-    },
-    async createWorkOrders(context, payload) {
-      fetch(api + "wo", {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          swal({
-            icon: "success",
-            title: `Quote added`,
-            buttons: "OK",
-            closeOnClickOutside: false,
-          });
-          context.dispatch("getWorkOrders");
-          // context.commit('setProducts', data.msg)
-        });
-    },
   },
   modules: {},
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
 });
