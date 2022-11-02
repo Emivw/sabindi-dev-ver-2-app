@@ -28,10 +28,6 @@
               <input type="text" class="form-control" id="recipient-name" placeholder="MatCat" v-model="MatCat" />
             </div>
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Material Cost :</label>
-              <input type="text" class="form-control" id="recipient-name" placeholder="cost" v-model="cost" />
-            </div>
-            <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Supplier ID:</label>
               <input type="text" class="form-control" id="recipient-name" placeholder="sID" v-model="sID" />
             </div>
@@ -61,7 +57,6 @@ export default {
       matDesc: "",
       MatDimensions: "",
       MatCat: "",
-      cost: "",
       sID: "",
     };
   },
@@ -72,7 +67,6 @@ export default {
         matDesc: this.matDesc,
         MatDimensions: this.MatDimensions,
         MatCat: this.MatCat,
-        cost: this.cost,
         sID: this.sID,
       }
       this.$store.dispatch("createMaterial", payload);

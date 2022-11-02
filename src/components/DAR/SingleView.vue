@@ -1,51 +1,56 @@
 <template>
     <div>
-        <div class="info-holder" v-for="dar in dar" :key="dar.darid">
-            <h2 class="text-center">Damage Assessment Report</h2>
-            <div class="seperator">
-                <div class="info-title-holder">
-                    <div class="container-fluid">
-                        <div class="row title">Claim Number</div>
-                        <div class="row text">{{ dar.claimNumber }}</div>
-                        <div class="row title">Client Name</div>
-                        <div class="row text">{{ dar.clientName }}</div>
-                        <div class="row title">Date</div>
-                        <div class="row text">{{ dar.date }}</div>
-                        <div class="row title">Report Number</div>
-                        <div class="row text">{{ dar.reportNumber }}</div>
-                        <div class="row title">Damage Type</div>
-                        <div class="row text">{{ dar.damageType }}</div>
-                        <div class="row title">Facility</div>
-                        <div class="row text">{{ dar.facility }}</div>
-                        <div class="row title">Damage Severity</div>
-                        <div class="row text">{{ dar.damageSeverity }}</div>
-                        <div class="row title">Inspection Category</div>
-                        <div class="row text">{{ dar.inspectionCategory }}</div>
-                        <div class="row title">Leak Detection Method</div>
-                        <div class="row text">{{ dar.leakDetectionMethod }}</div>
-                        <div class="row title">Damage Location Internal</div>
-                        <div class="row text">{{ dar.damageLocationInternal }}</div>
-                        <div class="row title">Damage Location External</div>
-                        <div class="row text">{{ dar.damageLocationExternal }}</div>
-                        <div class="row title">Damage Status Concealed</div>
-                        <div class="row text">{{ dar.damageStatusConcealed }}</div>
-                        <div class="row title">Damage Status Not Concealed</div>
-                        <div class="row text">{{ dar.damageStatusNotConcealed }}</div>
-                        <div class="row title">Repair Action Recommendation</div>
-                        <div class="row text">{{ dar.repairActionRecommendation }}</div>
-                        <div class="row title">Executive Summary</div>
-                        <div class="row text">{{ dar.executiveSummary }}</div>
-                        <div class="row title">Authorised By</div>
-                        <div class="row text">{{ dar.authBy }}</div></div>
-                    </div>
+        <div class="info-holder" v-for="quote in quote" :key="quote.qteid">
+            <h2 class="text-center">Lead Information</h2>
+            <div class="seperator d-flex ">
+                <div class="info-title-holder col-5">
+                    <div class="info-text">Entry Type :</div>
+                    <div class="info-text">uid:</div>
+                    <div class="info-text">Customer Name :</div>
+                    <div class="info-text">Customer Number :</div>
+                    <div class="info-text">Customer Address :</div>
+                    <div class="info-text">Damage Type :</div>
+                    <div class="info-text"> Insurance Category :</div>
+                    <div class="info-text"> Leak Detection Method :</div>
+                    <div class="info-text"> Damage Location :</div>
+                    <div class="info-text"> Damage Status :</div>
+                    <div class="info-text"> RepRecom :</div>
+                    <div class="info-text"> Quote Description :</div>
+                    <div class="info-text"> Summary :</div>
+                    <div class="info-text"> Job Category :</div>
+                    <div class="info-text"> Scope :</div>
+                    <div class="info-text"> Total :</div>
+                </div>
+                <div class="info-text-holder col-7">
+                    <div class="info-text">{{ quote.entryType }}</div>
+                    uid <div class="info-text">{{ quote.uid }}</div>
+                    <div class="info-text">{{ quote.cusName }}</div>
+                    <div class="info-text">{{ quote.cusNo }}</div>
+                    <div class="info-text">{{ quote.cusAddress }}</div>
+                    <div class="info-text">{{ quote.damageType }}</div>
+                    <div class="info-text">{{ quote.insCat }}</div>
+                    <div class="info-text">{{ quote.leakDetectMethod }}</div>
+                    <div class="info-text">{{ quote.dmgLocation }}</div>
+                    <div class="info-text">{{ quote.dmgStatus }}</div>
+                    <div class="info-text">{{ quote.RepRecom }}</div>
+                    <div class="info-text">{{ quote.qtDesc }}</div>
+                    <div class="info-text">{{ quote.summary }}</div>
+                    <div class="info-text">{{ quote.jobCat }}</div>
+                    <div class="info-text">{{ quote.qteMaterials }}</div>
+                    <div class="info-text">{{ quote.scope }}</div>
+                    <div class="info-text">{{ quote.total }}</div>
                 </div>
             </div>
-            <!-- <template>
+            <div class="a-notes">
+                <h4 class="text-center">Additional notes</h4>
+                <p class="text-center">{{ quote.addNote }}</p>
+            </div>
+            <template>
                 <v-row justify="center">
                     <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                                Edit Information
+                                Open Dialog
                             </v-btn>
                         </template>
                         <v-card>
@@ -56,53 +61,64 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.claimNumber" type="number" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.entryType" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.clientName" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.uid"></v-text-field>
                                         </v-col>
+                                        <!-- <v-col cols="12" sm="6" md="4">
+                                            <v-autocomplete
+                                                :items="['Looking to rent', 'Looking to rent out', 'Selling', 'Buying', 'Brochure/Business Card', 'Maintenance/Construction']"
+                                                v-model="quote.entryType"></v-autocomplete>
+                                        </v-col> -->
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.date" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.cusName"></v-text-field>
                                         </v-col>
 
                                         <v-col cols="12">
-                                            <v-text-field v-model="dar.reportNumber" type="number" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.cusNo" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.damageType" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.cusAddress"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.facility" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.damageType"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.damageSeverity" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.insCat"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.inspectionCategory" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.leakDetectMethod"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.leakDetectionMethod" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.dmgLocation"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.damageLocationInternal" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.dmgStatus"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.damageLocationExternal" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.RepRecom"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.damageStatusConcealed" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.qtDesc"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.damageStatusNotConcealed" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.summary"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.repairActionRecommendation" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.jobCat"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.executiveSummary" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.qteMaterials"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="dar.authBy" placeholder=""></v-text-field>
+                                            <v-text-field v-model="quote.scope"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="quote.total" type="number"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="quote.addNote"></v-text-field>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -116,8 +132,9 @@
                         </v-card>
                     </v-dialog>
                 </v-row>
-            </template> -->
+            </template>
         </div>
+
     </div>
 </template>
   
@@ -132,33 +149,38 @@ export default {
     }),
 
     mounted() {
-        return this.$store.dispatch("getDAR", this.id);
+        console.log(this.$store.state.quote)
+        console.log(this.id)
+        return this.$store.dispatch("getQuote", this.id);
+        // this.$store.dispatch("getSellers");
     },
     computed: {
-        dar() {
-            return this.$store.state.dar;
+        quote() {
+            return this.$store.state.quote;
         },
     },
 
     methods: {
         update() {
-            this.$store.dispatch("updateDAR", {
-                claimNumber: this.claimNumber,
-                clientName: this.clientName,
-                date: this.date,
-                reportNumber: this.reportNumber,
+            this.$store.dispatch("updateLead", {
+                entryType: this.entryType,
+                uid: this.uid,
+                cusName: this.cusName,
+                cusNo: this.cusNo,
+                cusAddress: this.cusAddress,
                 damageType: this.damageType,
-                facility: this.facility,
-                damageSeverity: this.damageSeverity,
-                inspectionCategory: this.inspectionCategory,
-                leakDetectionMethod: this.leakDetectionMethod,
-                damageLocationInternal: this.damageLocationInternal,
-                damageLocationExternal: this.damageLocationExternal,
-                damageStatusConcealed: this.damageStatusConcealed,
-                damageStatusNotConcealed: this.damageStatusNotConcealed,
-                repairActionRecommendation: this.repairActionRecommendation,
-                executiveSummary: this.executiveSummary,
-                authBy: this.authBy,
+                insCat: this.insCat,
+                leakDetectMethod: this.leakDetectMethod,
+                dmgLocation: this.dmgLocation,
+                dmgStatus: this.dmgStatus,
+                RepRecom: this.RepRecom,
+                qtDesc: this.qtDesc,
+                summary: this.summary,
+                jobCat: this.jobCat,
+                qteMaterials: this.qteMaterials,
+                scope: this.scope,
+                total: this.total,
+                addNote: this.addNote
             });
         }
     },
@@ -184,31 +206,12 @@ export default {
     }
 
     .info-text {
-        font-size: 2vh;
         word-break: break-all;
 
     }
 
     .v-card.v-sheet.theme--light {
         margin-top: 30px;
-    }
-
-    .container-fluid {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .title {
-         text-decoration: underline;
-         margin: auto;
-        text-align: center;
-    }
-
-    .text {
-        padding-bottom: 15px;
-        margin: auto;
-        text-align: center;
     }
 
 }

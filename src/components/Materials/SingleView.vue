@@ -3,22 +3,22 @@
         <div class="info-holder" v-if="material" :key="material.mid">
             <h2 class="text-center">material Information</h2>
             <div class="seperator d-flex ">
-                <div class="container-fluid">
-                    <div class="row title">Material Name</div>
-                    <div class="row text">{{ material.matName }}</div>
-                    <div class="row title">Material Description</div>
-                    <div class="row text">{{ material.matDesc }}</div>
-                    <div class="row title">Material Dimensions</div>
-                    <div class="row text">{{ material.MatDimensions }}</div>
-                    <div class="row title">Material Category</div>
-                    <div class="row text">{{ material.MatCat }}</div>
-                    <div class="row title">Material Cost</div>
-                    <div class="row text">R{{ material.cost }}</div>
-                    <div class="row title">Material sID</div>
-                    <div class="row text">{{ material.sID }}</div>
+                <div class="info-title-holder col-5">
+                    <div class="info-text">Material Name :</div>
+                    <div class="info-text">Material Description :</div>
+                    <div class="info-text">Material Dimensions :</div>
+                    <div class="info-text">Material Category :</div>
+                    <div class="info-text">Material sID :</div>
+                </div>
+                <div class="info-text-holder col-7">
+                    <div class="info-text">{{ material[0].matName }}</div>
+                    <div class="info-text">{{ material[0].matDesc }}</div>
+                    <div class="info-text">{{ material[0].MatDimensions }}</div>
+                    <div class="info-text">{{ material[0].MatCat }}</div>
+                    <div class="info-text">{{ material[0].sID }}</div>
                 </div>
             </div>
-            <!-- <template>
+            <template>
                 <v-row justify="center">
                     <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on, attrs }">
@@ -42,11 +42,11 @@
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="material[0].materialName"></v-text-field>
                                         </v-col>
-                                        <v-col cols="12" sm="6" md="4">
+                                        <!-- <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
                                                 :items="['Looking to rent', 'Looking to rent out', 'Selling', 'Buying', 'Brochure/Business Card', 'Maintenance/Construction']"
                                                 v-model="material.entryType"></v-autocomplete>
-                                        </v-col>
+                                        </v-col> -->
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="material[0].materialEmail"></v-text-field>
                                         </v-col>
@@ -71,7 +71,7 @@
                         </v-card>
                     </v-dialog>
                 </v-row>
-            </template> -->
+            </template>
         </div>
 
     </div>
@@ -152,24 +152,6 @@ export default {
 
     .v-card.v-sheet.theme--light {
         margin-top: 30px;
-    }
-
-    .container-fluid {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .title {
-         text-decoration: underline;
-         margin: auto;
-        text-align: center;
-    }
-
-    .text {
-        padding-bottom: 15px;
-        margin: auto;
-        text-align: center;
     }
 
 }

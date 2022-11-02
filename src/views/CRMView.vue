@@ -5,6 +5,7 @@
                 ADD <i class="fa-solid fa-plus"></i>
             </button>
             <AddModal />
+
         </div>
         <input type="text" class="form-control" placeholder="Search..." v-model="search" />
         <select name="entryType" v-model="entryType" class="options">
@@ -53,26 +54,14 @@ export default {
         BottomNav,
         AddModal
     },
-    data() {
-        return {
-            search: "",
-            entryType: "All",
-        };
-    },
+
     mounted() {
         return this.$store.dispatch("getLeads");
         // this.$store.dispatch("getSellers");
     },
     computed: {
         leads() {
-            return this.$store.state.leads?.filter((lead) => {
-                let isMatch = true;
-                if (!lead.leadName?.toLowerCase().includes(this.search.toLowerCase()))
-                    isMatch = false;
-                if (this.entryType !== "All" && lead.entryType !== this.entryType)
-                    isMatch = false;
-                return isMatch;
-            });
+            return this.$store.state.leads;
         }
     },
 
