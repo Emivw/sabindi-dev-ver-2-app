@@ -12,13 +12,16 @@
             <div class="card">
                 <router-link :to="{ name: 'SingleDAR', params: { id: dar.darid }, }" class="router-link">
                     <div class="l_name">
-                        <p></p>Claim Number:{{ dar.claimNumber }}
+                        <p class="subtitle">Claim Number:</p>
+                        <p>{{ dar.claimNumber }}</p>
                     </div>
                     <div class="l_name">
-                        <p></p>Client Name:{{ dar.clientName }}
+                        <p class="subtitle">Client Name:</p>
+                        <p>{{ dar.clientName }}</p>
                     </div>
                     <div class="l_name">
-                        <p></p>Damage Type:{{ dar.damageType }}
+                        <p class="subtitle">Damage Type:</p>
+                        <p>{{ dar.damageType }}</p>
                     </div>
                 </router-link>
             </div>
