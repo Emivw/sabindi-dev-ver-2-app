@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card id="page">
         <div id="box">
             <button type="button" data-bs-toggle="modal" data-bs-target="#add">
                 ADD <i class="fa-solid fa-plus"></i>

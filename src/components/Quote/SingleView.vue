@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="info-holder" v-for="quote in quote" :key="quote.qteid">
-            <h2 class="text-center">Lead Information</h2>
+            <h2 class="text-center">Quote Information</h2> 
             <div class="seperator d-flex ">
                 <div class="conatiner-fluid">
                     <div class="row title">Entry Type </div>

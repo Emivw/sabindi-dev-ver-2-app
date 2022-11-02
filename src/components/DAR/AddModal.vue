@@ -86,7 +86,7 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Cancel
           </button>
-          <button type="button" class="btn btn-primary" @click="add" data-bs-dismiss="modal">
+          <button id="move" type="button" class="btn btn-primary" @click="add" data-bs-dismiss="modal">
             ADD
           </button>
         </div>
@@ -145,5 +145,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

@@ -133,7 +133,7 @@ flex-wrap: wrap;
 }
 
 .btn{
-position: absolute;
+/* position: absolute; */
 left: 91%;
 background-color:orange;
 }
