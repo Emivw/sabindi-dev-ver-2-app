@@ -22,6 +22,7 @@ export default new Vuex.Store({
     material: null,
     // Inventory
     inventory: null,
+    sellers: null,
     // work orders
     wos: null,
     wo: null,
@@ -31,6 +32,8 @@ export default new Vuex.Store({
     //Damage Assessment Report
         dars: null,
         dar: null,
+   //cart 
+   mat:null,
     errMsg: null,
   },
   getters: {},
@@ -89,12 +92,19 @@ export default new Vuex.Store({
       state.inventory = inventory;
     },
 
+    // Cart
+    setMat(context, mat) {
+      context.mat = mat
+    },
+
     setSellers(state, sellers) {
       state.sellers = sellers;
     },
     setErrMsg(state, errMsg) {
       state.errMsg = errMsg;
     },
+
+
   },
   actions: {
     async register(context, payload) {
@@ -165,6 +175,7 @@ export default new Vuex.Store({
                 closeOnClickOutside: false,
               });
               context.commit("setUser", data.msg[0]);
+              context.dispatch('getMat', data.msg[0].uid)
               router.push("/about");
             }
           }
@@ -709,6 +720,33 @@ export default new Vuex.Store({
             button: "OK",
           });
         });
+    },
+//Add Mat
+    addMat(context, payload) {
+      let id = context.state.user.uid
+      fetch('https://proptechapi.herokuapp.com/users/' + id + '/mat', {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        .then((response) => response.json())  
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Item added`,
+            buttons: "OK",
+            closeOnClickOutside: false
+          })
+          context.dispatch('getMat', id)
+          console.log(id);
+        })
+    },
+    async getMat(context, id) {
+      let fetched = await fetch('https://proptechapi.herokuapp.com/users/' + id + '/mat');
+      let res = await fetched.json();
+      context.commit('setMat', res.results)
     },
   },
   modules: {},

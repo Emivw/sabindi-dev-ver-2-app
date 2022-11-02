@@ -35,10 +35,23 @@
       <v-app-bar-nav-icon v-if="user" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Sabindi Global Group</v-toolbar-title>
+      <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Materials</button>
     </v-app-bar>
 
     <v-main>
       <router-view />
+
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Materials</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body small" v-for="material in mat" :key="material.mid">
+    <div>
+      {{material.mid}}
+    </div>
+  </div>
+</div>
 
       <!-- <BottomNav v-if="user"/> -->
       <!--  -->
@@ -66,6 +79,9 @@ export default {
   computed: {
     user() {
       return this.$store.state.user
+    },
+    mat(){
+        return this.$store.state.mat
     }
   },
   methods: {
@@ -101,11 +117,25 @@ export default {
 
 .v-app-bar {
   z-index: 1000 !important;
+ 
+}
+
+.offcanvas-body{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
 }
 
 .v-toolbar__content {
   background-color: black;
   color: white;
+  display: flex;
+}
+
+.btn{
+position: absolute;
+left: 91%;
+background-color:orange;
 }
 
 .backgrd {

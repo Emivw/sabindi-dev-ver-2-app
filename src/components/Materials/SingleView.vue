@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="info-holder" v-for="material in material" :key="material.mid">
+        <div class="info-holder" v-if="material" :key="material.mid">
             <h2 class="text-center">material Information</h2>
             <div class="seperator d-flex ">
                 <div class="container-fluid">
@@ -25,6 +25,9 @@
                             <v-btn color="primary" dark v-bind="attrs" v-on="on">
                                 Open Dialog
                             </v-btn>
+                            <v-btn color="primary" @click="addMat">
+                                Add Material
+                            </v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -34,10 +37,10 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="material.lid" type="number"></v-text-field>
+                                            <v-text-field v-model="material[0].lid" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="material.materialName"></v-text-field>
+                                            <v-text-field v-model="material[0].materialName"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
@@ -45,16 +48,16 @@
                                                 v-model="material.entryType"></v-autocomplete>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="material.materialEmail"></v-text-field>
+                                            <v-text-field v-model="material[0].materialEmail"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="material.materialNumber"></v-text-field>
+                                            <v-text-field v-model="material[0].materialNumber"></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
-                                            <v-text-field v-model="material.materialNote"></v-text-field>
+                                            <v-text-field v-model="material[0].materialNote"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="material.uID" type="number"></v-text-field>
+                                            <v-text-field v-model="material[0].uID" type="number"></v-text-field>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -98,15 +101,28 @@ export default {
 
         update() {
             this.$store.dispatch("updateMaterial", {
-                lid: this.material.lid,
-                entryType: this.material.entryType,
-                materialName: this.material.materialName,
-                materialEmail: this.material.materialEmail,
-                materialNumber: this.material.materialNumber,
-                materialNote: this.material.materialNote,
-                uID: this.material.uID
+                lid: this.material[0].lid,
+                entryType: this.material[0].entryType,
+                materialName: this.material[0].materialName,
+                materialEmail: this.material[0].materialEmail,
+                materialNumber: this.material[0].materialNumber,
+                materialNote: this.material[0].materialNote,
+                uID: this.material[0].uID
             });
-        }
+        },
+ addMat(){
+    const payload = {
+        mid: this.material[0].mid,
+        matName: this.material[0].matName,
+        matDesc: this.material[0].matDesc,
+        matSpecs: this.material[0].matDesc,
+        matCat: this.material[0].matCat,
+        cost: this.material[0].cost,
+        matUnit: this.material[0].matUnit,
+        sID:this.material[0].sID
+    }
+    this.$store.dispatch('addMat',payload)
+  }
     },
 }
 </script>
