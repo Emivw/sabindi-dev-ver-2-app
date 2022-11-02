@@ -3,15 +3,51 @@
         <div class="info-holder" v-for="quote in quote" :key="quote.qteid">
             <h2 class="text-center">Lead Information</h2>
             <div class="seperator d-flex ">
+                <div class="conatiner-fluid">
+                    <div class="row title">Entry Type </div>
+                    <div class="row text">{{ quote.entryType }}</div>
+                    <div class="row title">uID</div>
+                    <div class="row text">{{ quote.uID }}</div>
+                    <div class="row title">Customer Name</div>
+                    <div class="row text">{{ quote.cusName }}</div>
+                    <div class="row title">Customer Number</div>
+                    <div class="row text">{{ quote.cusNo }}</div>
+                    <div class="row title">Customer Address</div>
+                    <div class="row text">{{ quote.cusAddress }}</div>
+                    <div class="row title">Damage Type</div>
+                    <div class="row text">{{ quote.damageType }}</div>
+                    <div class="row title">Insurance Category</div>
+                    <div class="row text">{{ quote.insCat }}</div>
+                    <div class="row title">Leak Detection Method</div>
+                    <div class="row text">{{ quote.leakDetectMethod }}</div>
+                    <div class="row title"></div>
+                    <div class="row text"></div>
+                    <div class="row title"></div>
+                    <div class="row text"></div>
+                    <div class="row title"></div>
+                    <div class="row text"></div>
+                    <div class="row title"></div>
+                    <div class="row text"></div>
+                    <div class="row title"></div>
+                    <div class="row text"></div>
+                    <div class="row title"></div>
+                    <div class="row text"></div>
+                    <div class="row title"></div>
+                    <div class="row text"></div>
+                    <div class="row title"></div>
+                    <div class="row text"></div>
+                    <div class="row title"></div>
+                    <div class="row text"></div>
+                </div>
                 <div class="info-title-holder col-5">
-                    <div class="info-text">Entry Type :</div>
-                    <div class="info-text">uID:</div>
-                    <div class="info-text">Customer Name :</div>
-                    <div class="info-text">Customer Number :</div>
-                    <div class="info-text">Customer Address :</div>
-                    <div class="info-text">Damage Type :</div>
-                    <div class="info-text"> Insurance Category :</div>
-                    <div class="info-text"> Leak Detection Method :</div>
+                    <div class="info-text">:</div>
+                    <div class="info-text">:</div>
+                    <div class="info-text"> :</div>
+                    <div class="info-text"> :</div>
+                    <div class="info-text"> :</div>
+                    <div class="info-text"> :</div>
+                    <div class="info-text">  :</div>
+                    <div class="info-text">  :</div>
                     <div class="info-text"> Damage Location :</div>
                     <div class="info-text"> Damage Status :</div>
                     <div class="info-text"> RepRecom :</div>
@@ -23,14 +59,14 @@
                     <div class="info-text"> Total :</div>
                 </div>
                 <div class="info-text-holder col-7">
-                    <div class="info-text">{{ quote.entryType }}</div>
-                    <div class="info-text">{{ quote.uID }}</div>
-                    <div class="info-text">{{ quote.cusName }}</div>
-                    <div class="info-text">{{ quote.cusNo }}</div>
-                    <div class="info-text">{{ quote.cusAddress }}</div>
-                    <div class="info-text">{{ quote.damageType }}</div>
-                    <div class="info-text">{{ quote.insCat }}</div>
-                    <div class="info-text">{{ quote.leakDetectMethod }}</div>
+                    <div class="info-text"></div>
+                    <div class="info-text"></div>
+                    <div class="info-text"></div>
+                    <div class="info-text"></div>
+                    <div class="info-text"></div>
+                    <div class="info-text">/div>
+                    <div class="info-text"></div>
+                    <div class="info-text"></div>
                     <div class="info-text">{{ quote.dmgLocation }}</div>
                     <div class="info-text">{{ quote.dmgStatus }}</div>
                     <div class="info-text">{{ quote.RepRecom }}</div>
@@ -46,7 +82,7 @@
                 <h4 class="text-center">Additional notes</h4>
                 <p class="text-center">{{ quote.addNote }}</p>
             </div>
-            <template>
+            <!-- <template>
                 <v-row justify="center">
                     <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on, attrs }">
@@ -67,11 +103,11 @@
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="quote.uID" type="number"></v-text-field>
                                         </v-col>
-                                        <!-- <v-col cols="12" sm="6" md="4">
+                                        <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
                                                 :items="['Looking to rent', 'Looking to rent out', 'Selling', 'Buying', 'Brochure/Business Card', 'Maintenance/Construction']"
                                                 v-model="quote.entryType"></v-autocomplete>
-                                        </v-col> -->
+                                        </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="quote.cusName"></v-text-field>
                                         </v-col>
@@ -133,7 +169,7 @@
                         </v-card>
                     </v-dialog>
                 </v-row>
-            </template>
+            </template> -->
         </div>
         <BottomNav />
     </div>
