@@ -14,8 +14,10 @@
       data: () => ({
         value: 'recent',
     items: [
-      { title: 'Todo', icon: ' mdi-domain', to: "/" },
-      { title: 'about', icon: ' mdi-message-text', to: "/about" },
+      { title: 'Home', icon: ' mdi-home', to: "/about" },
+      { title: 'PO', icon: ' mdi-cart-arrow-down', to: "/pos" },
+      { title: 'DAR', icon: ' mdi-chart-box', to: "/dars" },
+      { title: 'CRM', icon: ' mdi-briefcase', to: "/crm" },
     ],
   }),
     }

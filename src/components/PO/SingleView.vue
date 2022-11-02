@@ -3,31 +3,29 @@
         <div class="info-holder" v-for="po in pos" :key="po.poid">
             <h2 class="text-center">po Information</h2>
             <div class="seperator d-flex ">
-                <div class="info-title-holder col-5">
-                    <div class="info-text">poid :</div>
-                    <div class="info-text">Materials :</div>
-                    <div class="info-text">One time Pin :</div>
-                    <div class="info-text">Supplier ID :</div>
-                    <div class="info-text">quote ID :</div>
-                </div>
-                <div class="info-text-holder col-7">
-                    <div class="info-text">{{ id }}</div>
-                    <div class="info-text">{{ po.mat }}</div>
-                    <div class="info-text">{{ po.otp }}</div>
-                    <div class="info-text">{{ po.sID }}</div>
-                    <div class="info-text">{{ po.qteID }}</div>
+                <div class="container-fluid">
+                    <div class="row title">poid</div>
+                    <div class="row text">{{ id }}</div>
+                    <div class="row title">Materials</div>
+                    <div class="row text">{{ po.mat }}</div>
+                    <div class="row title">One time Pin</div>
+                    <div class="row text">{{ po.otp }}</div>
+                    <div class="row title">Supplier ID</div>
+                    <div class="row text">{{ po.sID }}</div>
+                    <div class="row title">quote ID</div>
+                    <div class="row text">{{ po.qteID }}</div>
                 </div>
             </div>
             <div class="a-notes">
                 <h4 class="text-center">Additional notes</h4>
                 <p class="text-center"></p>
             </div>
-            <template>
+            <!-- <template>
                 <v-row justify="center">
                     <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                                Open Dialog
+                                Open Dialog`
                             </v-btn>
                         </template>
                         <v-card>
@@ -43,11 +41,11 @@
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="qteID" :placeholder="po.qteID"></v-text-field>
                                         </v-col>
-                                        <!-- <v-col cols="12" sm="6" md="4">
+                                        <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
                                                 :items="['Looking to rent', 'Looking to rent out', 'Selling', 'Buying', 'Brochure/Business Card', 'Maintenance/Construction']"
                                                 v-model="po.entryType"></v-autocomplete>
-                                        </v-col> -->
+                                        </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="mat" :placeholder="po.mat"></v-text-field>
                                         </v-col>
@@ -69,7 +67,7 @@
                         </v-card>
                     </v-dialog>
                 </v-row>
-            </template>
+            </template> -->
         </div>
 
     </div>
@@ -141,6 +139,24 @@ export default {
 
     .v-card.v-sheet.theme--light {
         margin-top: 30px;
+    }
+
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .title {
+         text-decoration: underline;
+         margin: auto;
+        text-align: center;
+    }
+
+    .text {
+        padding-bottom: 15px;
+        margin: auto;
+        text-align: center;
     }
 
 }

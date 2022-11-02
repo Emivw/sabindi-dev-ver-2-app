@@ -1,31 +1,32 @@
 <template>
     <div>
-        <div class="info-holder" v-for="material in material" :key="material.mid">
+        <div class="info-holder" v-if="material" :key="material.mid">
             <h2 class="text-center">material Information</h2>
             <div class="seperator d-flex ">
-                <div class="info-title-holder col-5">
-                    <div class="info-text">Material Name :</div>
-                    <div class="info-text">Material Description :</div>
-                    <div class="info-text">Material Dimensions :</div>
-                    <div class="info-text">Material Category :</div>
-                    <div class="info-text">Material Cost :</div>
-                    <div class="info-text">Material sID :</div>
-                </div>
-                <div class="info-text-holder col-7">
-                    <div class="info-text">{{ material.matName }}</div>
-                    <div class="info-text">{{ material.matDesc }}</div>
-                    <div class="info-text">{{ material.MatDimensions }}</div>
-                    <div class="info-text">{{ material.MatCat }}</div>
-                    <div class="info-text">R{{ material.cost }}</div>
-                    <div class="info-text">{{ material.sID }}</div>
+                <div class="container-fluid">
+                    <div class="row title">Material Name</div>
+                    <div class="row text">{{ material.matName }}</div>
+                    <div class="row title">Material Description</div>
+                    <div class="row text">{{ material.matDesc }}</div>
+                    <div class="row title">Material Dimensions</div>
+                    <div class="row text">{{ material.MatDimensions }}</div>
+                    <div class="row title">Material Category</div>
+                    <div class="row text">{{ material.MatCat }}</div>
+                    <div class="row title">Material Cost</div>
+                    <div class="row text">R{{ material.cost }}</div>
+                    <div class="row title">Material sID</div>
+                    <div class="row text">{{ material.sID }}</div>
                 </div>
             </div>
-            <template>
+            <!-- <template>
                 <v-row justify="center">
                     <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn color="primary" dark v-bind="attrs" v-on="on">
                                 Open Dialog
+                            </v-btn>
+                            <v-btn color="primary" @click="addMat">
+                                Add Material
                             </v-btn>
                         </template>
                         <v-card>
@@ -36,27 +37,27 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="material.lid" type="number"></v-text-field>
+                                            <v-text-field v-model="material[0].lid" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="material.materialName"></v-text-field>
+                                            <v-text-field v-model="material[0].materialName"></v-text-field>
                                         </v-col>
-                                        <!-- <v-col cols="12" sm="6" md="4">
+                                        <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
                                                 :items="['Looking to rent', 'Looking to rent out', 'Selling', 'Buying', 'Brochure/Business Card', 'Maintenance/Construction']"
                                                 v-model="material.entryType"></v-autocomplete>
-                                        </v-col> -->
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="material.materialEmail"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12">
-                                            <v-text-field v-model="material.materialNumber"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12">
-                                            <v-text-field v-model="material.materialNote"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="material.uID" type="number"></v-text-field>
+                                            <v-text-field v-model="material[0].materialEmail"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="material[0].materialNumber"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <v-text-field v-model="material[0].materialNote"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="material[0].uID" type="number"></v-text-field>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -70,7 +71,7 @@
                         </v-card>
                     </v-dialog>
                 </v-row>
-            </template>
+            </template> -->
         </div>
 
     </div>
@@ -100,15 +101,28 @@ export default {
 
         update() {
             this.$store.dispatch("updateMaterial", {
-                lid: this.material.lid,
-                entryType: this.material.entryType,
-                materialName: this.material.materialName,
-                materialEmail: this.material.materialEmail,
-                materialNumber: this.material.materialNumber,
-                materialNote: this.material.materialNote,
-                uID: this.material.uID
+                lid: this.material[0].lid,
+                entryType: this.material[0].entryType,
+                materialName: this.material[0].materialName,
+                materialEmail: this.material[0].materialEmail,
+                materialNumber: this.material[0].materialNumber,
+                materialNote: this.material[0].materialNote,
+                uID: this.material[0].uID
             });
-        }
+        },
+ addMat(){
+    const payload = {
+        mid: this.material[0].mid,
+        matName: this.material[0].matName,
+        matDesc: this.material[0].matDesc,
+        matSpecs: this.material[0].matDesc,
+        matCat: this.material[0].matCat,
+        cost: this.material[0].cost,
+        matUnit: this.material[0].matUnit,
+        sID:this.material[0].sID
+    }
+    this.$store.dispatch('addMat',payload)
+  }
     },
 }
 </script>
@@ -138,6 +152,24 @@ export default {
 
     .v-card.v-sheet.theme--light {
         margin-top: 30px;
+    }
+
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .title {
+         text-decoration: underline;
+         margin: auto;
+        text-align: center;
+    }
+
+    .text {
+        padding-bottom: 15px;
+        margin: auto;
+        text-align: center;
     }
 
 }
