@@ -5,7 +5,7 @@
             <div class="seperator d-flex ">
                 <div class="info-title-holder col-5">
                     <div class="info-text">Entry Type :</div>
-                    <div class="info-text">uID:</div>
+                    <div class="info-text">uid:</div>
                     <div class="info-text">Customer Name :</div>
                     <div class="info-text">Customer Number :</div>
                     <div class="info-text">Customer Address :</div>
@@ -18,13 +18,12 @@
                     <div class="info-text"> Quote Description :</div>
                     <div class="info-text"> Summary :</div>
                     <div class="info-text"> Job Category :</div>
-                    <div class="info-text"> Quote Materials :</div>
                     <div class="info-text"> Scope :</div>
                     <div class="info-text"> Total :</div>
                 </div>
                 <div class="info-text-holder col-7">
                     <div class="info-text">{{ quote.entryType }}</div>
-                    <div class="info-text">{{ quote.uID }}</div>
+                    uid <div class="info-text">{{ quote.uid }}</div>
                     <div class="info-text">{{ quote.cusName }}</div>
                     <div class="info-text">{{ quote.cusNo }}</div>
                     <div class="info-text">{{ quote.cusAddress }}</div>
@@ -62,10 +61,10 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="quote.entryType"></v-text-field>
+                                            <v-text-field v-model="quote.entryType" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="quote.uID" type="number"></v-text-field>
+                                            <v-text-field v-model="quote.uid"></v-text-field>
                                         </v-col>
                                         <!-- <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
@@ -76,7 +75,7 @@
                                             <v-text-field v-model="quote.cusName"></v-text-field>
                                         </v-col>
 
-                                        <v-col cols="12" sm="6" md="4">
+                                        <v-col cols="12">
                                             <v-text-field v-model="quote.cusNo" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
@@ -135,15 +134,14 @@
                 </v-row>
             </template>
         </div>
-        <BottomNav />
+
     </div>
 </template>
   
 <script>
-import BottomNav from "../BottomNav.vue"
 export default {
     props: ['id'],
-    components: { BottomNav },
+
 
     data: () => ({
         dialog: false,
@@ -151,7 +149,8 @@ export default {
     }),
 
     mounted() {
-
+        console.log(this.$store.state.quote)
+        console.log(this.id)
         return this.$store.dispatch("getQuote", this.id);
         // this.$store.dispatch("getSellers");
     },
@@ -163,9 +162,9 @@ export default {
 
     methods: {
         update() {
-            this.$store.dispatch("updateQuote", {
+            this.$store.dispatch("updateLead", {
                 entryType: this.entryType,
-                uID: this.uID,
+                uid: this.uid,
                 cusName: this.cusName,
                 cusNo: this.cusNo,
                 cusAddress: this.cusAddress,
@@ -184,9 +183,6 @@ export default {
                 addNote: this.addNote
             });
         }
-        // update() {
-        //     console.log("You clicked me!");
-        // }
     },
 }
 </script>

@@ -8,16 +8,21 @@
 
         </div>
 
-        <div class="card-holder" v-for="po in pos" :key="po.poid">
+        <div class="card-holder" v-for="dar in dars" :key="dar.darid">
             <div class="card">
-                <router-link :to="{ name: 'SinglePO', params: { id: po.poid } }" class="router-link">
-                    <div class="l_name">Purchase Order ID:{{ po.poid }}</div>
-                    <div class="l_name">Quote ID:{{ po.qteID }}</div>
-                    <div class="l_email">Suppllier ID:{{ po.sID }}</div>
-                    <div class="l_type">Material:{{ po.mat }}</div>
+                <router-link :to="{ name: 'SingleDAR', params: { id: dar.darid }, }" class="router-link">
+                    <div class="l_name">
+                        <p></p>Claim Number:{{ dar.claimNumber }}
+                    </div>
+                    <div class="l_name">
+                        <p></p>Client Name:{{ dar.clientName }}
+                    </div>
+                    <div class="l_name">
+                        <p></p>Damage Type:{{ dar.damageType }}
+                    </div>
                 </router-link>
             </div>
-            <div class="delete col-5" @click="deletes(po.poid)">
+            <div class="delete col-5" @click="deletes(dar.darid)">
                 <i class="fa-solid fa-trash-can text-center"></i>
             </div>
         </div>
@@ -27,25 +32,26 @@
 
 <script>
 import BottomNav from "../components/BottomNav.vue"
-import AddModal from "../components/PO/AddModal.vue";
+import AddModal from "../components/DAR/AddModal.vue";
+
+
 export default {
-    props: ['po'],
+    props: ['dar'],
     components: {
         BottomNav,
         AddModal
     },
     mounted() {
-        return this.$store.dispatch("getPOS");
-        // this.$store.dispatch("getSellers");
+        return this.$store.dispatch("getDARS");
     },
     computed: {
-        pos() {
-            return this.$store.state.pos;
+        dars() {
+            return this.$store.state.dars
         }
     },
     methods: {
         deletes(id) {
-            this.$store.dispatch("deletePO", id);
+            this.$store.dispatch("deleteDAR", id);
         }
     },
 }
@@ -58,6 +64,7 @@ export default {
     flex-direction: column;
     align-items: center;
 }
+
 
 .f-holder {
     width: 100%;
@@ -77,6 +84,8 @@ export default {
     text-align: center;
 }
 
+
+
 /* Small phones */
 @media only screen and (max-width:576px) {
     .card-holder {
@@ -94,6 +103,17 @@ export default {
         padding: 5px;
         margin-bottom: 10px;
         border-radius: 10px;
+    }
+
+    .l_name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .subtitle {
+        font-weight: bold;
+        text-decoration: underline;
     }
 
     .column {
@@ -132,6 +152,17 @@ export default {
         padding: 5px;
         margin-bottom: 10px;
         border-radius: 10px;
+    }
+
+    .l_name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .subtitle {
+        font-weight: bold;
+        text-decoration: underline;
     }
 
     .column {

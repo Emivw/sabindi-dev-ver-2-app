@@ -80,25 +80,13 @@ const routes = [
     props: true,
   },
   {
-    path: "/pos",
-    name: "pos",
+    path: "/po",
+    name: "po",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/POView.vue"),
-  },
-  {
-    path: "/pos/:id",
-    name: "SinglePO",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(
-        /* webpackChunkName: "about" */ "../components/PO/SingleView.vue"
-      ),
-    props: true,
   },
   {
     path: "/wos",
@@ -118,6 +106,27 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/WO/SingleView.vue"),
       props:true,
+  },
+  {
+    path: "/dars",
+    name: "DarView",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/DARView.vue"),
+  },
+  {
+    path: "/dars/:id",
+    name: "SingleDAR",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../components/DAR/SingleView.vue"
+      ),
+    props: true,
   },
 
   {
@@ -143,7 +152,7 @@ const routes = [
   },
   {
     path: "/inventory",
-    name: "inventory",
+    name: "InventoryView",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

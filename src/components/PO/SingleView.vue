@@ -41,7 +41,7 @@
                                             <v-text-field v-model="id" type="number" :placeholder="id"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="qteID"   :placeholder="po.qteID"></v-text-field>
+                                            <v-text-field v-model="qteID" :placeholder="po.qteID"></v-text-field>
                                         </v-col>
                                         <!-- <v-col cols="12" sm="6" md="4">
                                             <v-autocomplete
@@ -78,13 +78,12 @@
 <script>
 export default {
     props: ['id'],
-
-
     data: () => ({
         dialog: false,
-
+        //         return{
+        // otp:this.
+        //         }
     }),
-
     mounted() {
         return this.$store.dispatch("getPO", this.id);
         // this.$store.dispatch("getSellers");
@@ -94,7 +93,6 @@ export default {
             return this.$store.state.po;
         },
     },
-
     methods: {
         deletes(id) {
             console.log(id);
@@ -121,58 +119,40 @@ export default {
         flex-direction: column;
         padding: 10px;
     }
-
     .seperator {
         margin: 15px 0px 15px 0px;
-
     }
-
     .info-title-holder>.info-text {
         font-weight: bold;
     }
-
     .info-text {
         word-break: break-all;
-
     }
-
     .v-card.v-sheet.theme--light {
         margin-top: 30px;
     }
-
 }
-
-
 /* Bigger Phones */
 @media only screen and (min-width:576px) {
-
     .info-holder {
         display: flex;
         flex-direction: column;
         padding: 10px;
     }
-
     .seperator {
         margin: 15px 0px 15px 0px;
-
     }
-
     .info-title-holder>.info-text {
         font-weight: bold;
     }
-
     .info-text {
         word-break: break-all;
-
     }
 }
-
 /* Tablets */
 @media only screen and (min-width:768px) {}
-
 /* Laptops */
 @media only screen and (min-width:992px) {}
-
 /* Desktops */
 @media only screen and (min-width:1200px) {}
 </style>

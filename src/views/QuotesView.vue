@@ -8,6 +8,8 @@
 
         </div>
 
+        <input type="text" class="form-control" placeholder="Search..." v-model="search" />
+
         <div class="card-holder" v-for="quote in quotes" :key="quote.qteid">
             <div class="card">
                 <router-link :to="{ name: 'SingleQuote', params: { id: quote.qteid } }" class="router-link">
@@ -28,25 +30,30 @@
 <script>
 import BottomNav from "../components/BottomNav.vue"
 import AddModal from "../components/Quote/AddModal.vue";
-
-
 export default {
     props: ['quote'],
+    data() {
+        return {
+            search: "",
+        };
+    },
     components: {
         BottomNav,
         AddModal
     },
-
     mounted() {
         return this.$store.dispatch("getQuotes");
-        // this.$store.dispatch("getSellers");
     },
     computed: {
         quotes() {
-            return this.$store.state.quotes;
+            return this.$store.state.quotes?.filter((quote) => {
+                let isMatch = true;
+                if (!quote.cusName?.toLowerCase().includes(this.search.toLowerCase()))
+                    isMatch = false;
+                return isMatch;
+            });
         }
     },
-
     methods: {
         deletes(id) {
             this.$store.dispatch("deleteQuote", id);
@@ -54,7 +61,6 @@ export default {
     },
 }
 </script>
-
 <style scoped>
 .card-holder {
     display: flex;
@@ -62,7 +68,6 @@ export default {
     flex-direction: column;
     align-items: center;
 }
-
 
 .f-holder {
     width: 100%;
@@ -81,8 +86,6 @@ export default {
 .fa-solid {
     text-align: center;
 }
-
-
 
 /* Small phones */
 @media only screen and (max-width:576px) {
@@ -106,7 +109,6 @@ export default {
     .column {
         padding-right: 10px;
     }
-
 }
 
 /* Bigger Phones */
@@ -121,4 +123,3 @@ export default {
 /* Desktops */
 @media only screen and (min-width:1200px) {}
 </style>
-

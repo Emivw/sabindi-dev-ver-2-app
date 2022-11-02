@@ -86,7 +86,7 @@
         category: [
           "admin"
         ],
-        to: '/pos'
+        to: '/po'
       },
       {
         title: 'Reports',
@@ -123,6 +123,15 @@
           "admin"
         ],
         to: '/costs'
+      },
+      {
+        title: 'Damage Assessment Report',
+        icon: 'mdi-cash-multiple ',
+        text: '',
+        category: [
+          "admin"
+        ],
+        to: '/dars'
       }
     ],
     })

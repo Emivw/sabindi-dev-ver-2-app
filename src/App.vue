@@ -19,9 +19,12 @@
 
           <v-list-item-content>
             <v-list-item-title class="drw_list">{{ item.title }}</v-list-item-title>
+
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <button class="btn btn-can" v-if="user" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight">Materials</button>
       <template v-slot:append>
         <div class="pa-2">
           <v-btn block @click="logOut" to="/signup">
@@ -35,11 +38,23 @@
       <v-app-bar-nav-icon v-if="user" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Sabindi Global Group</v-toolbar-title>
+
     </v-app-bar>
 
     <v-main>
       <router-view />
-
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel">Materials</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" v-for="material in mat" :key="material.mid">
+          <div>{{ material.matName }}</div>
+          <div class="delete col-5" @click="deleteMat(material.mid)">
+            <i class="fa-solid fa-trash-can text-center"></i>
+          </div>
+        </div>
+      </div>
       <!-- <BottomNav v-if="user"/> -->
       <!--  -->
     </v-main>
@@ -66,6 +81,9 @@ export default {
   computed: {
     user() {
       return this.$store.state.user
+    },
+    mat() {
+      return this.$store.state.mat
     }
   },
   methods: {
@@ -73,6 +91,9 @@ export default {
       return (this.$store.state.user = null,
         localStorage.removeItem('vuex')
       )
+    },
+    deleteMat(id) {
+      this.$store.dispatch('deleteMatItem', id)
     }
   }
 }
@@ -106,6 +127,14 @@ export default {
 .v-toolbar__content {
   background-color: black;
   color: white;
+}
+
+.btn-can {
+  background-color: black;
+  /* margin: auto; */
+  margin-left: 60px;
+  color: white !important;
+  font-size: 13px;
 }
 
 .backgrd {

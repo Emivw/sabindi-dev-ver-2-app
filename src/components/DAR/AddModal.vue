@@ -102,14 +102,14 @@
 
 <script>
 export default {
-  props: ['lead'],
+  props: ['quote'],
   data() {
     return {
       entryType: "",
       uid: "",
       cusName: "",
       cusNo: "",
-      cusAddresss: "",
+      cusAddress: "",
       damageType: "",
       insCat: "",
       leakDetectMethod: "",
@@ -132,7 +132,7 @@ export default {
         uid: this.uid,
         cusName: this.cusName,
         cusNo: this.cusNo,
-        cusAddresss: this.cusAddress,
+        cusAddress: this.cusAddress,
         damageType: this.damageType,
         insCat: this.insCat,
         leakDetectMethod: this.leakDetectMethod,
