@@ -35,7 +35,7 @@
       <v-app-bar-nav-icon v-if="user" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Sabindi Global Group</v-toolbar-title>
-      <button class="btn btn-can" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+      <button class="btn btn-can" v-if="user" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Materials</button>
 
     </v-app-bar>
 
@@ -43,11 +43,14 @@
       <router-view />
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Materials</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
-    ...
+  <div class="offcanvas-body" v-for="material in mat" :key="material.mid">
+    <div>{{material.matName}}</div>
+    <div class="delete col-5" @click="deleteMat(material.mid)">
+        <i class="fa-solid fa-trash-can text-center"></i>
+    </div>
   </div>
 </div>
       <!-- <BottomNav v-if="user"/> -->
@@ -77,8 +80,8 @@ export default {
     user() {
       return this.$store.state.user
     },
-    cart(){
-        return this.$store.state.cart
+    mat(){
+        return this.$store.state.mat
     }
   },
   methods: {
@@ -86,6 +89,9 @@ export default {
       return (this.$store.state.user = null,
         localStorage.removeItem('vuex')
       )
+    },
+    deleteMat(id){
+     this.$store.dispatch('deleteMatItem',id)
     }
   }
 }
@@ -121,7 +127,11 @@ export default {
   color: white;
 }
 
-
+.btn-can{
+  background-color: orange;
+  position: absolute;
+  left:91.5%;
+}
 
 .backgrd {
   background: linear-gradient(black, orange);

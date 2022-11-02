@@ -658,6 +658,21 @@ export default new Vuex.Store({
       let res = await fetched.json();
       context.commit('setMat', res.results)
     },
+    async deleteMatItem(context, id) {
+      fetch('https://proptechapi.herokuapp.com/users/' + context.state.user.uid + '/mat/' + id, {
+          method: 'DELETE'
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          swal({
+            icon: "success",
+            title: `Items have been removed`,
+            buttons: "OK",
+            closeOnClickOutside: false
+          })
+          context.dispatch('getMat', context.state.user.uid)
+        })
+    },
   },
   modules: {},
   plugins: [createPersistedState()],
